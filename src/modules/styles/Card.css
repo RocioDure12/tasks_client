@@ -1,0 +1,13 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f57e67;
+    align-items: center;
+    border-radius: 15px;
+    margin: 15px;
+
+    
+
+    
+}
