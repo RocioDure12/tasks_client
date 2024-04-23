@@ -27,5 +27,5 @@ type Mascota = {
           <p>No hay mascotas disponibles</p>
         )}
       </div>
-    );
+    )
   }

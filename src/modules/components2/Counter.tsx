@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import "../styles/Card.css"
 
 
 //Crea un componente de contador que muestre un número inicializado en 0 y dos botones: 
