@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,ChangeEvent } from "react";
 import Categories from "./Categories";
 import { Category } from "./CategoryForm";
 
@@ -8,12 +8,40 @@ interface CategoriesListProps {
   onDelete: (index: number) => any;
   onCheckChange:(value:boolean,index:number)=> any;
   onFavChanged:(value:boolean,index:number)=>any
-
 }
 
 export default function CategoriesList(props: CategoriesListProps) {
+  const[inputSearch, setInputSearch]=useState("")
+
+  const itemsFiltered=props.categories.filter((category:Category)=> category.name.includes(inputSearch))
+
+    const po=JSON.stringify(itemsFiltered)
+    console.log(po)
+
+  
+
+  function handleSearchInput(evt: ChangeEvent<HTMLInputElement>){
+    setInputSearch(evt.target.value)
+  }
+
+
+function handleSubmit(e: React.FormEvent<HTMLFormElement>){
+  e.preventDefault()
+}
     return (
     <>
+    <form onSubmit={handleSubmit}>
+      <label>
+
+        <input 
+          name="search"
+          type="text"
+          value={inputSearch}
+          onChange={handleSearchInput}
+        />
+      </label>
+    </form>
+
       <ul>
         {props.categories.map((category, index) => (
           <li key={index}>
@@ -26,14 +54,25 @@ export default function CategoriesList(props: CategoriesListProps) {
                 onChange={(evt)=>props.onCheckChange(evt.currentTarget.checked,index)}
                 />
             </label>
-            {category.markedAsFavorite ?
-             <button onClick={()=>props.onFavChanged(false,index)}>❤️</button> 
-             :
-            <button onClick={()=>props.onFavChanged(true,index)}>🤍</button>}
-      
+            <button onClick={()=>props.onFavChanged(!category.markedAsFavorite,index)}>
+              {category.markedAsFavorite ? '💓' : '🤍'}
+            
+            </button>
+     
+          
           </li>
+
         ))}
       </ul>
+
+      <ul>
+        {itemsFiltered.map((category, idx)=>(
+          <li key={idx}>{category.name}</li>
+
+        ))}
+        
+      </ul>
+      
     </>
   );
 }

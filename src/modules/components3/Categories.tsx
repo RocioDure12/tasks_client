@@ -6,6 +6,8 @@ import Item from "../components2/Item";
 
 export default function Categories(){
     const[categories,setCategories]=useState<Category[]>([]);
+    const show=JSON.stringify(categories)
+    console.log(show)
 
     //Utiliza el operador de propagación (...) 
     //para copiar el contenido actual de categories y luego añade newCategory al final de la lista
@@ -34,13 +36,15 @@ export default function Categories(){
     }
 
     function onFavChanged(value:boolean,index:number){
-        const itemFav=categories.map((category, idx)=>idx == index ? {...category,...{markedAsFavorite:value}} : category
+        const newCategories=categories.map((category, idx)=>idx == index ? {...category,...{markedAsFavorite:value}} : category
 
         )
-        setCategories(itemFav)
+        setCategories(newCategories)
 
 
     }
+
+
 
     return(
         <div className="card">
