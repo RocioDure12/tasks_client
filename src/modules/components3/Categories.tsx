@@ -1,13 +1,15 @@
 import { useState } from "react";
 import CategoryForm, { Category } from "./CategoryForm";
 import CategoriesList from "./CategoriesList";
-import Item from "../components2/Item";
+
 
 
 export default function Categories(){
     const[categories,setCategories]=useState<Category[]>([]);
+    const[searchText, setSearchText]=useState("")//input
+    
     const show=JSON.stringify(categories)
-    console.log(show)
+    console.log("hola somos la lista de categorias",show)
 
     //Utiliza el operador de propagación (...) 
     //para copiar el contenido actual de categories y luego añade newCategory al final de la lista
@@ -44,6 +46,13 @@ export default function Categories(){
 
     }
 
+    function onSearch(input:string){
+        //const filteredCategories=categories.filter((category:Category)=>{category.name == input || category.name})
+        //setCategories(filteredCategories)
+        setSearchText(input)
+
+    }
+
 
 
     return(
@@ -52,11 +61,13 @@ export default function Categories(){
             onCategorySubmit={onCategorySubmit}
             />
             <CategoriesList
+            searchText={searchText}
             categories={categories}
             onDelete={onDelete}
             onCheckChange={onCheckChange}
             onFavChanged={onFavChanged}
-           />
+            onSearch={onSearch}
+            />
         </div>
     )
 }
