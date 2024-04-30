@@ -1,9 +1,11 @@
 import { useState,ChangeEvent } from "react";
 
  export interface Category{
+    id:number
     name:string
     isChecked:boolean
     markedAsFavorite:boolean
+    //isDeleted:boolean
 }
 
 interface CategoryFormProps{
@@ -16,15 +18,17 @@ export default function CategoryForm(props:CategoryFormProps){
     
   //Función para manejar cambios en los campos del formulario
     function handleChangeName(evt: ChangeEvent<HTMLInputElement>){
-        setCategory({...category,...{name:evt.target.value}})
+        setCategory({...category,...{name:evt.target.value},})
     }
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        props.onCategorySubmit(category as Category)
-        setCategory({})
+        const categoryId = new Date().getTime();
+        props.onCategorySubmit({ ...category, id: categoryId } as Category);
+        setCategory({...category})
         
     }
+
 
     return(
         <>

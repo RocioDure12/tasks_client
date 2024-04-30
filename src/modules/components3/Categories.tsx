@@ -9,7 +9,7 @@ export default function Categories(){
     const[searchText, setSearchText]=useState("")//input
     
     const show=JSON.stringify(categories)
-    console.log("hola somos la lista de categorias",show)
+    console.log("hola somos la lista de categorias ORIGINAL",show)
 
     //Utiliza el operador de propagación (...) 
     //para copiar el contenido actual de categories y luego añade newCategory al final de la lista
@@ -25,20 +25,25 @@ export default function Categories(){
    //actualiza el estado con el nuevo array❤️🤍
 
     function onDelete(index:number){
-        const itemsFiltered=categories.filter((category, idx)=>idx != index)
+        const itemsFiltered=categories.filter((category)=>category.id != index)
         setCategories(itemsFiltered)
 
     }
 
+    //function onDelete(index:number){
+    //    setCategories(categories.map((category,idx)=> idx == index ? {...category,...{isDeleted:true}}: category))
+    //}
+
+
     function onCheckChange(isChecked:boolean,index:number){
-        const itemsFiltered=categories.map((category,idx)=> idx == index? {...category,...{isChecked:isChecked}}: category
+        const itemsFiltered=categories.map((category)=> category.id == index? {...category,...{isChecked:isChecked}}: category
         )
         setCategories(itemsFiltered)
 
     }
 
     function onFavChanged(value:boolean,index:number){
-        const newCategories=categories.map((category, idx)=>idx == index ? {...category,...{markedAsFavorite:value}} : category
+        const newCategories=categories.map((category)=>category.id == index ? {...category,...{markedAsFavorite:value}} : category
 
         )
         setCategories(newCategories)

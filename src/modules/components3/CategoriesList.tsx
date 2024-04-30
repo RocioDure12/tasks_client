@@ -14,9 +14,12 @@ interface CategoriesListProps {
 }
 
 export default function CategoriesList(props: CategoriesListProps) {
-    const filteredCategories=props.categories.filter((category:Category)=>props.searchText == "" || category.name == props.searchText )
+    //const filteredCategories=props.categories.filter((category:Category)=>props.searchText == "" || category.name == props.searchText )
+  
+    const filteredCategories=props.categories.filter((category:Category)=>!props.searchText || category.name.includes(props.searchText))
     const po=JSON.stringify( filteredCategories)
-    console.log(po)
+    console.log("somos las categorias filtradas",po)
+
 
   function handleSearchInput(evt: ChangeEvent<HTMLInputElement>){
     //setInputSearch(evt.target.value)
@@ -45,18 +48,19 @@ function handleSubmit(e: React.FormEvent<HTMLFormElement>){
     </form>
 
       <ul>
-        {filteredCategories.map((category, index) => (
-          <li key={index}>
+
+        {filteredCategories.map((category) => (
+          <li key={category.id}>
             {category.isChecked ? <del>{category.name}</del> : category.name}
-            <button onClick={() => props.onDelete(index)}>Eliminar</button>
+            <button onClick={() => props.onDelete(category.id)}>Eliminar</button>
             <label> Complete
                 <input
                 type="checkbox"
                 checked={category.isChecked == true}
-                onChange={(evt)=>props.onCheckChange(evt.currentTarget.checked,index)}
+                onChange={(evt)=>props.onCheckChange(evt.currentTarget.checked,category.id)}
                 />
             </label>
-            <button onClick={()=>props.onFavChanged(!category.markedAsFavorite,index)}>
+            <button onClick={()=>props.onFavChanged(!category.markedAsFavorite,category.id)}>
               {category.markedAsFavorite ? '💓' : '🤍'}
             
             </button>
