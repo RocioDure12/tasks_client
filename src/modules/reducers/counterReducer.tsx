@@ -1,4 +1,9 @@
-const inicialState={
+
+export interface Store
+{
+    counter:number
+}
+const inicialState:Store={
     counter:0
 }
 
