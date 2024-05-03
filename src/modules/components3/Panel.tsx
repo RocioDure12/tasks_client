@@ -1,15 +1,15 @@
 import React from "react";
 
 interface PanelProps {
-    onIncrement: () => void;
-    onDecrement: () => void;
+    increment: () => void;
+    decrement: () => void;
 }
 
-const Panel: React.FC<PanelProps> = ({ onDecrement, onIncrement }) => {
+const Panel: React.FC<PanelProps> = ({ decrement, increment }) => {
     return (
         <>
-            <button onClick={onDecrement}>-</button>
-            <button onClick={onIncrement}>+</button>
+            <button onClick={decrement}>-</button>
+            <button onClick={increment}>+</button>
         </>
     );
 }
