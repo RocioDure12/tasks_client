@@ -1,15 +1,17 @@
-interface panelProps{
-    onIncrement: () => any;
-    onDecrement:()=>any;
+import React from "react";
+
+interface PanelProps {
+    onIncrement: () => void;
+    onDecrement: () => void;
 }
 
-
-export default function Panel(props:panelProps){
-    return(
+const Panel: React.FC<PanelProps> = ({ onDecrement, onIncrement }) => {
+    return (
         <>
-            <button onClick={props.onDecrement}>-</button>
-            <button onClick={props.onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+            <button onClick={onIncrement}>+</button>
         </>
-    )
-
+    );
 }
+
+export default Panel;

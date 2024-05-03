@@ -1,29 +1,19 @@
-import { useState } from "react";
+import React from "react";
 import Panel from "./Panel";
-import "../styles/Card.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { onDecrement, onIncrement } from "../reducers/counterActions";
 
-export default function Counter(){
-    const [counter, setCounter]=useState(0)
+export default function Counter() {
+    const counter = useSelector((state) => state.counter); 
+    const dispatch = useDispatch();
 
-    function onIncrement(){
-        setCounter(counter + 1)
-    }
-
-    function onDecrement(){
-        setCounter(counter > 0 ? counter-1 : counter )
-    }
-
-    return(
+    return (
         <section className="card">
             <div>Contador: {counter}</div>
             <Panel
-            onDecrement={onDecrement}
-            onIncrement={onIncrement}/>
-    
+                onDecrement={() => dispatch(onDecrement())}
+                onIncrement={() => dispatch(onIncrement())}
+            />
         </section>
-
-    )
-
- 
-
+    );
 }
