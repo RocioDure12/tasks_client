@@ -4,6 +4,7 @@ import CategoriesList from "./CategoriesList";
 
 
 
+
 export default function Categories(){
     const[categories,setCategories]=useState<Category[]>([]);
     const[searchText, setSearchText]=useState("")//input
@@ -61,6 +62,7 @@ export default function Categories(){
 
 
     return(
+        
         <div className="card">
             <CategoryForm
             onCategorySubmit={onCategorySubmit}
@@ -73,6 +75,7 @@ export default function Categories(){
             onFavChanged={onFavChanged}
             onSearch={onSearch}
             />
+            
         </div>
     )
 }

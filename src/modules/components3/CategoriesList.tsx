@@ -1,6 +1,7 @@
 import { useState,ChangeEvent } from "react";
 import Categories from "./Categories";
 import { Category } from "./CategoryForm";
+import "../styles/Card.css"
 
 
 interface CategoriesListProps {
@@ -34,7 +35,7 @@ function handleSubmit(e: React.FormEvent<HTMLFormElement>){
 }
     return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form className="card" onSubmit={handleSubmit}>
       <label> Buscar
 
         <input 
@@ -47,7 +48,7 @@ function handleSubmit(e: React.FormEvent<HTMLFormElement>){
   
     </form>
 
-      <ul>
+      <ul className="card">
 
         {filteredCategories.map((category) => (
           <li key={category.id}>
