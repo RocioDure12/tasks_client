@@ -1,0 +1,1 @@
+//stracting state logic into a reducer
