@@ -1,12 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterReducer from './modules/reducers/counterSlice'
+import counterSlice from './modules/slicers/counterSlice'
+import cartSlice from './modules/slicers/cartSlice'
+//import  cartSlice  from './modules/reducers/CartSlice'
 
 //This creates a Redux store, and also automatically configure the Redux DevTools extension
 // so that you can inspect the store while developing
 
 export const store = configureStore({
   reducer: {
-    counter:counterReducer
+    counter:counterSlice,
+    cart:cartSlice,
 
   }
 })

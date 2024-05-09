@@ -5,6 +5,7 @@ import Categories from "./modules/components3/Categories";
 import ThemeProvider from "./modules/context/ThemeProvider";
 import NavBar from "./modules/components3/NavBar";
 import CartProvider from "./modules/context/CartProvider";
+import ProductList from "./modules/components3/ProductsList";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Counter></Counter>
         <Mode></Mode>
         <Categories />
+        <ProductList></ProductList>
 
         
       </section>
