@@ -2,45 +2,54 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
-import { CartItem } from "../context/CartContext";
-import produce from 'immer';
-
+import Product from "../models/product";
+import Cart from "../models/Cart";
+import type { PayloadAction } from '@reduxjs/toolkit'
+import produce from "immer";
 
 // Define a type for the slice state
-interface CartState{
-    itemsCart:CartItem[]
-    total:number   
+interface CartState {
+  cart: Cart;
+
 }
 
 // Define the initial state using that type
-const initialState:CartState={
-    itemsCart:[],
-    total:0,
+const initialState: CartState = {
 
-}
+  cart: { itemsCart: [] },
 
+};
 
-export const cartSlice =createSlice({
-    name:"cart",
-    initialState,
-    reducers:{
-        add:(state,action)=>{
-            const newItem = action.payload;
-            state.itemsCart.push(newItem);
-         
-        },
-
-        delete:(state)=>{
-            
-        }
-    }
-})
+export const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    add: (state, action:PayloadAction<Product>) => {
+      const newItem = action.payload;
+      
+      
 
 
-export const {add} = cartSlice.actions;
+  
 
-export const selectItemsCart = (state: RootState) => state.cart.itemsCart;
+      //state.itemsCart.push(newItem);
+    },
 
-export const selectTotal=(state: RootState) => state.cart
+    delete: (state) => {},
+  },
+});
+
+export const { add } = cartSlice.actions;
+
+export const selectItemsCart = (state: RootState) => state.cart;
+
+
+//export const selectTotal=(state: RootState) => state.cart //sumar total
+export const selectTotal = (state: RootState) =>
+  state.cart.cart.itemsCart.reduce(
+    (accumulator, item) => accumulator + item.product.price,
+    0
+  );
+
 
 export default cartSlice.reducer;

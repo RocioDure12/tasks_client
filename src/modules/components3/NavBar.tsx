@@ -1,13 +1,14 @@
-import useCartContext from "../hooks/useCartContext"
+import { useAppSelector } from "../../hooks";
+import { selectTotal } from "../slicers/cartSlice";
 
-export default function NavBar(){
-    const cartContext= useCartContext()
+export default function NavBar() {
+  const total = useAppSelector(selectTotal);
 
-    
-    return(
-        <div className="card">
-            <h2>Barra de navegacion "</h2>
-            <span>🛒</span>
-        </div>
-    )
+  return (
+    <div className="card">
+      <h2>Barra de navegacion "</h2>
+      <span>🛒</span>
+      <span>{total}</span>
+    </div>
+  );
 }

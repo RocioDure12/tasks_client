@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './modules/slicers/counterSlice'
 import cartSlice from './modules/slicers/cartSlice'
-//import  cartSlice  from './modules/reducers/CartSlice'
 
+//Define Root State and Dispatch Types
 //This creates a Redux store, and also automatically configure the Redux DevTools extension
 // so that you can inspect the store while developing
 

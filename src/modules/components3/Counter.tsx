@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Panel from "./Panel";
 import { useAppSelector, useAppDispatch } from "../../hooks"
 import { decrement, increment } from "../slicers/counterSlice"
-import ThemeContext from "../context/ThemeContext";
 import useThemeContext from "../hooks/useThemeContext";
 
 
