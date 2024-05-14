@@ -12,10 +12,11 @@ export default function App() {
     <ThemeProvider>
     <CartProvider>
       <section>
-        <NavBar></NavBar>
+       
         <Counter></Counter>
         <Mode></Mode>
         <Categories />
+        <NavBar></NavBar>
         <ProductList></ProductList>
 
         

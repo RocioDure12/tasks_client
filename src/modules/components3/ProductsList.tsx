@@ -1,6 +1,6 @@
 import { useAppDispatch } from "../../hooks";
 import {add} from "../slicers/cartSlice"
-import Product from "../models/product";
+import Product from "../models/Product";
 
 
 
