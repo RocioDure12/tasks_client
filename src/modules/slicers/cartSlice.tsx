@@ -5,8 +5,6 @@ import type { RootState } from "../../store";
 import Product from "../models/Product";
 import Cart from "../models/Cart";
 import type { PayloadAction } from '@reduxjs/toolkit'
-import produce from "immer";
-import CartItem from "../models/CartItem";
 
 // Define a type for the slice state
 interface CartState {
@@ -30,30 +28,33 @@ export const cartSlice = createSlice({
       const index=state.cart.itemsCart.findIndex(item=> newItem.id === item.product.id)
       
       if(index !== -1){
+        if (state.cart.itemsCart[index].product.stock > 0){
         state.cart.itemsCart[index].quantity+=1
+        state.cart.itemsCart[index].product.stock-=1
+      }
 
       } 
       else{
-        state.cart.itemsCart.push({ product: newItem, quantity: 1 })
+    
+        newItem.stock-=1
+        state.cart.itemsCart.push({ product: newItem, quantity: 1,})
+    
       } 
-     
-
-   
-      //state.cart.itemsCart.map(item=> console.log(item.quantity))
-   
-
+    
     },
-
-    delete: (state) => {},
+    
+    deleteItem: (state,action:PayloadAction<number>) => {
+      const idItem=action.payload
+      const itemsFiltered=state.cart.itemsCart.filter(item => item.product.id != idItem)
+      state.cart.itemsCart=itemsFiltered 
+    },
   },
 });
 
-export const { add } = cartSlice.actions;
+export const { add, deleteItem} = cartSlice.actions;
 
-export const selectItemsCart = (state: RootState) => state.cart;
+export const selectItemsCart = (state: RootState) => state.cart.cart.itemsCart;
 
-
-//export const selectTotal=(state: RootState) => state.cart //sumar total
 export const selectTotal = (state: RootState) =>
   state.cart.cart.itemsCart.reduce(
 

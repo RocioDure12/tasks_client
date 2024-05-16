@@ -1,6 +1,8 @@
 import { useAppDispatch } from "../../hooks";
 import {add} from "../slicers/cartSlice"
 import Product from "../models/Product";
+import { selectItemsCart } from "../slicers/cartSlice";
+import { useAppSelector } from "../../hooks";
 
 
 
@@ -16,11 +18,12 @@ const shoes: Product[] = [
   { id: 9, name: "Zapatillas de running", price: 59.99, stock:4 },
   { id: 10, name: "Borcegos de cuero sintético", price: 49.99, stock:4 },
   { id: 11, name: "Botas de senderismo", price: 69.99, stock:4 },
-  { id: 12, name: "Zapatillas de moda", price: 69.99, stock:4 },
+  { id: 12, name: "Zapatillas de moda", price: 69.99, stock:0 },
 ];
 
 const ProductList: React.FC = () => {
   const dispatch=useAppDispatch()
+  const itemsCart=useAppSelector(selectItemsCart)
 
   return (
     <ul className="card">
@@ -28,13 +31,16 @@ const ProductList: React.FC = () => {
         <li key={item.id}>
           <span>{item.name}</span>
           <span> ${item.price}</span>
+          {item.stock > 0 ? 
+          
           <button onClick={()=>dispatch(add(item))}>🛒</button>
+          :
+          <span> No hay más stock de este producto</span>}
           
-          
-
         </li>
       ))}
     </ul>
+    
   );
 };
 
