@@ -8,6 +8,7 @@ import CartProvider from "./modules/context/CartProvider";
 import ProductList from "./modules/components3/ProductsList";
 
 export default function App() {
+
   return (
     <ThemeProvider>
     <CartProvider>

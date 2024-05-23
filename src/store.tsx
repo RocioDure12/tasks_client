@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './modules/slicers/counterSlice'
 import cartSlice from './modules/slicers/cartSlice'
+import productsListSlice from './modules/slicers/productsSlice'
 
 //Define Root State and Dispatch Types
 //This creates a Redux store, and also automatically configure the Redux DevTools extension
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     counter:counterSlice,
     cart:cartSlice,
+    productsList:productsListSlice,
 
   }
 })
