@@ -44,7 +44,7 @@ function addToCart(product:Product){
           <span>{item.name}</span>
           <span> ${item.price}</span>
           {item.stock > 0 ? (
-            <button onClick={()=>addToCart(item)}>🛒(cantidad agregada)</button>
+            <button onClick={()=>addToCart(item)}>🛒({item.stock}..)</button>
           ) : (
             <span> No hay más stock de este producto</span>
           )}

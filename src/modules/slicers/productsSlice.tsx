@@ -23,11 +23,11 @@ export const productListSlice=createSlice({
         setProductsList:(state,action:PayloadAction <Product[]>)=>{
             state.productsList=action.payload
         },
-        incrementStock:(state,action:PayloadAction<number>)=>{
+        resetStock:(state,action:PayloadAction<number>)=>{
             const idItem=action.payload
             const index=state.productsList.findIndex(product=> product.id === idItem)
             if (index !== -1) { 
-                state.productsList[index].stock+=1
+                state.productsList[index].stock=1
                 
             }
 
@@ -49,7 +49,7 @@ export const productListSlice=createSlice({
     }
 )
 
-export const { setProductsList, decrementStock } = productListSlice.actions;
+export const { setProductsList, decrementStock, resetStock } = productListSlice.actions;
 
 export const selectProductsList = (state: RootState) => state.productsList.productsList
 
