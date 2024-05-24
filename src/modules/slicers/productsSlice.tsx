@@ -25,22 +25,21 @@ export const productListSlice=createSlice({
         },
         incrementStock:(state,action:PayloadAction<number>)=>{
             const idItem=action.payload
-            const product=state.productsList.findIndex(product=> product.id === idItem)
-            if (product !== -1) { 
-                state.productsList[idItem].stock+=1
+            const index=state.productsList.findIndex(product=> product.id === idItem)
+            if (index !== -1) { 
+                state.productsList[index].stock+=1
                 
             }
 
         },
         decrementStock:(state,action:PayloadAction<number>)=>{
             const idItem=action.payload
-            const product=state.productsList.findIndex(product=> product.id === idItem)
-            if (product !== -1) { 
-                if (state.productsList[idItem].stock > 0){
-                    state.productsList[idItem].stock-=1
+            const index=state.productsList.findIndex(product=> product.id === idItem)
+            if (index !== -1) { 
+                if (state.productsList[index].stock > 0){
+                    state.productsList[index].stock-=1
                 }
             }
-            console.log(state.productsList.map(product=>product.stock))
              
             }
 

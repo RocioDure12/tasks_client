@@ -25,14 +25,10 @@ export const cartSlice = createSlice({
   reducers: {
     add: (state, action:PayloadAction<Product>) => {
       const newItem = action.payload;
-
       const index=state.cart.itemsCart.findIndex(item=> newItem.id === item.product.id)
       
-      if(index != -1){
-        if (state.cart.itemsCart[index].product.stock > 0){
+      if(index != -1 && newItem.stock > 0 ){
           state.cart.itemsCart[index].quantity+=1
-      }
-
       } 
       else{
         state.cart.itemsCart.push({ product: newItem, quantity: 1,})
@@ -47,12 +43,20 @@ export const cartSlice = createSlice({
       state.cart.itemsCart=itemsFiltered 
     },
 
-    restarQuantity:(state, action:PayloadAction<number>)=>{
-     
-      
+    decrementQuantity:(state, action:PayloadAction<number>)=>{
+      const idItem=action.payload
+      const index=state.cart.itemsCart.findIndex(item=> item.product.id === idItem)
+      if (index !==1){
+        state.cart.itemsCart[index].quantity-=1
+      }
     },
 
-    sumarQuantity:(state, action:PayloadAction<number>)=>{
+    incrementQuantity:(state, action:PayloadAction<number>)=>{
+      const idItem=action.payload
+      const index=state.cart.itemsCart.findIndex(item=> item.product.id === idItem)
+      if (index !==1){
+        state.cart.itemsCart[index].quantity+=1
+      }
    
 
     }
