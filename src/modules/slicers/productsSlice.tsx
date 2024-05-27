@@ -4,8 +4,6 @@ import type { RootState } from "../../store";
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Product from "../models/Product";
 
-
-
 interface productListState{
     productsList:Product[]
 
@@ -13,10 +11,12 @@ interface productListState{
 
 const initialState:productListState={
     productsList:[]
-
 }
 
+
+
 export const productListSlice=createSlice({
+    
     name:"productList",
     initialState,
     reducers:{
@@ -26,9 +26,10 @@ export const productListSlice=createSlice({
         resetStock:(state,action:PayloadAction<number>)=>{
             const idItem=action.payload
             const index=state.productsList.findIndex(product=> product.id === idItem)
+      
+
             if (index !== -1) { 
-                state.productsList[index].stock=1
-                
+                state.productsList[index].stock=1            
             }
 
         },

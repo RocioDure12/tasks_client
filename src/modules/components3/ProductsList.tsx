@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../hooks";
-import { addToCart } from "../slicers/cartSlice";
+import { add } from "../slicers/cartSlice";
 import Product from "../models/Product";
 import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
@@ -32,10 +32,10 @@ const ProductList: React.FC = () => {
     dispatch(setProductsList(shoes));
   }, [dispatch]);
   
-//function addToCart(product:Product){
-  //dispatch(decrementStock(product.id))
-  //dispatch(addToCart(product))
-//}
+function addToCart(product:Product){
+  dispatch(decrementStock(product.id))
+  dispatch(add(product))
+}
 
   return (
     <ul className="card">
