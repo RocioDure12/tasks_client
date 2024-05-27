@@ -14,7 +14,6 @@ export default function NavBar() {
 
   function removeFromCart(item:CartItem){
     dispatch(resetStock(item.product.id))
-    item.quantity
     dispatch(deleteItem(item.product.id))
 
   }

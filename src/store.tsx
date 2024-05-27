@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './modules/slicers/counterSlice'
 import cartSlice from './modules/slicers/cartSlice'
 import productsListSlice from './modules/slicers/productsSlice'
+import thunk from 'redux-thunk';
 
 //Define Root State and Dispatch Types
 //This creates a Redux store, and also automatically configure the Redux DevTools extension
@@ -12,8 +13,11 @@ export const store = configureStore({
     counter:counterSlice,
     cart:cartSlice,
     productsList:productsListSlice,
+      
 
-  }
+  },
+  middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
