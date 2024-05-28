@@ -1,11 +1,11 @@
 import { useAppDispatch } from "../../hooks";
-import { add } from "../slicers/cartSlice";
+import { add, selectItemsCart } from "../slicers/cartSlice";
 import Product from "../models/Product";
 import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
 import { setProductsList, decrementStock} from "../slicers/productsSlice";
 import { selectProductsList } from "../slicers/productsSlice";
-
+import { resetStock } from "../slicers/productsSlice";
 
 
 export const shoes: Product[] = [
@@ -26,6 +26,7 @@ export const shoes: Product[] = [
 const ProductList: React.FC = () => {
   const dispatch = useAppDispatch();
   const productList=useAppSelector(selectProductsList)
+
 
   useEffect(() => {
     // Dispatch la acción para establecer la lista de productos cuando el componente se monta

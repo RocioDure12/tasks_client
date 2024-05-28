@@ -12,12 +12,16 @@ export default function NavBar() {
   const itemsCart=useAppSelector(selectItemsCart)
   const dispatch=useAppDispatch()
 
-  function removeFromCart(item:CartItem){
-    dispatch(resetStock(item.product.id))
+  const handleResetStock = (item:CartItem) => {
+    const itemsToUpdate = itemsCart.map(item => ({
+        id: item.product.id,
+        quantity: item.quantity
+    }));
+    dispatch(resetStock(itemsToUpdate));
     dispatch(deleteItem(item.product.id))
+  };
 
-  }
-  
+
   return (
     <div className="card">
       <span>🛒</span>
@@ -25,7 +29,7 @@ export default function NavBar() {
       <ul>
         {itemsCart.map((item)=>
           <li key={item.product.id}>{item.product.name} ({item.quantity}) ${item.product.price}
-          <button onClick={()=>removeFromCart(item)}>Eliminar</button>
+          <button onClick={()=>handleResetStock(item)}>Eliminar</button>
           </li> 
         )}
       </ul>

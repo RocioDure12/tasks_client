@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
 import type { PayloadAction } from '@reduxjs/toolkit'
 import Product from "../models/Product";
+import { selectItemsCart } from "../slicers/cartSlice";
+import { useAppSelector } from "../../hooks";
 
 interface productListState{
     productsList:Product[]
@@ -14,7 +16,6 @@ const initialState:productListState={
 }
 
 
-
 export const productListSlice=createSlice({
     
     name:"productList",
@@ -23,16 +24,24 @@ export const productListSlice=createSlice({
         setProductsList:(state,action:PayloadAction <Product[]>)=>{
             state.productsList=action.payload
         },
-        resetStock:(state,action:PayloadAction<number>)=>{
-            const idItem=action.payload
-            const index=state.productsList.findIndex(product=> product.id === idItem)
-      
+        resetStock: (state, action: PayloadAction<{ id: number, quantity: number }[]>) => {
+            action.payload.forEach(({ id, quantity }) => {
+                const index = state.productsList.findIndex(product => product.id === id);
+                if (index !== -1) {
+                    state.productsList[index].stock = quantity;
+                }
+            });
+        
+    
+            //const idItem=action.payload
+            //const index=state.productsList.findIndex(product=> product.id === idItem)
+            //if (index !== -1) { 
+              //  state.productsList[index].stock=1
+                
 
-            if (index !== -1) { 
-                state.productsList[index].stock=1            
             }
 
-        },
+        ,
         decrementStock:(state,action:PayloadAction<number>)=>{
             const idItem=action.payload
             const index=state.productsList.findIndex(product=> product.id === idItem)
