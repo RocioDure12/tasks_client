@@ -5,7 +5,6 @@ import type { RootState } from "../../store";
 import Product from "../models/Product";
 import Cart from "../models/Cart";
 import type { PayloadAction } from '@reduxjs/toolkit'
-import CartItem from "../models/CartItem";
 
 // Define a type for the slice state
 interface CartState {

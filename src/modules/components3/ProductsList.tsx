@@ -5,8 +5,6 @@ import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
 import { setProductsList, decrementStock} from "../slicers/productsSlice";
 import { selectProductsList } from "../slicers/productsSlice";
-import { resetStock } from "../slicers/productsSlice";
-
 
 export const shoes: Product[] = [
   { id: 1, name: "Borcegos de cuero", price: 59.99, stock: 4 },
