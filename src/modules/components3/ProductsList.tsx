@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
 import { setProductsList, decrementStock} from "../slicers/productsSlice";
 import { selectProductsList } from "../slicers/productsSlice";
+import { updateStockAndAddToCart } from "../slicers/productsSlice";
 
 export const shoes: Product[] = [
   { id: 1, name: "Borcegos de cuero", price: 59.99, stock: 4 },
@@ -31,10 +32,6 @@ const ProductList: React.FC = () => {
     dispatch(setProductsList(shoes));
   }, [dispatch]);
   
-function addToCart(product:Product){
-  dispatch(decrementStock(product.id))
-  dispatch(add(product))
-}
 
   return (
     <ul className="card">
@@ -43,7 +40,7 @@ function addToCart(product:Product){
           <span>{item.name}</span>
           <span> ${item.price}</span>
           {item.stock > 0 ? (
-            <button onClick={()=>addToCart(item)}>🛒({item.stock}..)</button>
+            <button onClick={()=>updateStockAndAddToCart(item)}>🛒({item.stock}..)</button>
           ) : (
             <span> No hay más stock de este producto</span>
           )}
