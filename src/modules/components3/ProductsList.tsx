@@ -1,9 +1,8 @@
 import { useAppDispatch } from "../../hooks";
-import { add, selectItemsCart } from "../slicers/cartSlice";
 import Product from "../models/Product";
 import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
-import { setProductsList, decrementStock} from "../slicers/productsSlice";
+import { setProductsList} from "../slicers/productsSlice";
 import { selectProductsList } from "../slicers/productsSlice";
 import { updateStockAndAddToCart } from "../slicers/productsSlice";
 
@@ -40,7 +39,7 @@ const ProductList: React.FC = () => {
           <span>{item.name}</span>
           <span> ${item.price}</span>
           {item.stock > 0 ? (
-            <button onClick={()=>updateStockAndAddToCart(item)}>🛒({item.stock}..)</button>
+            <button onClick={()=>dispatch(updateStockAndAddToCart(item))}>🛒({item.stock}..)</button>
           ) : (
             <span> No hay más stock de este producto</span>
           )}

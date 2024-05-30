@@ -71,7 +71,7 @@ export const updateStockAndRemoveToCart=(itemsCart:CartItem[])=>(dispatch:AppDis
    
 }
 
-export const { setProductsList, decrementStock, resetStock } = productListSlice.actions;
+export const { setProductsList, decrementStock, resetStock} = productListSlice.actions;
 
 export const selectProductsList = (state: RootState) => state.productsList.productsList
 
