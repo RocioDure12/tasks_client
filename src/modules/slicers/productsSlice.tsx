@@ -29,7 +29,7 @@ export const productListSlice=createSlice({
             action.payload.forEach(({ id, quantity }) => {
                 const index = state.productsList.findIndex(product => product.id === id);
                 if (index !== -1) {
-                    state.productsList[index].stock = quantity;
+                    state.productsList[index].stock+=quantity
                 }
             });
 
