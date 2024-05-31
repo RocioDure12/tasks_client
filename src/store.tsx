@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import counterSlice from './modules/slicers/counterSlice'
 import cartSlice from './modules/slicers/cartSlice'
 import productsListSlice from './modules/slicers/productsSlice'
+import authSlice from './modules/slicers/authSlice'
 
 
 //Define Root State and Dispatch Types
@@ -13,6 +14,7 @@ export const store = configureStore({
     counter:counterSlice,
     cart:cartSlice,
     productsList:productsListSlice,
+    auth:authSlice,
 
   },
   

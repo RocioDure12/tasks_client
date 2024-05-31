@@ -6,6 +6,7 @@ import ThemeProvider from "./modules/context/ThemeProvider";
 import NavBar from "./modules/components3/NavBar";
 import CartProvider from "./modules/context/CartProvider";
 import ProductList from "./modules/components3/ProductsList";
+import LoginForm from "./modules/components3/LoginForm";
 
 export default function App() {
 
@@ -13,7 +14,7 @@ export default function App() {
     <ThemeProvider>
     <CartProvider>
       <section>
-       
+       <LoginForm></LoginForm>
         <Counter></Counter>
         <Mode></Mode>
         <Categories />
