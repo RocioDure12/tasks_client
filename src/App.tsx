@@ -8,11 +8,14 @@ import CartProvider from "./modules/context/CartProvider";
 import ProductList from "./modules/components3/ProductsList";
 import LoginForm from "./modules/components3/LoginForm";
 
+
 export default function App() {
 
   return (
+   
     <ThemeProvider>
     <CartProvider>
+  
       <section>
        <LoginForm></LoginForm>
         <Counter></Counter>
@@ -23,7 +26,9 @@ export default function App() {
 
         
       </section>
+      
     </CartProvider>
     </ThemeProvider>
+   
   );
 }

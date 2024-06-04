@@ -5,7 +5,7 @@ import User from "../models/User";
 
 interface AuthState{
     token:string | null;
-    user:User | null
+    user:User| null
     loading:boolean
     error:string | null
 }
@@ -18,7 +18,7 @@ const initialState:AuthState={
 
 
 }
-
+//sacar esto de aca
 // Acción asíncrona para iniciar sesión
 export const login = createAsyncThunk(
     'auth/login',
