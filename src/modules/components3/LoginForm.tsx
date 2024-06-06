@@ -1,20 +1,28 @@
 import { useState } from "react"
 import { useAppDispatch } from "../../hooks"
-import { login } from "../slicers/authSlice";
+import useAuthApi from "../hooks/useAuthApi";
+import { authenticateUser } from "../slicers/authSlice";
 
-interface UserLogin{
+export interface UserLogin{
     username:string
     password:string
 }
 
 const LoginForm:React.FC=()=>{
+    
     const dispatch=useAppDispatch()
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
+    const authApi = useAuthApi()
     
-    const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        dispatch(login(userLogin as UserLogin))
-    
+        try{
+            const response=await authApi.login(userLogin as UserLogin)
+            dispatch(authenticateUser(response));
+        } catch(error){
+            console.log(error)
+        }
+        
 
     }
 
