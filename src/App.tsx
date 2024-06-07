@@ -19,7 +19,7 @@ export default function App() {
         <Routes>
           <>
             <Route path='/home' element={<Home></Home>}/>
-            <Route path='/login' element={<LoginForm></LoginForm>}/>
+            <Route path='users/login' element={<LoginForm></LoginForm>}/>
 
   
           </>
