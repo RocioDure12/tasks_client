@@ -14,7 +14,10 @@ const baseUrl='http://127.0.0.1:8000'
 export default function useAuthApi(){
  
     const login= async(userLogin:UserLogin):Promise<LoginResponse>=>{
-        const response=await axios.post(`${baseUrl}/users/login`, userLogin);
+        const response=await axios.post(`${baseUrl}/users/login`, {
+            username:userLogin.username,
+            password:userLogin.password,
+        });
         return response.data
     }
     return {login}
