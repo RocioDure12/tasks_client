@@ -16,7 +16,7 @@ const LoginForm:React.FC=()=>{
     
     const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        
+        console.log(userLogin)
         if (!userLogin.username || !userLogin.password) {
             alert("Por favor, completa todos los campos.");
             return;
@@ -28,6 +28,7 @@ const LoginForm:React.FC=()=>{
             return
         }
         if (result.data){
+            
             dispatch(authenticateUser(result.data))
         }else{
             alert("error desconocido")
