@@ -1,25 +1,59 @@
-import axios from "axios";
-import { UserLogin } from "../components3/LoginForm";
+import axios, { AxiosError } from "axios";
 import User from "../models/User";
 
+const api = axios.create({
+  baseURL: "http://127.0.0.1:8000",
+});
 
-
-interface LoginResponse{
-    token:string
-    user:User
+//Estructura de la respuesta esperada despues de un inicio exitoso
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
-const baseUrl='http://127.0.0.1:8000'
+//Éxito data contiene los datos esperados de tipo T.
+//error y errorMessage son opcionales y, generalmente, estarán ausentes en este caso.
+//Error:
+//data es opcional y, generalmente, estará ausente en este caso.
+//error: contiene el error que ocurrió, de tipo Error o AxiosError.
+//errorMessage: un mensaje de error que describe el problema.
 
-export default function useAuthApi(){
- 
-    const login= async(userLogin:UserLogin):Promise<LoginResponse>=>{
-        const response=await axios.post(`${baseUrl}/users/login`, {
-            username:userLogin.username,
-            password:userLogin.password,
-        });
-        return response.data
+export type ActionResult<T> =
+  | {
+      data: T;
+      error?: Error | AxiosError;
+      errorMessage?: string;
     }
-    return {login}
+  | {
+      data?: T;
+      error?: Error | AxiosError;
+      errorMessage: string;
+    };
 
+//estructua de datos para el inicio de sesion
+export interface LoginData {
+  username: string;
+  password: string;
+}
+
+export default function useAuthApi() {
+  const login = async (
+    data: LoginData
+  ): Promise<ActionResult<LoginResponse>> => {
+    try {
+      const response = await api.post<LoginResponse>("users/login", {
+        username: data.username,
+        password: data.password,
+      });
+      return { data: response.data };
+    } catch (error) {
+      //console.error(error);
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        return { error, errorMessage: "Credenciales inválidas." };
+      }
+      return { error: error as Error, errorMessage: "Error desconocido." };
+    }
+  };
+
+  return { login };
 }

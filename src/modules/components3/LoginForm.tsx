@@ -16,13 +16,23 @@ const LoginForm:React.FC=()=>{
     
     const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        try{
-            const response=await authApi.login(userLogin as UserLogin)
-            dispatch(authenticateUser(response));
-        } catch(error){
-            console.log(error)
-        }
         
+        if (!userLogin.username || !userLogin.password) {
+            alert("Por favor, completa todos los campos.");
+            return;
+        }
+
+        const result=await authApi.login(userLogin as UserLogin)
+        if(result.error){
+            console.log(result.errorMessage);
+            return
+        }
+        if (result.data){
+            dispatch(authenticateUser(result.data))
+        }else{
+            alert("error desconocido")
+        }
+      
 
     }
 
