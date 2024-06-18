@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAppDispatch } from "../../hooks"
 import useAuthApi from "../hooks/useAuthApi";
-import { authenticateUser } from "../slicers/authSlice";
+import { login } from "../slicers/authSlice";
 
 export interface UserLogin{
     username:string
@@ -29,7 +29,7 @@ const LoginForm:React.FC=()=>{
         }
         if (result.data){
             
-            dispatch(authenticateUser(result.data))
+            dispatch(login(result.data))
         }else{
             alert("error desconocido")
         }

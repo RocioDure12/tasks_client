@@ -41,10 +41,10 @@ export default function useAuthApi() {
     data: LoginData
   ): Promise<ActionResult<LoginResponse>> => {
     try {
-      const response = await api.post<LoginResponse>("users/login", {
-        username: data.username,
-        password: data.password,
-      });
+        const form=new FormData();
+        form.append('username', data.username)
+        form.append('password', data.password)
+      const response = await api.post<LoginResponse>("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
       return { data: response.data };
     } catch (error) {
       //console.error(error);
