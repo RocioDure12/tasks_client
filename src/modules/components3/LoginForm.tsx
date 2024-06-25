@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAppDispatch } from "../../hooks"
 import useAuthApi from "../hooks/useAuthApi";
-import { login } from "../slicers/authSlice";
+import { authenticateUser } from "../slicers/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export interface UserLogin{
@@ -31,7 +31,7 @@ const LoginForm:React.FC=()=>{
         }
         if (result.data){
             
-            dispatch(login(result.data))
+            dispatch(authenticateUser(result.data))
             navigate('/home')
         }else{
             alert("error desconocido")

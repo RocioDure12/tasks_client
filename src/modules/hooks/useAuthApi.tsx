@@ -7,9 +7,10 @@ const api = axios.create({
 
 //Estructura de la respuesta esperada despues de un inicio exitoso
 export interface LoginResponse {
-  refreshToken: string;
-  accessToken: string;
+  //expiracionRefreshToken:Date
   user: User;
+  accessToken:string
+  refreshToken:string
 }
 
 //Éxito data contiene los datos esperados de tipo T.
@@ -45,8 +46,13 @@ export default function useAuthApi() {
         const form=new FormData();
         form.append('username', data.username)
         form.append('password', data.password)
+        
       const response = await api.post<LoginResponse>("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
-      return { data: response.data };
+
+      document.cookie=`accessToken=${response.data.accessToken}; path=/; secure; samesite=strict`;
+      document.cookie=`refreshToken=${response.data.refreshToken}; path=/; secure; samesite=strict`;
+      
+      return { data: response.data};
     } catch (error) {
       //console.error(error);
       if (axios.isAxiosError(error) && error.response?.status === 401) {

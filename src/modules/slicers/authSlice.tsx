@@ -3,15 +3,12 @@ import User from "../models/User";
 import type { RootState } from "../../store";
 
 interface AuthState{
-    accessToken?:string | null;
-    refreshToken?:string | null;
+    //expirationRefreshToken?:Date | null
     user:User| null
     isAuthenticated:boolean
 }
 
 const initialState:AuthState={
-    accessToken:null,
-    refreshToken:null,
     user:null,
     isAuthenticated:false
 }
@@ -20,9 +17,7 @@ const initialState:AuthState={
     name:'auth',
     initialState,
     reducers:{
-        login:(state, action:PayloadAction<{accessToken:string, refreshToken:string; user:User}>)=>{
-            state.accessToken=action.payload.accessToken;
-            state.refreshToken=action.payload.refreshToken
+        authenticateUser:(state, action:PayloadAction<{user:User}>)=>{
             state.user=action.payload.user
             state.isAuthenticated=true
           
@@ -37,7 +32,7 @@ const initialState:AuthState={
 
 
 
-export const{login, logout} =authSlice.actions
+export const{authenticateUser, logout} =authSlice.actions
 
 
 export const selectIsAuthenticated= (state:RootState)=> state.auth.isAuthenticated
