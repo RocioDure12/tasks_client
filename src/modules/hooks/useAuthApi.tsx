@@ -7,7 +7,8 @@ const api = axios.create({
 
 //Estructura de la respuesta esperada despues de un inicio exitoso
 export interface LoginResponse {
-  token: string;
+  refreshToken: string;
+  accessToken: string;
   user: User;
 }
 

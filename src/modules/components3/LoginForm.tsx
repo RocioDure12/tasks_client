@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useAppDispatch } from "../../hooks"
 import useAuthApi from "../hooks/useAuthApi";
 import { login } from "../slicers/authSlice";
+import { useNavigate } from "react-router-dom";
 
 export interface UserLogin{
     username:string
@@ -13,6 +14,7 @@ const LoginForm:React.FC=()=>{
     const dispatch=useAppDispatch()
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
     const authApi = useAuthApi()
+    const navigate=useNavigate()
     
     const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
@@ -30,6 +32,7 @@ const LoginForm:React.FC=()=>{
         if (result.data){
             
             dispatch(login(result.data))
+            navigate('/home')
         }else{
             alert("error desconocido")
         }

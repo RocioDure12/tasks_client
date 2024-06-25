@@ -3,13 +3,15 @@ import User from "../models/User";
 import type { RootState } from "../../store";
 
 interface AuthState{
-    token:string | null;
+    accessToken?:string | null;
+    refreshToken?:string | null;
     user:User| null
     isAuthenticated:boolean
 }
 
 const initialState:AuthState={
-    token:null,
+    accessToken:null,
+    refreshToken:null,
     user:null,
     isAuthenticated:false
 }
@@ -18,8 +20,9 @@ const initialState:AuthState={
     name:'auth',
     initialState,
     reducers:{
-        login:(state, action:PayloadAction<{token:string; user:User}>)=>{
-            state.token=action.payload.token;
+        login:(state, action:PayloadAction<{accessToken:string, refreshToken:string; user:User}>)=>{
+            state.accessToken=action.payload.accessToken;
+            state.refreshToken=action.payload.refreshToken
             state.user=action.payload.user
             state.isAuthenticated=true
           
