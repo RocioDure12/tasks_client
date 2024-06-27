@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import User from "../models/User";
+import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: "http://127.0.0.1:8000",
@@ -49,8 +50,10 @@ export default function useAuthApi() {
         
       const response = await api.post<LoginResponse>("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
 
-      document.cookie=`accessToken=${response.data.accessToken}; path=/; secure; samesite=strict`;
-      document.cookie=`refreshToken=${response.data.refreshToken}; path=/; secure; samesite=strict`;
+      Cookies.set('accessToken',response.data.accessToken, {path:'',secure:true, sameSite:'strict'} )
+      Cookies.set('refreshToken',response.data.refreshToken, {path:'',secure:true, sameSite:'strict'} )
+      console.log("caca",Cookies.get('accessToken'))
+      
       
       return { data: response.data};
     } catch (error) {
