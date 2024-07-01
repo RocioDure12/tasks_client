@@ -4,14 +4,15 @@ import Cookies from "js-cookie";
 
 const api = axios.create({
   baseURL: "http://127.0.0.1:8000",
+  withCredentials: true,
 });
 
 //Estructura de la respuesta esperada despues de un inicio exitoso
 export interface LoginResponse {
   //expiracionRefreshToken:Date
   user: User;
-  accessToken:string
-  refreshToken:string
+  access_token:string
+  refresh_token:string
 }
 
 //Éxito data contiene los datos esperados de tipo T.
@@ -33,7 +34,7 @@ export type ActionResult<T> =
       errorMessage: string;
     };
 
-//estructua de datos para el inicio de sesion
+//estructura de datos para el inicio de sesion
 export interface LoginData {
   username: string;
   password: string;
@@ -50,11 +51,11 @@ export default function useAuthApi() {
         
       const response = await api.post<LoginResponse>("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
 
-      Cookies.set('accessToken',response.data.accessToken, {path:'',secure:true, sameSite:'strict'} )
-      Cookies.set('refreshToken',response.data.refreshToken, {path:'',secure:true, sameSite:'strict'} )
-      console.log("caca",Cookies.get('accessToken'))
-      
-      
+      Cookies.set('accessToken',response.data.access_token, {path:'/', sameSite:'Strict', })
+      Cookies.set('refreshToken',response.data.refresh_token, {path:'/'} )
+
+
+      console.log(response.data)
       return { data: response.data};
     } catch (error) {
       //console.error(error);
