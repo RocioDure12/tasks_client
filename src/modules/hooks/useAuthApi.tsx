@@ -49,12 +49,8 @@ export default function useAuthApi() {
         form.append('username', data.username)
         form.append('password', data.password)
         
-      const response = await api.post<LoginResponse>("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
-
-      Cookies.set('accessToken',response.data.access_token, {path:'/', sameSite:'Strict', })
-      Cookies.set('refreshToken',response.data.refresh_token, {path:'/'} )
-
-
+      const response = await api.post<LoginResponse>
+      ("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
       console.log(response.data)
       return { data: response.data};
     } catch (error) {
