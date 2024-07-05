@@ -49,10 +49,14 @@ const LoginForm:React.FC=()=>{
 
     }
 
-
+    const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        
+    }
+    
 
     return(
-        <form action="http://127.0.0.1:8000/users/login" method="POST" encType="multipart/form-data">
+        <form onSubmit={handleSubmit} action="http://127.0.0.1:8000/users/login" method="POST" encType="multipart/form-data">
             Usuario 
             <input
                  type="text"

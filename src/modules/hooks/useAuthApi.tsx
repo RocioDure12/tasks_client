@@ -2,9 +2,9 @@ import axios, { AxiosError } from "axios";
 import User from "../models/User";
 import Cookies from "js-cookie";
 
-const api = axios.create({
+const api= axios.create({
   baseURL: "http://127.0.0.1:8000",
-  withCredentials: true,
+  withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
 });
 
 //Estructura de la respuesta esperada despues de un inicio exitoso
