@@ -34,6 +34,7 @@ const initialState:AuthState={
 
 export const{authenticateUser, logout} =authSlice.actions
 
+export const currentUser= (state:RootState)=> state.auth.user
 
 export const selectIsAuthenticated= (state:RootState)=> state.auth.isAuthenticated
 

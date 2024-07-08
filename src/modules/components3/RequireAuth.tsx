@@ -13,6 +13,21 @@ export default function RequireAuth(props:PropsWithChildren){
     const dispatch=useAppDispatch()
     const isAuthenticated =useAppSelector(selectIsAuthenticated)
 
+    useEffect(()=>{
+        const caca=async()=>{
+            const result= await authApi.currentUser()
+            if (result.error){
+                console.log(result.errorMessage)
+                return
+            }
+            if (result.data){
+                dispatch(authenticateUser(result.data))
+            }
+        }
+
+        caca()
+    },[authApi,dispatch])
+
 
 
     if (!isAuthenticated){
