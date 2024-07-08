@@ -1,7 +1,4 @@
 import { useState } from "react"
-import { useAppDispatch } from "../../hooks"
-import useAuthApi from "../hooks/useAuthApi";
-import { authenticateUser } from "../slicers/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export interface UserLogin{
@@ -11,9 +8,9 @@ export interface UserLogin{
 
 const LoginForm:React.FC=()=>{
     
-    const dispatch=useAppDispatch()
+
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
-    const authApi = useAuthApi()
+   
     const navigate=useNavigate()
     
     /*const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
@@ -56,7 +53,7 @@ const LoginForm:React.FC=()=>{
     
 
     return(
-        <form onSubmit={handleSubmit} action="http://127.0.0.1:8000/users/login" method="POST" encType="multipart/form-data">
+        <form /*onSubmit={handleSubmit}*/ action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
             Usuario 
             <input
                  type="text"

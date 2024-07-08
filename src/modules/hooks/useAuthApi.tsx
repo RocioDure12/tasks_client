@@ -8,11 +8,11 @@ const api= axios.create({
 });
 
 //Estructura de la respuesta esperada despues de un inicio exitoso
-export interface LoginResponse {
+export interface Response {
   //expiracionRefreshToken:Date
   user: User;
-  access_token:string
-  refresh_token:string
+  //access_token:string
+  //refresh_token:string
 }
 
 //Éxito data contiene los datos esperados de tipo T.
@@ -41,26 +41,22 @@ export interface LoginData {
 }
 
 export default function useAuthApi() {
-  const login = async (
-    data: LoginData
-  ): Promise<ActionResult<LoginResponse>> => {
+  const currentUser = async (): Promise<ActionResult<Response>> => {
     try {
-        const form=new FormData();
-        form.append('username', data.username)
-        form.append('password', data.password)
-        
-      const response = await api.post<LoginResponse>
-      ("users/login",form, {headers: { "Content-Type": "multipart/form-data" }});
-      console.log(response.data)
-      return { data: response.data};
+      const response = await api.get<Response>("/users/readme");
+      return { data: response.data };
     } catch (error) {
-      //console.error(error);
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        return { error, errorMessage: "Credenciales inválidas." };
+      if (axios.isAxiosError(error)) {
+        // Manejo de errores de Axios
+        return { error, errorMessage: error.message };
+      } else {
+        // Otros tipos de errores
+        return { error: error as Error, errorMessage: "Error al obtener el usuario actual" };
       }
-      return { error: error as Error, errorMessage: "Error desconocido." };
     }
   };
 
-  return { login };
+  return { currentUser };
 }
+
+

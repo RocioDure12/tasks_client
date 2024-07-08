@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { selectTotal } from "../slicers/cartSlice";
 import { selectItemsCart } from "../slicers/cartSlice";
 import { updateStockAndRemoveToCart } from "../slicers/productsSlice";
+import axios from "axios";
 
 
 
@@ -9,6 +11,7 @@ export default function NavBar() {
   const total = useAppSelector(selectTotal);
   const itemsCart=useAppSelector(selectItemsCart)
   const dispatch=useAppDispatch()
+
 
   return (
     <div className="card">
