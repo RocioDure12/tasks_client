@@ -5,12 +5,12 @@ import type { RootState } from "../../store";
 interface AuthState{
     //expirationRefreshToken?:Date | null
     user:User| null
-    isAuthenticated:boolean
+
 }
 
 const initialState:AuthState={
     user:null,
-    isAuthenticated:false
+ 
 }
 
   const authSlice=createSlice({
@@ -19,23 +19,29 @@ const initialState:AuthState={
     reducers:{
         authenticateUser:(state, action:PayloadAction<{user:User}>)=>{
             state.user=action.payload.user
-            state.isAuthenticated=true
+          
+        
           
         },
 
         logout:(state)=>{
-          state.isAuthenticated=false
+         
 
-        }
+        },
+      setUserNull:(state)=>{
+        state.user= null;
+
+      }
     },
+    
   })
 
 
 
-export const{authenticateUser, logout} =authSlice.actions
+export const{authenticateUser, logout, setUserNull} =authSlice.actions
 
 export const currentUser= (state:RootState)=> state.auth.user
 
-export const selectIsAuthenticated= (state:RootState)=> state.auth.isAuthenticated
+//export const selectIsAuthenticated= (state:RootState)=> state.auth.isAuthenticated
 
 export default authSlice.reducer
