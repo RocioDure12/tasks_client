@@ -38,7 +38,8 @@ export default function RequireAuth(props:PropsWithChildren){
     if (loading){
         return <div>Loading</div>
     }
-    else if(!user){
+    else if(!user)
+    {
         return<Navigate to="users/login" replace/>
     }
 
