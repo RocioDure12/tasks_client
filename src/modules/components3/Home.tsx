@@ -2,9 +2,9 @@ import { useAppSelector } from "../../hooks"
 import { currentUser} from "../slicers/authSlice"
 
 export default function Home(){
-    const caca=useAppSelector(currentUser)
+    const user=useAppSelector(currentUser)
 
     return(
-        <div>Bienvenido {caca?.name} </div>
+        <div>Bienvenido {user?.name} </div>
     )
 }
