@@ -1,9 +1,8 @@
 import axios, { AxiosError } from "axios";
 import User from "../models/User";
-import Cookies from "js-cookie";
 
 const api= axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: "http://localhost:8000",
   withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
 });
 
@@ -41,9 +40,9 @@ export interface LoginData {
 }
 
 export default function useAuthApi() {
-  const currentUser = async (): Promise<ActionResult<Response>> => {
+  const currentUser = async (): Promise<ActionResult<User>> => {
     try {
-      const response = await api.get<Response>("/users/readme");
+      const response = await api.get<User>("/users/readme");
       return { data: response.data };
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -55,8 +54,27 @@ export default function useAuthApi() {
       }
     }
   };
+  const getCookiesValues = async (): Promise<ActionResult<string>> => {
+    try {
+      const response = await api.get<{ message: string }>("/get-cookies");
+      return { data: response.data.message };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        // Manejo de errores de Axios
+        return { error, errorMessage: error.message };
+      } else {
+        // Otros tipos de errores
+        return { error: error as Error, errorMessage: "Error al obtener las cookies" };
+      }
+    }
+  };
 
-  return { currentUser };
+
+  
+
+  return { currentUser, getCookiesValues };
+
+
 }
 
 

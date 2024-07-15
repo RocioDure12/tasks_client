@@ -6,9 +6,6 @@ import LoginForm from "./modules/components3/LoginForm";
 import Home from './modules/components3/Home';
 import RequireAuth from './modules/components3/RequireAuth';
 
-
-
-
 export default function App() {
 
   return (
@@ -20,11 +17,9 @@ export default function App() {
         <Routes>
           <>
             
-            <Route path='users/login' element={<LoginForm></LoginForm>}/>
-            <Route path='/home' element={<RequireAuth><Home></Home></RequireAuth>}/>
-        
-
-  
+            <Route path='/users/login' element={<LoginForm></LoginForm>}/>
+            <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
+      
           </>
         </Routes>
       </Router>

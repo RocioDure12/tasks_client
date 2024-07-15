@@ -1,10 +1,14 @@
+import { useEffect } from "react"
 import { useAppSelector } from "../../hooks"
 import { currentUser} from "../slicers/authSlice"
+import axios from "axios"
+
 
 export default function Home(){
-    //const user=useAppSelector(currentUser)
+    const user=useAppSelector(currentUser)
+
 
     return(
-        <div>Bienvenido </div>
+        <div>Bienvenido {user?.name}</div>
     )
 }
