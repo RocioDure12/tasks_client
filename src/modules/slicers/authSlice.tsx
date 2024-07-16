@@ -3,7 +3,6 @@ import User from "../models/User";
 import type { RootState } from "../../store";
 
 interface AuthState {
-  //expirationRefreshToken?:Date | null
   user?: User;
 }
 
@@ -27,7 +26,5 @@ const authSlice = createSlice({
 export const { authenticateUser, logout, setUserNull } = authSlice.actions;
 
 export const currentUser = (state: RootState) => state.auth.user;
-
-//export const selectIsAuthenticated= (state:RootState)=> state.auth.isAuthenticated
 
 export default authSlice.reducer;

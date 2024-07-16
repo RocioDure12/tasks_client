@@ -6,13 +6,6 @@ const api= axios.create({
   withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
 });
 
-//Estructura de la respuesta esperada despues de un inicio exitoso
-export interface Response {
-  //expiracionRefreshToken:Date
-  user: User;
-  //access_token:string
-  //refresh_token:string
-}
 
 //Éxito data contiene los datos esperados de tipo T.
 //error y errorMessage son opcionales y, generalmente, estarán ausentes en este caso.
