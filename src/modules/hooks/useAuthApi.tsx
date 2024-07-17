@@ -47,6 +47,7 @@ export default function useAuthApi() {
       }
     }
   };
+  
   const getCookiesValues = async (): Promise<ActionResult<string>> => {
     try {
       const response = await api.get<{ message: string }>("/get-cookies");
@@ -61,6 +62,7 @@ export default function useAuthApi() {
       }
     }
   };
+
 
 
   

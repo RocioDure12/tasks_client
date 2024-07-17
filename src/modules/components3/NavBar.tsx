@@ -18,8 +18,10 @@ export default function NavBar() {
       <span>🛒</span>
       <span>${total}</span>
       <ul>
+        ITEMS CARRITO
         {itemsCart.map((item)=>
           <li key={item.product.id}>{item.product.name} ({item.quantity}) ${item.product.price}
+          
           <button onClick={()=>dispatch(updateStockAndRemoveToCart(itemsCart))}>Eliminar</button>
           </li> 
         )}
