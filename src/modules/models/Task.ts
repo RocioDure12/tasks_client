@@ -3,7 +3,7 @@ interface Task{
     task_name: string;
     description: string;
     status:boolean;
-    due_time:Date;
+    due_date:Date;
     deleted_at?:Date;
     created_at:Date;
     updated_at?:Date;
