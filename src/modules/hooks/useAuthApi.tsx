@@ -63,10 +63,6 @@ export default function useAuthApi() {
     }
   };
 
-
-
-  
-
   return { currentUser, getCookiesValues };
 
 
