@@ -7,7 +7,7 @@ import {
   authenticateUser,
   currentUser,
   setUserNull,
-} from "../slicers/authSlice";
+} from "../slices/authSlice";
 
 export default function RequireAuth(props: PropsWithChildren) {
   const authApi = useAuthApi();

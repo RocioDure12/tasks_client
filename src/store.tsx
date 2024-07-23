@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './modules/slicers/counterSlice'
-import cartSlice from './modules/slicers/cartSlice'
-import productsListSlice from './modules/slicers/productsSlice'
-import authSlice from './modules/slicers/authSlice'
+import counterSlice from './modules/slices/counterSlice'
+import cartSlice from './modules/slices/cartSlice'
+import productsListSlice from './modules/slices/productsSlice'
+import authSlice from './modules/slices/authSlice'
 
 
 //Define Root State and Dispatch Types

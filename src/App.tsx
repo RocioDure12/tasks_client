@@ -6,6 +6,7 @@ import Home from './modules/components3/Home';
 import RequireAuth from './modules/components3/RequireAuth';
 import { TaskForm } from './modules/components3/TaskForm';
 import ProductList from './modules/components3/ProductsList';
+import NavBar from './modules/components3/NavBar';
 
 export default function App() {
 
@@ -14,6 +15,7 @@ export default function App() {
     <ThemeProvider>
     <CartProvider>
       <Router>
+        <NavBar></NavBar>
         <Routes>
           <>
             

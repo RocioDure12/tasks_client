@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks";
-import { currentUser} from "../slicers/authSlice";
+import { currentUser} from "../slices/authSlice";
 import { Calendar } from 'antd';
 import type { CalendarProps } from 'antd';
 import type { Dayjs } from 'dayjs';

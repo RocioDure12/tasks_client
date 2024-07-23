@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Panel from "./Panel";
 import { useAppSelector, useAppDispatch } from "../../hooks"
-import { decrement, increment } from "../slicers/counterSlice"
+import { decrement, increment } from "../slices/counterSlice"
 import useThemeContext from "../hooks/useThemeContext";
 
 

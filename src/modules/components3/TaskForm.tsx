@@ -1,16 +1,24 @@
 import { useState } from "react"
 import Task from "../models/Task"
+import useTaskApi from "../hooks/useTaskApi"
+import axios, { AxiosError } from "axios";
 
+const taskApi= useTaskApi()
 
 export const TaskForm:React.FC=()=>{
-    const [task, setTask]=useState<Partial<Task>>({})
+    const [task, setTask]=useState<Partial<Task>>({status:false})
 
-    const handleChangeName=(evt:React.ChangeEvent<HTMLInputElement>)=>{
-        setTask({...task,...{name:evt.target.value},})
+    const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
+        const { name, value, type, checked } = evt.target;
+        const updatedTask = { ...task, [name]: type === 'checkbox' ? checked : value };
+        
+        setTask(updatedTask);
     }
 
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
+        const result=taskApi.createTask(task as Task)
+        console.log(result)
     }
 
     return(
@@ -18,31 +26,31 @@ export const TaskForm:React.FC=()=>{
             Nombre
             <input
             type="text"
-            name="name"
-            value={task.task_name}
-            onChange={handleChangeName}
+            name="task_name"
+            value={task.task_name || ""}
+            onChange={handleChange}
             required
             />
             Tiempo
             <input
+            name="due_date"
             type="datetime-local"
-            name="due-time"
-            value={task.due_date?.toLocaleDateString()}
-            onChange={handleChangeName}
+            onChange={handleChange}
             required
             />
             Descripción
             <input
             type="text"
             name="description"
-            value={task.description}
-            onChange={handleChangeName}
+            value={task.description || ""}
+            onChange={handleChange}
             required
             />
             <input
+             name="status"
              type="checkbox"
-             onChange={handleChangeName}
-             value={task.status?.toString()}
+             onChange={handleChange}
+             checked={task.status || false}
              />
 
              <button>Enviar</button>

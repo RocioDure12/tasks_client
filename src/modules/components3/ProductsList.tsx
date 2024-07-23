@@ -2,9 +2,9 @@ import { useAppDispatch } from "../../hooks";
 import Product from "../models/Product";
 import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
-import { setProductsList} from "../slicers/productsSlice";
-import { selectProductsList } from "../slicers/productsSlice";
-import { updateStockAndAddToCart } from "../slicers/productsSlice";
+import { setProductsList} from "../slices/productsSlice";
+import { selectProductsList } from "../slices/productsSlice";
+import { updateStockAndAddToCart } from "../slices/productsSlice";
 
 export const shoes: Product[] = [
   { id: 1, name: "Borcegos de cuero", price: 59.99, stock: 4 },
