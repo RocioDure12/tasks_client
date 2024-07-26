@@ -31,7 +31,7 @@ export const TaskForm:React.FC=()=>{
             onChange={handleChange}
             required
             />
-            Tiempo
+            Fecha de vencimiento
             <input
             name="due_date"
             type="datetime-local"

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import User from "../models/User";
 
+
 const api= axios.create({
   baseURL: "http://localhost:8000",
   withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
@@ -63,7 +64,22 @@ export default function useAuthApi() {
     }
   };
 
-  return { currentUser, getCookiesValues };
+  const logout=async():Promise<ActionResult<string>>=>{
+    try{
+      const response= await api.post<{message: string}>("/users/logout")
+      return{data: response.data.message}
+  
+
+    }catch(error){
+      if (axios.isAxiosError(error)) {
+        return { error, errorMessage: error.message };
+      } else {
+        return { error: error as Error, errorMessage: "Error al eliminar las cookies" };
+
+    }
+  }
+  };
+  return { currentUser, getCookiesValues, logout };
 
 
 }

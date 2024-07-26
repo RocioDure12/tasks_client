@@ -27,7 +27,7 @@ export default function NavBar() {
         )}
       </ul>
 
-        <button style={{ background: '#e6eba9', borderRadius:"10px"}}>Logout</button>
+        
     </div>
   );
 }
