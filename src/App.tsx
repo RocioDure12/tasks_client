@@ -8,6 +8,7 @@ import { TaskForm } from './modules/components3/TaskForm';
 import ProductList from './modules/components3/ProductsList';
 import NavBar from './modules/components3/NavBar';
 import { SignUpForm } from './modules/components3/SignUpForm';
+import VerifyEmailAccount from './modules/components3/VerifyEmailAccount';
 
 export default function App() {
 
@@ -16,11 +17,12 @@ export default function App() {
     <ThemeProvider>
     <CartProvider>
       <Router>
-        <NavBar></NavBar>
-        <SignUpForm></SignUpForm>
+
         <Routes>
           <>
             
+            <Route path='/' element={<SignUpForm/>}/>
+            <Route path='/verifyemail' element={<VerifyEmailAccount/>} />
             <Route path='/users/login' element={<LoginForm></LoginForm>}/>
             <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
             <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>

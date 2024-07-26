@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import User from "../models/User";
-import { Button } from "antd";
+import useUserApi from "../hooks/useUserApi";
+
 
 export const SignUpForm:React.FC=()=>{
-    const [user,setUser]=useState<Partial<User>>({disabled:false, isVerified:false})
+    const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
+    const userApi=useUserApi()
 
     const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
-        //const{name,value,type}=evt.target
+        setUser({
+            ...user,
+            [evt.target.name]: evt.target.value
+        })
+
 
     }
 
@@ -14,14 +20,15 @@ export const SignUpForm:React.FC=()=>{
         e.preventDefault()
         //validaciones
         // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
-
+        const result=userApi.createUser(user as User)
+        console.log(result)
     }
 
 
 
     return(
         <form onSubmit={handleSubmit}>
-            <label>Nombre</label>
+            <>Nombre</>
             <input
              type="text"
              name="name"
@@ -30,7 +37,7 @@ export const SignUpForm:React.FC=()=>{
              required
              />
 
-             <label>Apellido</label>
+             <>Apellido</>
              <input 
              type="text"
              name="surname"
@@ -39,7 +46,7 @@ export const SignUpForm:React.FC=()=>{
              required
              />
 
-             <label>Email</label>
+             <>Email</>
              <input
              type="email"
              name="email"
@@ -48,15 +55,21 @@ export const SignUpForm:React.FC=()=>{
              required
              />
 
-             <label>Nombre de usuario</label>
+             <>Nombre de usuario</>
              <input
              type="text"
              name="username"
              value={user.username || ""}
              onChange={handleChange}
              required
-             
-             
+             />
+
+             <>Contraseña</>
+             <input
+             name="password"
+             value={user.password || ""}
+             onChange={handleChange}
+             required
              />
              <button>Enviar</button>
 

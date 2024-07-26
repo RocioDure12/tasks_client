@@ -6,12 +6,12 @@ interface User{
     username: string;
     password: string; 
     disabled: boolean;
-    isVerified: boolean;
-    verificationCode: string;
-    deletedAt?: Date;
-    createdAt: Date;
-    updatedAt?: Date;
-    roleId?: number;
+    is_verified: boolean;
+    //verificationCode: string;
+    deleted_at?: Date;
+    created_at: Date;
+    updated_at?: Date;
+    role_id?: number;
 
 }
 
