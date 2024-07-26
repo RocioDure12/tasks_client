@@ -7,6 +7,7 @@ import RequireAuth from './modules/components3/RequireAuth';
 import { TaskForm } from './modules/components3/TaskForm';
 import ProductList from './modules/components3/ProductsList';
 import NavBar from './modules/components3/NavBar';
+import { SignUpForm } from './modules/components3/SignUpForm';
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
     <CartProvider>
       <Router>
         <NavBar></NavBar>
+        <SignUpForm></SignUpForm>
         <Routes>
           <>
             
