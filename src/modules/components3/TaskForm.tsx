@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const taskApi= useTaskApi()
 
 export const TaskForm:React.FC=()=>{
-    const [task, setTask]=useState<Partial<Task>>({status:false})
+    const [task, setTask]=useState<Partial<Task>>({status:false, due_date:undefined})
 
     const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
         const { name, value, type, checked } = evt.target;
@@ -20,6 +20,7 @@ export const TaskForm:React.FC=()=>{
         e.preventDefault()
         const result=taskApi.createTask(task as Task)
         console.log(result)
+        setTask({due_date:undefined});
     }
 
     return(
@@ -38,6 +39,7 @@ export const TaskForm:React.FC=()=>{
             type="datetime-local"
             onChange={handleChange}
             required
+      
             />
             Descripción
             <input

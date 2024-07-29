@@ -11,7 +11,7 @@ const api= axios.create({
 export default function useUserApi(){
     const createUser= async (user:Partial<User>):Promise<ActionResult<User>>=>{
         try{
-            const response= await api.post<User>("/users", user);
+            const response= await api.post("/users/create", user);
             return {data:response.data}
         }
         catch(error){
@@ -26,23 +26,21 @@ export default function useUserApi(){
 
     }
 
-    const verifyEmailAccount=async(token:string):Promise<ActionResult<string>>=>{
-        try{
-            const response= await api.post<string>("/users/",token
-            );
-            return {data:response.data}
-        }
-        catch(error){
-        if (axios.isAxiosError(error)){
-            return{error, errorMessage:error.message}
-        }else{
+    const verifyEmailAccount = async (token: string):Promise<ActionResult<User>>=> {
+        try {
+          const response = await api.post(`users/verification/${token}`);
+          console.log(response);
+          return { data: response.data };
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            return { error, errorMessage: error.message };
+          } else {
             return { error: error as Error, errorMessage: "Error" };
-
+          }
         }
-        }
+      };
 
-    }
-
+ 
 
     return{createUser, verifyEmailAccount}
 

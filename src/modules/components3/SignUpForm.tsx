@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
-
+import { useNavigate } from "react-router-dom";
 
 export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
     const userApi=useUserApi()
+    const navigate = useNavigate();
 
     const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
         setUser({
@@ -16,12 +17,16 @@ export const SignUpForm:React.FC=()=>{
 
     }
 
-    const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit=async(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         //validaciones
         // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
-        const result=userApi.createUser(user as User)
-        console.log(result)
+        const result=await userApi.createUser(user as User)
+        if (result.data){
+            navigate("/verifyemail")
+        } else{
+            console.log("Error al crear usuario")
+        }
     }
 
 

@@ -20,11 +20,10 @@ export default function App() {
 
         <Routes>
           <>
-            
-            <Route path='/' element={<SignUpForm/>}/>
+            <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
+            <Route path='/signup' element={<SignUpForm/>}/>
             <Route path='/verifyemail' element={<VerifyEmailAccount/>} />
             <Route path='/users/login' element={<LoginForm></LoginForm>}/>
-            <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
             <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
             <Route path='productlist' element={<ProductList></ProductList>}/>
       

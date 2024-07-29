@@ -18,7 +18,7 @@ export default function VerifyEmailAccount() {
         e.preventDefault()
         const result=await userApi.verifyEmailAccount(token)
         if (result.data){
-            navigate("users/login")
+            navigate("/users/login")
         }else{
             console.log("error en verificacion del email")
         }
