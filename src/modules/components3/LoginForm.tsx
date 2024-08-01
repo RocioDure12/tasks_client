@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export interface UserLogin{
     username:string
@@ -7,6 +8,7 @@ export interface UserLogin{
 
 const LoginForm:React.FC=()=>{
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
+    const navigate=useNavigate()
     /*const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         console.log(userLogin)
@@ -40,8 +42,9 @@ const LoginForm:React.FC=()=>{
 
     }
 
+  
     return(
-        <form /*onSubmit={handleSubmit}*/ action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
+        <form action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
             Usuario 
             <input
                  type="text"

@@ -1,8 +1,6 @@
 import { useState } from "react"
 import Task from "../models/Task"
 import useTaskApi from "../hooks/useTaskApi"
-import axios, { AxiosError } from "axios";
-import { Link } from "react-router-dom";
 
 const taskApi= useTaskApi()
 
@@ -56,7 +54,7 @@ export const TaskForm:React.FC=()=>{
              checked={task.status || false}
              />
         
-             <button>Enviar</button>
+             <button>Guardar</button>
              
              
 
