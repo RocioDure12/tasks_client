@@ -7,10 +7,10 @@ import "../styles/Card.css"
 interface CategoriesListProps {
   searchText:string
   categories: Category[];
-  onDelete: (index: number) => any;
-  onCheckChange:(value:boolean,index:number)=> any;
-  onFavChanged:(value:boolean,index:number)=>any;
-  onSearch:(input:string)=>any
+  onDelete: (index: number) => void;
+  onCheckChange:(value:boolean,index:number)=> void;
+  onFavChanged:(value:boolean,index:number)=>void;
+  onSearch:(input:string)=>void
 
 }
 

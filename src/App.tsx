@@ -12,6 +12,7 @@ import { TaskDetails } from './modules/components3/TaskDetails';
 import { EditTaskForm } from './modules/components3/EditTaskForm';
 import { TasksList } from './modules/components3/TasksList';
 
+
 export default function App() {
 
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <Route path='/signup' element={<SignUpForm/>}/>
           <Route path='/users/login' element={<LoginForm></LoginForm>}/>
           <Route path='/verifyemail' element={<VerifyEmailAccount/>} />
+          
 
           <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
           <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
