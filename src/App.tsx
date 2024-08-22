@@ -7,10 +7,8 @@ import RequireAuth from './modules/components/RequireAuth';
 import { TaskForm } from './modules/components/TaskForm';
 import { SignUpForm } from './modules/components/SignUpForm';
 import VerifyEmailAccount from './modules/components/VerifyEmailAccount';
-import { Profile } from './modules/components/Profile';
-import { TaskDetails } from './modules/components/TaskDetails';
-import { EditTaskForm } from './modules/components/EditTaskForm';
-import { TasksList } from './modules/components/TasksList';
+import { Profile } from './modules/old/Profile';
+
 
 
 export default function App() {
@@ -28,11 +26,8 @@ export default function App() {
 
           <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
           <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
-          <Route path='/task/:id' element={<RequireAuth><TaskDetails/></RequireAuth>}/>
-          <Route path='/task/edit/:id' element={<RequireAuth><EditTaskForm/></RequireAuth>}/>
           <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
-          <Route path='/taskslist' element={<RequireAuth><TasksList/></RequireAuth>}/>
-
+          
         </Routes>
       </Router>
       
