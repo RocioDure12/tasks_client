@@ -17,8 +17,6 @@ export const Form=<T extends {}>({fields, initialValues, onFormSubmit }: FormPro
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         onFormSubmit(values as T)
-        //aqui conectarse con la api para crear/editar etc
-        //reestablecer los campos
         setValues(initialValues)
 
     }

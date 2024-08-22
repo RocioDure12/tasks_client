@@ -5,8 +5,7 @@ import useTaskApi from "../hooks/useTaskApi"
 import { useEffect, useState } from "react";
 
 
-const taskApi= useTaskApi()
-const initialValues:Partial<Task>=({})
+//const initialValues:Partial<Task>=({})
 
 const taskFormFields:Field[]=[
     {
@@ -28,25 +27,52 @@ const taskFormFields:Field[]=[
     }
 ]
 
-const handleCreateTask=(data:Task)=>{
-    const result=taskApi.createTask(data)
-    console.log(result)
-
-}
-
 //const handleEditTask=(data:Task)=>{
 //    const result=taskApi.editTask(data)
 //
 //}
 
-export const TaskForm=()=>{
+export const TaskForm=({taskId}:{taskId?:number})=>{
     const [task,setTask]=useState<Partial<Task>>({status:false, due_date:undefined})
+    const taskApi= useTaskApi()
+
+    useEffect(()=>{
+        if (taskId !== undefined){
+            //consulta a la api
+            //si la tarea ya existe rellena el form con los campos existentes (setTask)
+        }
+
+        else{
+            setTask({})
+        }
+
+    })
+
+    const handleEditTask=(data:Task)=>{
+        console.log("caca")
+    }
+
+    const handleCreateTask=(data:Task)=>{
+        const result=taskApi.createTask(data)
+        console.log(result)
+    
+    }
+
+    const handleSubmit = (data: Task) => {
+        if (taskId !== undefined) {
+            handleEditTask(data); // Edita la tarea si taskId está definido
+        } else {
+            handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
+        }
+    };
+
+
 
     return(
         <Form
         fields={taskFormFields}
-        initialValues={initialValues}
-        onFormSubmit={handleCreateTask}
+        initialValues={task}// Pasa los valores actuales de la tarea al formulario
+        onFormSubmit={handleSubmit}
 
         />
     )
