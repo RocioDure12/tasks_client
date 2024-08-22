@@ -19,8 +19,8 @@ export default function App() {
     <CartProvider>
       <Router>
         <Routes>
-          <Route path='/signup' element={<SignUpForm/>}/>
           <Route path='/users/login' element={<LoginForm></LoginForm>}/>
+          <Route path='/signup' element={<SignUpForm/>}/>
           <Route path='/verifyemail' element={<VerifyEmailAccount/>} />
           
 

@@ -16,7 +16,7 @@ export default function RequireAuth(props: PropsWithChildren) {
   const [loading, setLoading] = useState(true);
 
   const getCurrentUser = async () => {
-    setLoading(true);
+    //setLoading(true);
     const result = await authApi.currentUser();
     if (result.error) {
       dispatch(setUserNull());
@@ -34,9 +34,10 @@ export default function RequireAuth(props: PropsWithChildren) {
 
   if (loading) {
     return <div>Loading</div>;
-  } else if (!user) {
+  }
+  if (!user) {
     return <Navigate to="/users/login" replace />;
   }
-
+  
   return <>{props.children}</>;
 }
