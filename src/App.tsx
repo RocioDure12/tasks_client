@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ThemeProvider from "./modules/context/ThemeProvider";
 import CartProvider from "./modules/context/CartProvider";
-import LoginForm from "./modules/components3/LoginForm";
-import Home from './modules/components3/Home';
-import RequireAuth from './modules/components3/RequireAuth';
-import { TaskForm } from './modules/components3/TaskForm';
-import { SignUpForm } from './modules/components3/SignUpForm';
-import VerifyEmailAccount from './modules/components3/VerifyEmailAccount';
-import { Profile } from './modules/components3/Profile';
-import { TaskDetails } from './modules/components3/TaskDetails';
-import { EditTaskForm } from './modules/components3/EditTaskForm';
-import { TasksList } from './modules/components3/TasksList';
+import LoginForm from "./modules/components/LoginForm";
+import Home from './modules/components/Home';
+import RequireAuth from './modules/components/RequireAuth';
+import { TaskForm } from './modules/components/TaskForm';
+import { SignUpForm } from './modules/components/SignUpForm';
+import VerifyEmailAccount from './modules/components/VerifyEmailAccount';
+import { Profile } from './modules/components/Profile';
+import { TaskDetails } from './modules/components/TaskDetails';
+import { EditTaskForm } from './modules/components/EditTaskForm';
+import { TasksList } from './modules/components/TasksList';
 
 
 export default function App() {
