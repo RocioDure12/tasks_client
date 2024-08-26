@@ -3,7 +3,7 @@ import { Button } from "./Button"
 
 import { useState } from "react"
 
-export const Form=<T extends {}>({fields, initialValues, onFormSubmit }: FormProps<T>)=>{
+export const Form=<T extends {}>({fields, initialValues, onFormSubmit, buttonText}: FormProps<T>)=>{
     const [values, setValues]=useState<Partial<T>>(initialValues)
 
     const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
@@ -17,8 +17,6 @@ export const Form=<T extends {}>({fields, initialValues, onFormSubmit }: FormPro
     const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
         onFormSubmit(values as T)
-        setValues(initialValues)
-
     }
     
     return(
@@ -38,10 +36,7 @@ export const Form=<T extends {}>({fields, initialValues, onFormSubmit }: FormPro
             </label>
         ))}
 
-        <Button/>
-
-
-
-
+  
+    <Button type="submit">{buttonText}</Button>
     </form>)
 }

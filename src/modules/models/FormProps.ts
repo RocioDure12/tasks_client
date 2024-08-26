@@ -4,4 +4,5 @@ export interface FormProps<T>{
     fields:Field[]
     initialValues:Partial<T>
     onFormSubmit:(data:T)=>void
+    buttonText:string
 }

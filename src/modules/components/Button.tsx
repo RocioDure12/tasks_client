@@ -1,8 +1,16 @@
-import { PropsWithChildren } from "react";
+import { forwardRef } from 'react';
 
-export const Button=(props:PropsWithChildren)=>{
-    return(
-        <button>{props.children}</button>
-    )
+type ButtonProps = {
+  //loading?: boolean; // custom prop
+} & React.PropsWithChildren<React.ComponentPropsWithRef<'button'>>;
 
-}
+
+export const Button: React.FC<ButtonProps> = forwardRef(
+    ({  children, ...props }, ref) => {
+      return (
+        <button {...props} ref={ref}>
+          {children}
+        </button>
+      );
+    }
+  );

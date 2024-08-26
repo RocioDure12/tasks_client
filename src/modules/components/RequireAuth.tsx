@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import useAuthApi from "../hooks/useAuthApi";
 import { useAppDispatch } from "../../hooks";
@@ -13,7 +13,7 @@ export default function RequireAuth(props: PropsWithChildren) {
   const authApi = useAuthApi();
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
-  const [loading, setLoading] = useState(true);
+
 
   const getCurrentUser = async () => {
     //setLoading(true);
@@ -25,19 +25,18 @@ export default function RequireAuth(props: PropsWithChildren) {
     if (result.data) {
       dispatch(authenticateUser(result.data));
     }
-    setLoading(false);
+ 
   };
 
   useEffect(() => {
     getCurrentUser();
   }, []);
 
-  if (loading) {
-    return <div>Loading</div>;
-  }
+
   if (!user) {
     return <Navigate to="/users/login" replace />;
-  }
+  } else{
   
   return <>{props.children}</>;
+}
 }

@@ -5,6 +5,7 @@ import useTaskApi from "../hooks/useTaskApi"
 import { useEffect, useState } from "react";
 
 
+
 //const initialValues:Partial<Task>=({})
 
 const taskFormFields:Field[]=[
@@ -20,9 +21,17 @@ const taskFormFields:Field[]=[
         label: "Descripcion",
     },
     {
-        type:"date",
+        type:"datetime-local",
         name:"due_date",
         label:"Fecha de vencimiento"
+
+    },
+    {
+        type:"checkbox",
+        name:"status",
+        label:""
+
+
 
     }
 ]
@@ -32,7 +41,7 @@ const taskFormFields:Field[]=[
 //
 //}
 
-export const TaskForm=({taskId}:{taskId?:number})=>{
+export const Task2Form=({taskId}:{taskId?:number})=>{
     const [task,setTask]=useState<Partial<Task>>({status:false, due_date:undefined})
     const taskApi= useTaskApi()
 
@@ -43,17 +52,17 @@ export const TaskForm=({taskId}:{taskId?:number})=>{
         }
 
         else{
-            setTask({})
+            setTask({status:false, due_date:undefined})
         }
 
-    })
+    },[taskId])
 
     const handleEditTask=(data:Task)=>{
         console.log("caca")
     }
 
-    const handleCreateTask=(data:Task)=>{
-        const result=taskApi.createTask(data)
+    const handleCreateTask=async(data:Task)=>{
+        const result=await taskApi.createTask(data)
         console.log(result)
     
     }
@@ -69,11 +78,16 @@ export const TaskForm=({taskId}:{taskId?:number})=>{
 
 
     return(
+        
         <Form
         fields={taskFormFields}
         initialValues={task}// Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
+        buttonText={taskId !== undefined? "Editar" : "Guardar"}
 
         />
+    
+ 
+
     )
 }
