@@ -64,6 +64,8 @@ const LoginForm:React.FC=()=>{
 
             <button type="submit">Iniciar sesión</button>
 
+            <p>¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
+
         </form>
     )
 

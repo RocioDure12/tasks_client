@@ -9,6 +9,7 @@ import { SignUpForm } from './modules/components/SignUpForm';
 import VerifyEmailAccount from './modules/components/VerifyEmailAccount';
 import { Profile } from './modules/old/Profile';
 import {Task2Form} from "./modules/components/Task2Form"
+import { TasksList } from './modules/components/TasksList';
 
 
 
@@ -29,6 +30,7 @@ export default function App() {
           <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
           <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
           <Route path='/formulario' element={<RequireAuth><Task2Form></Task2Form></RequireAuth>}/>
+          <Route path='/list' element={<TasksList></TasksList>}/>
         </Routes>
       </Router>
       
