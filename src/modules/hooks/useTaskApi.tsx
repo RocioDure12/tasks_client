@@ -23,12 +23,22 @@ export default function useTaskApi(){
             return { error: error as Error, errorMessage: "Error al crear la tarea" };
 
         }
-        }
-      
-
-
+        };
 }
 
-    return{createTask}
+    const readTasks = async(): Promise<ActionResult<Task[]>> => {
+        try {
+            const response = await api.get<Task[]>(`tasks/my_tasks`);
+            return { data: response.data };
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return { error, errorMessage: error.message };
+            } else {
+                return { error: error as Error, errorMessage: "Error al obtener las tareas" };
+                }
+                }
+      };
+
+    return{createTask, readTasks}
 
 }

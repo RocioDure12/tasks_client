@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../hooks";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import useAuthApi from "../hooks/useAuthApi";
 import { useAppDispatch } from "../../hooks";
@@ -34,7 +34,7 @@ export default function RequireAuth(props: PropsWithChildren) {
 
 
   if (!user) {
-    return <Navigate to="/users/login" replace />;
+    return <Navigate to="/signup" replace />;
   } else{
   
   return <>{props.children}</>;
