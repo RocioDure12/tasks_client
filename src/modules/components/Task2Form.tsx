@@ -3,10 +3,7 @@ import Field from "../models/Field";
 import  Task  from "../models/Task";
 import useTaskApi from "../hooks/useTaskApi"
 import { useEffect, useState } from "react";
-
-
-
-//const initialValues:Partial<Task>=({})
+import { useParams } from 'react-router-dom';
 
 const taskFormFields:Field[]=[
     {
@@ -36,17 +33,13 @@ const taskFormFields:Field[]=[
     }
 ]
 
-//const handleEditTask=(data:Task)=>{
-//    const result=taskApi.editTask(data)
-//
-//}
-
-export const Task2Form=({taskId}:{taskId?:number})=>{
+export const Task2Form=()=>{
     const [task,setTask]=useState<Partial<Task>>({status:false, due_date:undefined})
     const taskApi= useTaskApi()
+    const {id}=useParams<{ id: string }>();
 
     useEffect(()=>{
-        if (taskId !== undefined){
+        if (id !== undefined){
             //consulta a la api
             //si la tarea ya existe rellena el form con los campos existentes (setTask)
         }
@@ -55,21 +48,20 @@ export const Task2Form=({taskId}:{taskId?:number})=>{
             setTask({status:false, due_date:undefined})
         }
 
-    },[taskId])
+    },[id])
 
-    const handleEditTask=(data:Task)=>{
-        console.log("caca")
+    const handleEditTask=async(data:Task,id:string)=>{
+        const result=await taskApi.updateTask(data, id)
     }
+
 
     const handleCreateTask=async(data:Task)=>{
         const result=await taskApi.createTask(data)
-        console.log(result)
-    
     }
 
     const handleSubmit = (data: Task) => {
-        if (taskId !== undefined) {
-            handleEditTask(data); // Edita la tarea si taskId está definido
+        if (id !== undefined) {
+            handleEditTask(data, id);
         } else {
             handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
         }
@@ -83,7 +75,7 @@ export const Task2Form=({taskId}:{taskId?:number})=>{
         fields={taskFormFields}
         initialValues={task}// Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
-        buttonText={taskId !== undefined? "Editar" : "Guardar"}
+        buttonText={id? "Editar" : "Guardar"}
 
         />
     

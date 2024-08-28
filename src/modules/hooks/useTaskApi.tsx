@@ -10,23 +10,21 @@ const api= axios.create({
 
 
 
-export default function useTaskApi(){
-    const createTask= async (task:Partial<Task>):Promise<ActionResult<Task>>=>{
-        try{
-            const response= await api.post<Task>("tasks/create", task);
-            return {data:response.data}
+export default function useTaskApi() {
+    const createTask = async (task: Partial<Task>): Promise<ActionResult<Task>> => {
+        try {
+            const response = await api.post<Task>("tasks/create", task);
+            return { data: response.data };
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return { error, errorMessage: error.message };
+            } else {
+                return { error: error as Error, errorMessage: "Error al crear la tarea" };
+            }
         }
-        catch(error){
-        if (axios.isAxiosError(error)){
-            return{error, errorMessage:error.message}
-        }else{
-            return { error: error as Error, errorMessage: "Error al crear la tarea" };
+    };
 
-        }
-        };
-}
-
-    const readTasks = async(): Promise<ActionResult<Task[]>> => {
+    const readTasks = async (): Promise<ActionResult<Task[]>> => {
         try {
             const response = await api.get<Task[]>(`tasks/my_tasks`);
             return { data: response.data };
@@ -35,10 +33,22 @@ export default function useTaskApi(){
                 return { error, errorMessage: error.message };
             } else {
                 return { error: error as Error, errorMessage: "Error al obtener las tareas" };
-                }
-                }
-      };
+            }
+        }
+    };
 
-    return{createTask, readTasks}
+    const updateTask = async (task: Task, id: string): Promise<ActionResult<Task>> => {
+        try {
+            const response = await api.put<Task>(`tasks/${id}`, task);
+            return { data: response.data };
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                return { error, errorMessage: error.message };
+            } else {
+                return { error: error as Error, errorMessage: "Error al actualizar la tarea" };
+            }
+        }
+    };
 
+    return { createTask, readTasks, updateTask };
 }

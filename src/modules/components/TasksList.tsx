@@ -25,8 +25,8 @@ export const TasksList = () => {
     getTasks();
   }, []);
 
-  const handleEditTask=()=>{
-    navigate("/formulario")
+  const handleEditTask=(id:number)=>{
+    navigate(`/formulario/${id}`)
     
 
   }
@@ -36,7 +36,7 @@ export const TasksList = () => {
       <ul>
         {list.map((item) => (
           <li key={item.id}>{item.task_name}
-            <Button onClick={handleEditTask}>Editar</Button>
+            <Button onClick={()=>{handleEditTask(item.id)}}>Editar</Button>
             <Button>Eliminar</Button>
          </li>
         
