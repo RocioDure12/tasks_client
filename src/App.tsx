@@ -26,7 +26,7 @@ export default function App() {
           <Route path='/verifyemail' element={<VerifyEmailAccount/>} />
           
 
-          <Route path='/home' element={<RequireAuth><Home/></RequireAuth>}/>
+          <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
           <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
           <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
           <Route path='/formulario/:id?' element={<RequireAuth><Task2Form></Task2Form></RequireAuth>}/>

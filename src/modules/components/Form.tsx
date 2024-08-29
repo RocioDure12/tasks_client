@@ -1,14 +1,11 @@
 import { FormProps } from "../models/FormProps"
 import { Button } from "./Button"
 
-import { useState, useEffect } from "react"
+import { useState} from "react"
 
 export const Form=<T extends {}>({fields, initialValues, onFormSubmit, buttonText}: FormProps<T>)=>{
     const [values, setValues]=useState<Partial<T>>(initialValues)
 
-    useEffect(() => {
-        setValues(initialValues);
-      }, [initialValues]);
 
     const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
         const { name, value, type, checked } = evt.target;

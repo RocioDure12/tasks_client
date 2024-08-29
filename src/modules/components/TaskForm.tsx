@@ -14,10 +14,11 @@ export const TaskForm:React.FC=()=>{
         
         setTask(updatedTask);
     }
-    //agregar async await
-    const handleSubmit=(e: React.FormEvent<HTMLFormElement>)=>{
+
+    
+    const handleSubmit=async(e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        const result=taskApi.createTask(task as Task)
+        const result=await taskApi.createTask(task as Task)
         console.log(result)
         setTask({due_date:undefined});
     }

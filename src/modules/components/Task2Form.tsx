@@ -1,84 +1,76 @@
-import {Form} from "./Form"
+import { Form } from "./Form";
 import Field from "../models/Field";
-import  Task  from "../models/Task";
-import useTaskApi from "../hooks/useTaskApi"
+import Task from "../models/Task";
+import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-const taskFormFields:Field[]=[
-    {
-        type: "text",
-        name: "task_name",
-        label: "Tarea",
-        required:true
-    },
-    {
-        type: "text",
-        name: "description",
-        label: "Descripcion",
-    },
-    {
-        type:"datetime-local",
-        name:"due_date",
-        label:"Fecha de vencimiento"
+const taskFormFields: Field[] = [
+  {
+    type: "text",
+    name: "task_name",
+    label: "Tarea",
+    required: true,
+  },
+  {
+    type: "text",
+    name: "description",
+    label: "Descripcion",
+  },
+  {
+    type: "datetime-local",
+    name: "due_date",
+    label: "Fecha de vencimiento",
+  },
+];
 
-    },
-  
-]
+export const Task2Form = () => {
+  const [task, setTask] = useState<Partial<Task>>({
+    status: false,
+    due_date: undefined,
+  });
+  const taskApi = useTaskApi();
+  const { id } = useParams<{ id: string }>();
 
-export const Task2Form=()=>{
-    const [task,setTask]=useState<Partial<Task>>({status:false, due_date:undefined})
-    const taskApi= useTaskApi()
-    const {id}=useParams<{ id: string }>();
-
-    useEffect(()=>{
-        if (id !== undefined){
-            getTaskById(id)
-        } else{
-            setTask({ status: false, due_date: undefined });
-        }
-    },[id, taskApi])
-
-    const handleEditTask=async(data:Task,id:string)=>{
-        const result=await taskApi.updateTask(data, id)
+  useEffect(() => {
+    if (id !== undefined) {
+      getTaskById(id);
+    } else {
+      setTask({ status: false, due_date: undefined });
     }
+  }, [id]);
 
+  const handleEditTask = async (data: Task, id: string) => {
+    const result = await taskApi.updateTask(data, id);
+  };
 
-    const handleCreateTask=async(data:Task)=>{
-        const result=await taskApi.createTask(data)
+  const handleCreateTask = async (data: Task) => {
+    const result = await taskApi.createTask(data);
+  };
+
+  const getTaskById = async (id: string) => {
+    const result = await taskApi.getTaskById(id);
+    if (result.data) {
+      setTask(result.data);
+    } else {
+      console.log("Error al obtener la tarea:");
     }
+  };
 
-    const getTaskById = async (id:string) => {
-          const result = await taskApi.getTaskById(id);
-          if (result.data) {
-            setTask(result.data);
-          } else {
-            console.log("Error al obtener la tarea:");
-          }
-        
-      };
+  const handleSubmit = (data: Task) => {
+    if (id !== undefined) {
+      handleEditTask(data, id);
+    } else {
+      handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
+    }
+  };
 
-    const handleSubmit = (data: Task) => {
-        if (id !== undefined) {
-            handleEditTask(data, id);
-        } else {
-            handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
-        }
-    };
-
-
-
-    return(
-        
-        <Form
-        fields={taskFormFields}
-        initialValues={task}// Pasa los valores actuales de la tarea al formulario
-        onFormSubmit={handleSubmit}
-        buttonText={id? "Editar" : "Guardar"}
-
-        />
-    
- 
-
-    )
-}
+  return (
+    <Form
+      fields={taskFormFields}
+      initialValues={task} // Pasa los valores actuales de la tarea al formulario
+      onFormSubmit={handleSubmit}
+      buttonText={id ? "Editar" : "Guardar"}
+    />
+  );
+};
