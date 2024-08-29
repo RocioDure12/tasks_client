@@ -29,7 +29,7 @@ export default function App() {
           <Route path='/' element={<RequireAuth><Home/></RequireAuth>}/>
           <Route path='/taskform' element={<RequireAuth><TaskForm/></RequireAuth>}/>
           <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
-          <Route path='/formulario/:id' element={<RequireAuth><Task2Form></Task2Form></RequireAuth>}/>
+          <Route path='/formulario/:id?' element={<RequireAuth><Task2Form></Task2Form></RequireAuth>}/>
           <Route path='/list' element={<TasksList></TasksList>}/>
         </Routes>
       </Router>
