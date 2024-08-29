@@ -11,6 +11,20 @@ const api= axios.create({
 
 
 export default function useTaskApi() {
+    const getTaskById=async(id:string):Promise<ActionResult<Task>>=>{
+        try{
+            const response=await api.get<Task>(`tasks/${id}`);
+            return {data:response.data}
+        }catch(error){
+            if (axios.isAxiosError(error)){
+                return { error, errorMessage: error.message };  
+            } else{
+                return { error: error as Error, errorMessage: "Error al obtener la tarea" };
+
+            }
+        }
+
+    }
     const createTask = async (task: Partial<Task>): Promise<ActionResult<Task>> => {
         try {
             const response = await api.post<Task>("tasks/create", task);
@@ -50,5 +64,5 @@ export default function useTaskApi() {
         }
     };
 
-    return { createTask, readTasks, updateTask };
+    return { createTask, readTasks, updateTask, getTaskById };
 }

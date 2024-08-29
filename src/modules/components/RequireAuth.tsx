@@ -36,6 +36,6 @@ export default function RequireAuth(props: PropsWithChildren) {
   if (!user) {
     return <Navigate to="/users/login" replace />;
   } else{
-     <>{props.children}</>;
+     return <>{props.children}</>;
 }
 }

@@ -23,14 +23,7 @@ const taskFormFields:Field[]=[
         label:"Fecha de vencimiento"
 
     },
-    {
-        type:"checkbox",
-        name:"status",
-        label:""
-
-
-
-    }
+  
 ]
 
 export const Task2Form=()=>{
@@ -40,15 +33,11 @@ export const Task2Form=()=>{
 
     useEffect(()=>{
         if (id !== undefined){
-            //consulta a la api
-            //si la tarea ya existe rellena el form con los campos existentes (setTask)
+            getTaskById(id)
+        } else{
+            setTask({ status: false, due_date: undefined });
         }
-
-        else{
-            setTask({status:false, due_date:undefined})
-        }
-
-    },[id])
+    },[id, taskApi])
 
     const handleEditTask=async(data:Task,id:string)=>{
         const result=await taskApi.updateTask(data, id)
@@ -58,6 +47,16 @@ export const Task2Form=()=>{
     const handleCreateTask=async(data:Task)=>{
         const result=await taskApi.createTask(data)
     }
+
+    const getTaskById = async (id:string) => {
+          const result = await taskApi.getTaskById(id);
+          if (result.data) {
+            setTask(result.data);
+          } else {
+            console.log("Error al obtener la tarea:");
+          }
+        
+      };
 
     const handleSubmit = (data: Task) => {
         if (id !== undefined) {

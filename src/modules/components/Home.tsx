@@ -39,7 +39,7 @@ const onDateSelect = (date: Dayjs | null) => {
         <Calendar 
         onPanelChange={onPanelChange} 
         onSelect={onDateSelect}
-        />;
+        />
         
     </>
     )
