@@ -13,7 +13,7 @@ const api= axios.create({
 export default function useTaskApi() {
     const getTaskById=async(id:string):Promise<ActionResult<Task>>=>{
         try{
-            const response=await api.get<Task>(`tasks/${id}`);
+            const response=await api.get<Task>(`tasks/tasks/${id}`);
             return {data:response.data}
         }catch(error){
             if (axios.isAxiosError(error)){

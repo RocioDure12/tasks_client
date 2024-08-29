@@ -53,7 +53,7 @@ export const Task2Form = () => {
     if (result.data) {
       setTask(result.data);
     } else {
-      console.log("Error al obtener la tarea:");
+      console.log("Error al obtener la tarea");
     }
   };
 

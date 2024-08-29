@@ -17,7 +17,7 @@ export const TasksList = () => {
     if (result.data) {
       setList(result.data);
     } else {
-      console.error(result.errorMessage);
+      console.log("error al obtener tareas");
     }
   };
 
