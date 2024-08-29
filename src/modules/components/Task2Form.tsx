@@ -25,10 +25,8 @@ const taskFormFields: Field[] = [
 ];
 
 export const Task2Form = () => {
-  const [task, setTask] = useState<Partial<Task>>({
-    status: false,
-    due_date: undefined,
-  });
+  const [task, setTask] = useState<Partial<Task>>({});
+
   const taskApi = useTaskApi();
   const { id } = useParams<{ id: string }>();
 
@@ -36,7 +34,7 @@ export const Task2Form = () => {
     if (id !== undefined) {
       getTaskById(id);
     } else {
-      setTask({ status: false, due_date: undefined });
+      setTask({ /*due_date: undefined*/ });
     }
   }, [id]);
 
@@ -53,7 +51,7 @@ export const Task2Form = () => {
     if (result.data) {
       setTask(result.data);
     } else {
-      console.log("Error al obtener la tarea");
+      console.log("Error al obtener popo");
     }
   };
 
@@ -64,7 +62,7 @@ export const Task2Form = () => {
       handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
     }
   };
-
+  console.log(task);
   return (
     <Form
       fields={taskFormFields}
