@@ -61,7 +61,7 @@ export const Task2Form = () => {
     if (id !== undefined) {
       handleEditTask(data, id);
     } else {
-      handleCreateTask(data); // Crea una nueva tarea si taskId no está definido
+      handleCreateTask(data) // Crea una nueva tarea si taskId no está definido
     }
   };
   console.log(task);
