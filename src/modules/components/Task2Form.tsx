@@ -39,10 +39,12 @@ export const Task2Form = () => {
   }, [id]);
 
   const handleEditTask = async (data: Task, id: string) => {
+    console.log("edit",data)
     const result = await taskApi.updateTask(data, id);
   };
 
   const handleCreateTask = async (data: Task) => {
+    console.log("create",data)
     const result = await taskApi.createTask(data);
   };
 

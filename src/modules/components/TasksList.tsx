@@ -2,15 +2,17 @@ import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import Task from "../models/Task";
 import { Button } from "./Button";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
 
   const taskApi = useTaskApi();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   const getTasks = async () => {
     const result = await taskApi.readTasks();
@@ -21,29 +23,38 @@ export const TasksList = () => {
     }
   };
 
-  useEffect(() => {
-    getTasks();
-  }, []);
+  const handleEditTask = (id: number) => {
+    navigate(`/formulario/${id}`);
+  };
 
-  const handleEditTask=(id:number)=>{
-    navigate(`/formulario/${id}`)
-    
-
-  }
+  const handleDeleteTask = async (id: number) => {
+    const result = await taskApi.deleteTask(id);
+    await getTasks();
+  };
 
   return (
     <>
       <ul>
         {list.map((item) => (
-          <li key={item.id}>{item.task_name}
-            <Button onClick={()=>{handleEditTask(item.id)}}>Editar</Button>
-            <Button>Eliminar</Button>
-         </li>
-        
-         
+          <li key={item.id}>
+            {item.task_name}
+            <Button
+              onClick={() => {
+                handleEditTask(item.id);
+              }}
+            >
+              Editar
+            </Button>
+            <Button
+              onClick={() => {
+                handleDeleteTask(item.id);
+              }}
+            >
+              Eliminar
+            </Button>
+          </li>
         ))}
       </ul>
-     
     </>
   );
 };

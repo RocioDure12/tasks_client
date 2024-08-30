@@ -64,5 +64,18 @@ export default function useTaskApi() {
         }
     };
 
-    return { createTask, readTasks, updateTask, getTaskById };
+    const deleteTask=async(id:number):Promise<ActionResult<Task>>=>{
+        try{
+            const response=await api.delete<Task>(`tasks/${id}`)
+            return{data: response.data};
+        }catch(error){
+            if(axios.isAxiosError(error)){
+                return{error, errorMessage:error.message}
+            }else{
+                return { error: error as Error, errorMessage: "Error al eliminar la tarea" }
+            }
+        }
+    }
+
+    return { createTask, readTasks, updateTask, getTaskById, deleteTask};
 }

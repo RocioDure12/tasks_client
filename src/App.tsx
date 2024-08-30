@@ -4,7 +4,7 @@ import CartProvider from "./modules/context/CartProvider";
 import LoginForm from "./modules/components/LoginForm";
 import Home from './modules/components/Home';
 import RequireAuth from './modules/components/RequireAuth';
-import { TaskForm } from './modules/components/TaskForm';
+import { TaskForm } from './modules/old/TaskForm';
 import { SignUpForm } from './modules/components/SignUpForm';
 import VerifyEmailAccount from './modules/components/VerifyEmailAccount';
 import { Profile } from './modules/old/Profile';
