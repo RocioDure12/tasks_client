@@ -34,18 +34,16 @@ export const Task2Form = () => {
     if (id !== undefined) {
       getTaskById(id);
     } else {
-      setTask({ /*due_date: undefined*/ });
+      setTask({});
     }
   }, [id]);
 
   const handleEditTask = async (data: Task, id: string) => {
-    console.log("edit",data)
     const result = await taskApi.updateTask(data, id);
   };
 
   const handleCreateTask = async (data: Task) => {
-    console.log("create",data)
-    const result = await taskApi.createTask(data);
+    const result = await taskApi.createTask(data as Task);
   };
 
   const getTaskById = async (id: string) => {
@@ -53,7 +51,7 @@ export const Task2Form = () => {
     if (result.data) {
       setTask(result.data);
     } else {
-      console.log("Error al obtener popo");
+      console.log("Error al obtener tarea");
     }
   };
 
@@ -61,7 +59,7 @@ export const Task2Form = () => {
     if (id !== undefined) {
       handleEditTask(data, id);
     } else {
-      handleCreateTask(data) // Crea una nueva tarea si taskId no está definido
+      handleCreateTask(data as Task) // Crea una nueva tarea si taskId no está definido
     }
   };
   console.log(task);
