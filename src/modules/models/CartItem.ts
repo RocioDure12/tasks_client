@@ -1,4 +1,4 @@
-import Product from "./Product"
+import Product from "../old/Product"
 
 interface CartItem{
     product:Product

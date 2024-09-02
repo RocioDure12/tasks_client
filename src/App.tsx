@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ThemeProvider from "./modules/context/ThemeProvider";
 import CartProvider from "./modules/context/CartProvider";
 import LoginForm from "./modules/components/LoginForm";
-import Home from './modules/components/Home';
 import RequireAuth from './modules/components/RequireAuth';
 import { TaskForm } from './modules/old/TaskForm';
 import { SignUpForm } from './modules/components/SignUpForm';
@@ -10,8 +9,7 @@ import VerifyEmailAccount from './modules/components/VerifyEmailAccount';
 import { Profile } from './modules/old/Profile';
 import {Task2Form} from "./modules/components/Task2Form"
 import { TasksList } from './modules/components/TasksList';
-
-
+import Home from './modules/components/Home';
 
 export default function App() {
 
@@ -31,7 +29,7 @@ export default function App() {
           <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
           <Route path='/formulario/:id?' element={<RequireAuth><Task2Form></Task2Form></RequireAuth>}/>
           <Route path='/list' element={<RequireAuth><TasksList></TasksList></RequireAuth>}/>
-          <Route path='prueba' element={<RequireAuth><TaskForm></TaskForm></RequireAuth>}></Route>
+       
         </Routes>
       </Router>
       

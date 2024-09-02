@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../hooks";
-import Product from "../models/Product";
+import Product from "./Product";
 import { useAppSelector } from "../../hooks";
 import { useEffect } from "react";
 import { setProductsList} from "../slices/productsSlice";

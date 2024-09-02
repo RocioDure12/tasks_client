@@ -2,7 +2,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../store";
-import Product from "../models/Product";
+import Product from "../old/Product";
 import Cart from "../models/Cart";
 import type { PayloadAction } from '@reduxjs/toolkit'
 

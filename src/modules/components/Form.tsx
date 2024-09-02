@@ -32,6 +32,7 @@ export const Form = <T extends {}>({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onFormSubmit(values as T);
+    setValues({})
   };
 
   return (
