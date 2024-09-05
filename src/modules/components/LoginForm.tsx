@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
+
+
 export interface UserLogin{
     username:string
     password:string
@@ -63,7 +65,9 @@ const LoginForm:React.FC=()=>{
                  required
             />
 
-            <button type="submit">Iniciar sesión</button>
+            <button
+             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+             type="submit">Iniciar sesión</button>
 
             <p>¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
 
