@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Task from "../models/Task";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
+import MainLayout from "./MainLayout";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -33,7 +34,7 @@ export const TasksList = () => {
   };
 
   return (
-    <>
+    <MainLayout>
       <ul>
         {list.map((item) => (
           <li key={item.id}>
@@ -55,6 +56,6 @@ export const TasksList = () => {
           </li>
         ))}
       </ul>
-    </>
+    </MainLayout>
   );
 };

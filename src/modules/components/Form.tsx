@@ -1,5 +1,6 @@
 import { FormProps } from "../models/FormProps";
 import { Button } from "./Button";
+import { Input } from "./Input";
 
 import { useEffect, useState } from "react";
 
@@ -37,29 +38,32 @@ export const Form = <T extends {}>({
 
   return (
     <form onSubmit={handleSubmit}>
-      {fields.map((field) => (
-        <label key={field.name}>
-          {field.label}
-          <input
-            type={field.type}
-            name={field.name}
-            value={
-              field.type === "checkbox"
-                ? undefined
-                : (values[field.name as keyof T] as string) || ""
-            }
-            checked={
-              field.type === "checkbox"
-                ? Boolean(values[field.name as keyof T] as boolean)
-                : undefined
-            }
-            onChange={handleChange}
-            required={field.required}
+ 
+        {fields.map((field) => (
+          <Input
+          type={field.type}
+          name={field.name}
+          value={
+            field.type === "checkbox"
+              ? undefined
+              : (values[field.name as keyof T] as string) || ""
+          }
+          checked={
+            field.type === "checkbox"
+              ? Boolean(values[field.name as keyof T])
+              : undefined
+          }
+      
+          onChange={handleChange}
+          required={field.required}
+          label={field.name}
           />
-        </label>
-      ))}
+          
+    
+        ))}
 
-      <Button type="submit">{buttonText}</Button>
+
+        <Button type="submit">{buttonText}</Button>
     </form>
   );
 };

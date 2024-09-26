@@ -3,6 +3,7 @@ import { currentUser } from "../slices/authSlice";
 import useAuthApi from "../hooks/useAuthApi";
 import { useNavigate } from "react-router-dom";
 import { Calendar } from '@mantine/dates';
+import MainLayout from "./MainLayout";
 
 
 export default function Home(){
@@ -11,10 +12,9 @@ export default function Home(){
     const navigate = useNavigate();
 
     return (
-        <>
-        <p>caca</p>
-        <Calendar/>
-         </>
+        <MainLayout>
+             <Calendar/>
+        </MainLayout>
       )
 
     

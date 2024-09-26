@@ -8,5 +8,6 @@ export interface InputProps{
     label?: string;
     id?: string;
     className?: string;
+    checked?:Boolean;
 
 }
