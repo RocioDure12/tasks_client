@@ -37,10 +37,12 @@ export const Form = <T extends {}>({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
  
-        {fields.map((field) => (
+        <div  className="flex flex-col gap-2" >
+        {fields.map((field, index) => (
           <Input
+          key={index}
           type={field.type}
           name={field.name}
           value={
@@ -61,6 +63,7 @@ export const Form = <T extends {}>({
           
     
         ))}
+        </div>
 
 
         <Button type="submit">{buttonText}</Button>

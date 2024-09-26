@@ -4,6 +4,7 @@ import Task from "../models/Task";
 import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import MainLayout from "./MainLayout";
 
 const taskFormFields: Field[] = [
   {
@@ -64,11 +65,13 @@ export const Task2Form = () => {
   };
   console.log(task);
   return (
-    <Form
-      fields={taskFormFields}
-      initialValues={task} // Pasa los valores actuales de la tarea al formulario
-      onFormSubmit={handleSubmit}
-      buttonText={id ? "Editar" : "Guardar"}
-    />
-  );
+    <MainLayout>
+      <Form
+        fields={taskFormFields}
+        initialValues={task} // Pasa los valores actuales de la tarea al formulario
+        onFormSubmit={handleSubmit}
+        buttonText={id ? "Editar" : "Guardar"}
+      />
+    </MainLayout>
+    );
 };

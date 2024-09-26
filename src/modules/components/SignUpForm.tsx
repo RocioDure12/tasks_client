@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
+import MainLayout from "./MainLayout";
 
 export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
@@ -32,7 +33,8 @@ export const SignUpForm:React.FC=()=>{
 
 
     return(
-        <form onSubmit={handleSubmit}>
+    <MainLayout  >
+        <form className="flex-col p-6 rounded-xl shadow-lg" onSubmit={handleSubmit}>
             <>Nombre</>
             <input
              type="text"
@@ -81,5 +83,6 @@ export const SignUpForm:React.FC=()=>{
 
         <p>¿Ya tienes una cuenta? Inicia sesión <a href="http://localhost:5173/users/login">aquí</a> </p>
         </form>
+    </MainLayout>
     )
 }

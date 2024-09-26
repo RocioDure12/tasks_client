@@ -35,7 +35,7 @@ export default function App() {
                 path="/taskform"
                 element={
                   <RequireAuth>
-                    <TaskForm />
+                    <Task2Form />
                   </RequireAuth>
                 }
               />
