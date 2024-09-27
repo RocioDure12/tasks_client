@@ -1,10 +1,10 @@
-import { Form } from "./Form";
+import { Form } from "../components/Form";
 import Field from "../models/Field";
 import Task from "../models/Task";
 import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import MainLayout from "./MainLayout";
+import MainLayout from "../components/MainLayout";
 
 const taskFormFields: Field[] = [
   {
