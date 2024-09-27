@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
-import MainLayout from "./MainLayout";
+import MainLayout from "../components/MainLayout";
 
 export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})

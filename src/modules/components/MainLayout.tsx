@@ -6,9 +6,9 @@ export interface MainLayoutProps extends PropsWithChildren {
 }
 export default function MainLayout(props: MainLayoutProps) {
   return (
-    <div className={"bg-gray-300 h-full"}>
+    <div className={"bg-purple-50 h-full"}>
       <NavBar />
-      <div className="p-3 max-w-screen-sm m-auto mt-5">
+      <div className="p-6 max-w-sm mx-auto flex items-center">
         {props.children}
         </div>
     </div>

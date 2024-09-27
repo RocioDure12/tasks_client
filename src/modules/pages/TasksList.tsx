@@ -1,9 +1,11 @@
 import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import Task from "../models/Task";
-import { Button } from "./Button";
+import { Button } from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import MainLayout from "./MainLayout";
+import MainLayout from "../components/MainLayout";
+import { Card } from "../components/Card";
+
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -35,27 +37,33 @@ export const TasksList = () => {
 
   return (
     <MainLayout>
-      <ul>
-        {list.map((item) => (
-          <li key={item.id}>
-            {item.task_name}
-            <Button
-              onClick={() => {
-                handleEditTask(item.id);
-              }}
-            >
-              Editar
-            </Button>
-            <Button
-              onClick={() => {
-                handleDeleteTask(item.id);
-              }}
-            >
-              Eliminar
-            </Button>
-          </li>
-        ))}
-      </ul>
+  
+        <ul>
+          {list.map((item) => (
+            <Card>
+            <li key={item.id}>
+              {item.task_name}
+              <Button
+                onClick={() => {
+                  handleEditTask(item.id);
+                }}
+              >
+                Editar
+              </Button>
+              <Button
+                onClick={() => {
+                  handleDeleteTask(item.id);
+                }}
+              >
+                Eliminar
+              </Button>
+            </li>
+            </Card>
+          ))}
+        </ul>
+ 
+    
     </MainLayout>
+  
   );
 };
