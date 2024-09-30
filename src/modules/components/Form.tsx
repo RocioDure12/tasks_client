@@ -37,7 +37,7 @@ export const Form = <T extends {}>({
   };
 
   return (
-    <form className="flex flex-col gap-6 shadow-lg bg-purple-500" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
  
         <div  className="flex flex-col gap-2" >
         {fields.map((field, index) => (

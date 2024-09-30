@@ -1,33 +1,12 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { selectTotal } from "../slices/cartSlice";
-import { selectItemsCart } from "../slices/cartSlice";
-import { updateStockAndRemoveToCart } from "../slices/productsSlice";
-import axios from "axios";
 
 
+export const NavBar:React.FC=()=>{
+    return(
+        <nav className="w-full flex shadow-lg text-lg p-3 justify-end fixed top-0">
+            <a className="p-2" href="">Home</a>
+            <a className="p-2"href="">Lalala</a>
+            <a href="" className="p-2">Lololo</a>
 
-export default function NavBar() {
-  const total = useAppSelector(selectTotal);
-  const itemsCart=useAppSelector(selectItemsCart)
-  const dispatch=useAppDispatch()
-
-
-  return (
-    <div style={{ background: '#6f8b94', borderRadius:"15px"}}>
- 
-      <span>🛒</span>
-      <span>${total}</span>
-      <ul>
-        {itemsCart.map((item)=>
-          <li key={item.product.id}>{item.product.name} ({item.quantity}) ${item.product.price}
-          
-          <button onClick={()=>dispatch(updateStockAndRemoveToCart(itemsCart))}>Eliminar</button>
-          </li> 
-        )}
-      </ul>
-
-        
-    </div>
-  );
+        </nav>
+    )
 }
