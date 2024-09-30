@@ -75,7 +75,7 @@ const LoginForm:React.FC=()=>{
 
                 <Button type="submit">Iniciar sesión</Button>
 
-                <p className="p-1 mt-1 mb-1 text-center">¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
+                <p className="text-sm p-1 mt-1 mb-1 text-center">¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
 
             </form>
         </MainLayout>

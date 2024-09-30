@@ -9,7 +9,7 @@ import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { Task2Form } from "./modules/pages/Task2Form";
 import { TasksList } from "./modules/pages/TasksList";
-import Home from "./modules/components/Home";
+import Home from "./modules/pages/Home";
 import { MantineProvider } from "@mantine/core";
 
 export default function App() {
