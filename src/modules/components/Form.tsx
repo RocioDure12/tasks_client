@@ -58,7 +58,7 @@ export const Form = <T extends {}>({
       
           onChange={handleChange}
           required={field.required}
-          label={field.name}
+          label={field.label}
           />
           
     

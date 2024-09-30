@@ -4,22 +4,48 @@ import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import {Form} from "../components/Form"
-import {  } from "../models/Field";
+import Field from "../models/Field";
 
 //falta form fields
 //user
 //configurar la info del form sign up para enviarla via props 
 
-/*const userSignUpFields:Field[]=[
-    {
-    type: "text",
-    name: "task_name",
-    label: "Tarea",
-    required: true,
-  },
+const userSignUpFields:Field[]=[
+{
+type: "text",
+name: "name",
+label: "Nombre",
+required: true,
 
+},
+{
+type:"text",
+name:"surname",
+label:"Apellido",
+required:true,
+},
+{
+    type: "email",
+name:"email",
+required:true,
+label:"email",
 
-]/*/
+},
+{
+type:"text",
+name:"username",
+required:true,
+label:"username",
+},
+
+{
+type:"password",
+name:"password",
+required:true,
+label:"Contraseña"
+}
+           
+]
 
 export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
@@ -50,57 +76,14 @@ export const SignUpForm:React.FC=()=>{
 
 
     return(
-    <MainLayout  >
-        <form onSubmit={handleSubmit}>
-            <>Nombre</>
-            <input
-             type="text"
-             name="name"
-             value={user.name || ""}
-             onChange={handleChange}
-             required
-     
-             />
+    <MainLayout>
+        <Form
+          fields={userSignUpFields}
+          initialValues={user} // Pasa los valores actuales de la tarea al formulario
+          onFormSubmit={handleSubmit}
+          buttonText="Guardar"
+        ></Form>
 
-             <>Apellido</>
-             <input 
-             type="text"
-             name="surname"
-             value={user.surname || ""}
-             onChange={handleChange}
-             required
-             />
-
-             <>Email</>
-             <input
-             type="email"
-             name="email"
-             value={user.email || ""}
-             onChange={handleChange}
-             required
-             />
-
-             <>Nombre de usuario</>
-             <input
-             type="text"
-             name="username"
-             value={user.username || ""}
-             onChange={handleChange}
-             required
-             />
-
-             <>Contraseña</>
-             <input
-             name="password"
-             value={user.password || ""}
-             onChange={handleChange}
-             required
-             />
-             <button>Enviar</button>
-
-
-        <p>¿Ya tienes una cuenta? Inicia sesión <a href="http://localhost:5173/users/login">aquí</a> </p>
-        </form>
     </MainLayout>
     )
 }
