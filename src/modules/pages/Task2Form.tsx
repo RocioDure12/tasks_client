@@ -65,7 +65,7 @@ export const Task2Form = () => {
   };
   console.log(task);
   return (
-    <MainLayout>
+    <MainLayout >
       <Form
         fields={taskFormFields}
         initialValues={task} // Pasa los valores actuales de la tarea al formulario
