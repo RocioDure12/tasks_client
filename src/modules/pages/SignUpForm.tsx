@@ -3,6 +3,23 @@ import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
+import {Form} from "../components/Form"
+import {  } from "../models/Field";
+
+//falta form fields
+//user
+//configurar la info del form sign up para enviarla via props 
+
+/*const userSignUpFields:Field[]=[
+    {
+    type: "text",
+    name: "task_name",
+    label: "Tarea",
+    required: true,
+  },
+
+
+]/*/
 
 export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
@@ -34,7 +51,7 @@ export const SignUpForm:React.FC=()=>{
 
     return(
     <MainLayout  >
-        <form className="flex-col p-6 rounded-xl shadow-lg" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <>Nombre</>
             <input
              type="text"
@@ -42,6 +59,7 @@ export const SignUpForm:React.FC=()=>{
              value={user.name || ""}
              onChange={handleChange}
              required
+     
              />
 
              <>Apellido</>
