@@ -40,7 +40,7 @@ export const TasksList = () => {
   
         <ul>
           {list.map((item) => (
-            <Card>
+            <Card key={item.id}>
             <li key={item.id}>
               {item.task_name}
               <Button

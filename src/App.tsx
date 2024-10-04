@@ -3,7 +3,6 @@ import ThemeProvider from "./modules/context/ThemeProvider";
 import CartProvider from "./modules/context/CartProvider";
 import LoginForm from "./modules/pages/LoginForm";
 import RequireAuth from "./modules/pages/RequireAuth";
-import { TaskForm } from "./modules/old/TaskForm";
 import { SignUpForm } from "./modules/pages/SignUpForm";
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";

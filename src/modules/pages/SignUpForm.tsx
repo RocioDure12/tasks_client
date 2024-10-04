@@ -6,43 +6,40 @@ import MainLayout from "../components/MainLayout";
 import {Form} from "../components/Form"
 import Field from "../models/Field";
 
-//falta form fields
-//user
-//configurar la info del form sign up para enviarla via props 
 
 const userSignUpFields:Field[]=[
 {
-type: "text",
-name: "name",
-label: "Nombre",
-required: true,
+    type: "text",
+    name: "name",
+    label: "Nombre",
+    required: true,
 
 },
 {
-type:"text",
-name:"surname",
-label:"Apellido",
-required:true,
+    type:"text",
+    name:"surname",
+    label:"Apellido",
+    required:true,
 },
 {
     type: "email",
-name:"email",
-required:true,
-label:"email",
+    name:"email",
+    required:true,
+    label:"email",
 
 },
 {
-type:"text",
-name:"username",
-required:true,
-label:"username",
+    type:"text",
+    name:"username",
+    label:"username",
+    required:true,
 },
 
 {
-type:"password",
-name:"password",
-required:true,
-label:"Contraseña"
+    type:"password",
+    name:"password",
+    label:"Contraseña",
+    required:true,
 }
            
 ]
@@ -52,34 +49,25 @@ export const SignUpForm:React.FC=()=>{
     const userApi=useUserApi()
     const navigate = useNavigate();
 
-    const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
-        setUser({
-            ...user,
-            [evt.target.name]: evt.target.value
-        })
 
-
-    }
-
-    const handleSubmit=async(e: React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
+    const handleSubmit=async(data:User)=>{
         //validaciones
         // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
-        const result=await userApi.createUser(user as User)
+        const result=await userApi.createUser(data)
+        console.log(result)
         if (result.data){
+            console.log(result.data.role_id)
             navigate("/verifyemail")
         } else{
             console.log("Error al crear usuario")
         }
     }
 
-
-
     return(
     <MainLayout>
         <Form
           fields={userSignUpFields}
-          initialValues={user} // Pasa los valores actuales de la tarea al formulario
+          initialValues={user}
           onFormSubmit={handleSubmit}
           buttonText="Guardar"
         ></Form>

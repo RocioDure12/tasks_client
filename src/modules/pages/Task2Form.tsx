@@ -22,6 +22,7 @@ const taskFormFields: Field[] = [
     type: "datetime-local",
     name: "due_date",
     label: "Fecha de vencimiento",
+    required:true,
   },
 ];
 

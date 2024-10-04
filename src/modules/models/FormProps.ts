@@ -5,4 +5,5 @@ export interface FormProps<T>{
     initialValues:Partial<T>
     onFormSubmit:(data:T)=>void
     buttonText:string
+
 }
