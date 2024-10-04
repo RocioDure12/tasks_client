@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
-import MainLayout from "../components/MainLayout";
+
 import {Form} from "../components/Form"
 import Field from "../models/Field";
 import FormLayout from "../components/FormLayout";
@@ -57,7 +57,6 @@ export const SignUpForm:React.FC=()=>{
         const result=await userApi.createUser(data)
         console.log(result)
         if (result.data){
-            console.log(result.data.role_id)
             navigate("/verifyemail")
         } else{
             console.log("Error al crear usuario")

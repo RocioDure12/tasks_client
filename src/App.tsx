@@ -3,7 +3,7 @@ import ThemeProvider from "./modules/context/ThemeProvider";
 import CartProvider from "./modules/context/CartProvider";
 import LoginForm from "./modules/pages/LoginForm";
 import RequireAuth from "./modules/pages/RequireAuth";
-import { SignUpForm } from "./modules/pages/SignUpForm";
+import { SignUpForm } from "./modules/pages/SignUpForm"
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { Task2Form } from "./modules/pages/Task2Form";
@@ -20,7 +20,7 @@ export default function App() {
             <Routes>
               <Route path="/users/login" element={<LoginForm></LoginForm>} />
               <Route path="/signup" element={<SignUpForm />} />
-              <Route path="/verifyemail" element={<VerifyEmailAccount />} />
+              <Route path="/verifyemail/:token?" element={<VerifyEmailAccount />} />
 
               <Route
                 path="/"

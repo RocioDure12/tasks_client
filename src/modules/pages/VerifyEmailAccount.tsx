@@ -1,15 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import useUserApi from "../hooks/useUserApi"
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 export default function VerifyEmailAccount() {
      
-    const [token, setToken]=useState("")
+    //const [token, setToken]=useState("")
     const userApi=useUserApi()
     const navigate = useNavigate();
+    const { token } = useParams<{ token: string }>();
 
-        const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
+    useEffect(() => {
+        if (token) {
+        handle_email_verification(token)
+        navigate("/users/login")}
+        else{
+            console.log("No se encontro el token")
+        }
+      }, [token]);
+    
+
+
+        /*const handleChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
             setToken(evt.target.value)
 
     }
@@ -22,21 +35,22 @@ export default function VerifyEmailAccount() {
         }else{
             console.log("error en verificacion del email")
         }
-    }
+    }*/
 
-    return(
-        <form onSubmit={handleSubmit}>
-            Ingresa el codigo que recibiste por email 
+    const handle_email_verification=async(token:string)=>{
+        const result=await userApi.verifyEmailAccount(token)
+        if (result.data){
+            navigate("/users/login")
+        }else{
+            console.log("error en verificacion del email")
+            }
+        }
 
-            <input
-             type="text"
-             name="token"
-             value={token}
-             onChange={handleChange}
-             required
-             />
-             <button>Enviar</button>
-        </form>
+
+    return(<>
+        <div>Ingresa a tu casilla de correo electronico y verifica tu email</div>
+        
+        </>
         
     
     )

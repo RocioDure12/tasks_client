@@ -37,7 +37,7 @@ export const Form = <T extends {}>({
   };
 
   return (
-    <form className="m-2 rounded-lg bg-white h-full p-5 flex flex-col gap-2 shadow-lg" onSubmit={handleSubmit}>
+    <form className="m-2 rounded-lg bg-white h-full p-7 flex flex-col gap-2 shadow-lg" onSubmit={handleSubmit}>
  
         <div>
         {fields.map((field, index) => (
