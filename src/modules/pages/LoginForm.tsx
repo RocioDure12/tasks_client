@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { Form } from "../components/Form";
-import MainLayout from "../components/MainLayout";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button"
+import FormLayout from "../components/FormLayout";
 
 
 
@@ -53,7 +53,7 @@ const LoginForm:React.FC=()=>{
     return(
 
 
-        <MainLayout>
+        <FormLayout>
             <form className="m-2 rounded-lg bg-white h-full p-5 flex flex-col gap-2 shadow-lg" action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
                 <Input
                     type="text"
@@ -78,7 +78,7 @@ const LoginForm:React.FC=()=>{
                 <p className="text-sm p-1 mt-1 mb-1 text-center">¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
 
             </form>
-        </MainLayout>
+        </FormLayout>
     )
 
 }

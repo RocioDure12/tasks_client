@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import {Form} from "../components/Form"
 import Field from "../models/Field";
+import FormLayout from "../components/FormLayout";
 
 
 const userSignUpFields:Field[]=[
@@ -25,13 +26,13 @@ const userSignUpFields:Field[]=[
     type: "email",
     name:"email",
     required:true,
-    label:"email",
+    label:"Email",
 
 },
 {
     type:"text",
     name:"username",
-    label:"username",
+    label:"Username",
     required:true,
 },
 
@@ -64,7 +65,7 @@ export const SignUpForm:React.FC=()=>{
     }
 
     return(
-    <MainLayout>
+    <FormLayout>
         <Form
           fields={userSignUpFields}
           initialValues={user}
@@ -72,6 +73,6 @@ export const SignUpForm:React.FC=()=>{
           buttonText="Guardar"
         ></Form>
 
-    </MainLayout>
+    </FormLayout>
     )
 }
