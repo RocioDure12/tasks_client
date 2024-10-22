@@ -55,7 +55,7 @@ export default function App() {
                 }
               />
               <Route
-                path="/list"
+                path="/list/:date?"
                 element={
                   <RequireAuth>
                     <TasksList></TasksList>

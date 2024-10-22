@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const navigate=useNavigate()
 
   const handleSelect = (date: Date) => {
     // Si el día ya está seleccionado, lo deseleccionamos
@@ -15,6 +16,9 @@ export default function Home() {
     } else {
       // De lo contrario, seleccionamos el nuevo día
       setSelectedDate(date);
+    }
+    if (date){
+      navigate(`/list/${dayjs(date).format('DD-MM-YYYY')}`)
     }
   };
 

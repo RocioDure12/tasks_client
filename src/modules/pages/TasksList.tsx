@@ -2,13 +2,16 @@ import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import Task from "../models/Task";
 import { Button } from "../components/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { Card } from "../components/Card";
+import dayjs from 'dayjs';
 
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
+
+  const {date}=useParams<{ date: string }>() //a confirmar
 
   const taskApi = useTaskApi();
   const navigate = useNavigate();
@@ -35,11 +38,21 @@ export const TasksList = () => {
     await getTasks();
   };
 
+  //funcion para filtrar las tareas por la fecha
+
+  //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
+  const filteredList = list.filter(item => {
+    const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
+    return formattedDate === date;
+  });
+
+
+
   return (
     <MainLayout>
   
         <ul>
-          {list.map((item) => (
+          {filteredList.map((item) => (
             <Card key={item.id}>
             <li key={item.id}>
               {item.task_name}
