@@ -4,8 +4,6 @@ interface Subtask{
     status:boolean
     task_id:number
 
-        
-    
 }
 
 export default Subtask
