@@ -1,0 +1,1 @@
+//Función genérica para manejar las solicitudes (como `handleApiRequest`)

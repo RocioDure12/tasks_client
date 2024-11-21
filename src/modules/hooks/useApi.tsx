@@ -17,6 +17,12 @@ export type ActionResult<T> =
       error?: Error | AxiosError;
       errorMessage: string;
     };
+//Éxito data contiene los datos esperados de tipo T.
+//error y errorMessage son opcionales y, generalmente, estarán ausentes en este caso.
+//Error:
+//data es opcional y, generalmente, estará ausente en este caso.
+//error: contiene el error que ocurrió, de tipo Error o AxiosError.
+//errorMessage: un mensaje de error que describe el problema.
 
 export async function handleApiRequest<T>(
     method:"get"|"post"|"put"|"delete", // El método HTTP a usar

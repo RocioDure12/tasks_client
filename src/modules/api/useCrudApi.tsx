@@ -1,0 +1,1 @@
+//Hook genérico para manejar operaciones CRUD de cualquier entidad

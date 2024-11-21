@@ -1,0 +1,1 @@
+// Hook específico para manejo de autenticación (login, obtener usuario actual, logout)
