@@ -1,27 +1,39 @@
 import { handleApiRequest } from "./useApi";
 //Hook genérico para manejar operaciones CRUD de cualquier entidad
 
-export default function useCrudApi<T>(entity:string){
+export default function useCrudApi<T>(baseUrl:string){
     const create=async(data:T)=>{
-        return handleApiRequest<T>("post",`/${entity}/create`,data)
+        return handleApiRequest<T>("post",`/${baseUrl}/create`,data)
 
     }
     // Leer entidad por ID
     const read = async (id: number) => {
-        return handleApiRequest<T>("get", `/${entity}/${id}`);
+        return handleApiRequest<T>("get", `/${baseUrl}/${id}`);
     };
+
+    const read_by_id=async(id:number)=>{
+        return handleApiRequest<T>("get",`${baseUrl}/${id}`)
+    }
+
+    const getItemsByUserId=async(userId:number)=>{
+        return handleApiRequest<T>("get",`${baseUrl}?userId=${userId}`)
+    }
+
+    const getItemsPaginated=async(offset:number, limit:number)=>{
+        return handleApiRequest<T>("get",`${baseUrl}/?offset=${offset}&limit=/${limit}`)
+    }
 
     // Actualizar entidad por ID
     const update = async (id: number, data: T) => {
-        return handleApiRequest<T>("put", `/${entity}/${id}`, data);
+        return handleApiRequest<T>("put", `/${baseUrl}/${id}`, data);
     };
 
     // Eliminar entidad por ID
-    const deleteEntity = async (id: number) => {
-        return handleApiRequest<T>("delete", `/${entity}/${id}`);
+    const deleteById= async (id: number) => {
+        return handleApiRequest<T>("delete", `/${baseUrl}/${id}`);
     };
 
-    return { create, read, update, deleteEntity };
+    return { create, read, read_by_id,update, deleteById, getItemsPaginated,getItemsByUserId};
     }
 
 
