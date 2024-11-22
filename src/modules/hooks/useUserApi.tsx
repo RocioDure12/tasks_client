@@ -3,6 +3,11 @@ import User from "../models/User";
 import { handleApiRequest } from "../api/useApi";
 import { ActionResult } from "../api/useApi";
 
+export interface LoginData {
+  username: string;
+  password: string;
+}
+
 export default function useUserApi(){
   const api=useCrudApi<User>("users")
 
@@ -14,37 +19,14 @@ export default function useUserApi(){
     return await handleApiRequest("post",`users/verification/${token}`);
       
   }
-  return {createUser, verifyEmailAccount}
+  const currentUser = async (): Promise<ActionResult<User>> => {
+    return handleApiRequest<User>("get","/users/readme")
+  };
+
+  const logout=async():Promise<ActionResult<string>>=>{
+    return handleApiRequest<string>("post","/users/logout")
+  }
+
+  
+  return {createUser, verifyEmailAccount, currentUser,logout}
 }
-/*
-const api= axios.create({
-  baseURL: "http://localhost:8000",
-  withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
-});
-
-export default function useUserApi(){
-    const createUser= async (user:Partial<User>):Promise<ActionResult<User>>=>{
-        try{
-            const response= await api.post("/users/create", user);
-            return {data:response.data}
-        }
-        catch(error){
-        if (axios.isAxiosError(error)){
-            return{error, errorMessage:error.message}
-        }else{
-            return { error: error as Error, errorMessage: "Error al crear el usuario" };
-
-        }
-        }
-      
-
-    }
-
-
-      };
-
- 
-
-    return{createUser, verifyEmailAccount}
-
-}*/

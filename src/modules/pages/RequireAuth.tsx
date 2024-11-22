@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../hooks";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import useAuthApi from "../hooks/useAuthApi";
+import useUserApi from "../hooks/useUserApi";
 import { useAppDispatch } from "../../hooks";
 import {
   authenticateUser,
@@ -10,7 +10,7 @@ import {
 } from "../slices/authSlice";
 
 export default function RequireAuth(props: PropsWithChildren) {
-  const authApi = useAuthApi();
+  const userApi = useUserApi();
   const dispatch = useAppDispatch();
   const user = useAppSelector(currentUser);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function RequireAuth(props: PropsWithChildren) {
 
   const getCurrentUser = async () => {
     setLoading(true);
-    const result = await authApi.currentUser();
+    const result = await userApi.currentUser();
     if (result.error) {
       dispatch(setUserNull());
     } else if (result.data) {
