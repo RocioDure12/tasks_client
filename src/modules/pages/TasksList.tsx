@@ -15,13 +15,15 @@ export const TasksList = () => {
 
   const taskApi = useTaskApi();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     getTasks();
   }, []);
 
   const getTasks = async () => {
-    const result = await taskApi.readTasks();
+
+    const result = await taskApi.readMyTasks();
     if (result.data) {
       setList(result.data);
     } else {
