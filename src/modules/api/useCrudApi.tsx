@@ -1,4 +1,4 @@
-import { handleApiRequest } from "./useApi";
+import { ActionResult, handleApiRequest } from "./useApi";
 //Hook genérico para manejar operaciones CRUD de cualquier entidad
 
 export default function useCrudApi<T>(baseUrl:string){
@@ -7,16 +7,16 @@ export default function useCrudApi<T>(baseUrl:string){
 
     }
     // Leer entidad por ID
-    const read = async (id: number) => {
+    /*const read = async (id: number) => {
         return handleApiRequest<T>("get", `/${baseUrl}/${id}`);
-    };
+    };*/
 
     const read_by_id=async(id:number)=>{
         return handleApiRequest<T>("get",`${baseUrl}/${id}`)
     }
 
-    const getItemsByUserId=async(userId:number)=>{
-        return handleApiRequest<T>("get",`${baseUrl}?userId=${userId}`)
+    const getItemsByUserId=async(userId:number):Promise<ActionResult<T[]>>=>{
+        return handleApiRequest<T[]>("get",`${baseUrl}?userId=${userId}`)
     }
 
     const getItemsPaginated=async(offset:number, limit:number)=>{
@@ -33,7 +33,7 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("delete", `/${baseUrl}/${id}`);
     };
 
-    return { create, read, read_by_id,update, deleteById, getItemsPaginated,getItemsByUserId};
+    return { create, read_by_id,update, deleteById, getItemsPaginated,getItemsByUserId};
     }
 
 

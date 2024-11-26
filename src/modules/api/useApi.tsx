@@ -28,7 +28,7 @@ export type ActionResult<T> =
 export async function handleApiRequest<T>(
     method:"get"|"post"|"put"|"delete", // El método HTTP a usar
     url:string,// El endpoint al que se quiere hacer la solicitud
-    data?:any// Datos opcionales para solicitudes POST o PUT
+    data?:T// Datos opcionales para solicitudes POST o PUT
 
 ):Promise<ActionResult<T>>{
     try{

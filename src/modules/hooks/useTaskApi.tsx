@@ -1,81 +1,31 @@
-import axios, { AxiosError } from "axios";
-import { ActionResult } from "./useAuthApi";
 import Task from "../models/Task";
-
-
-const api= axios.create({
-  baseURL: "http://localhost:8000",
-  withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
-});
-
-
+import useCrudApi from "../api/useCrudApi";
+import { ActionResult } from "../api/useApi";
 
 export default function useTaskApi() {
-    const getTaskById=async(id:string):Promise<ActionResult<Task>>=>{
-        try{
-            const response=await api.get<Task>(`tasks/tasks/${id}`);
-            return {data:response.data}
-        }catch(error){
-            if (axios.isAxiosError(error)){
-                return { error, errorMessage: error.message };  
-            } else{
-                return { error: error as Error, errorMessage: "Error al obtener la tarea" };
+    const api=useCrudApi<Task>("tasks")
 
-            }
-        }
+    const getTaskById=async(id:number):Promise<ActionResult<Task>>=>{
+        return await api.read_by_id(id)
+    }
+
+    const createTask=async (task: Partial<Task>): Promise<ActionResult<Task>> => {
+        return api.create(task as Task)
+    }
+
+    const readMyTasks= async (userId:number): Promise<ActionResult<Task[]>> => {
+        return api.getItemsByUserId(userId)
 
     }
-    const createTask = async (task: Partial<Task>): Promise<ActionResult<Task>> => {
-        try {
-            const response = await api.post<Task>("tasks/create", task);
-            return { data: response.data };
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                return { error, errorMessage: error.message };
-            } else {
-                return { error: error as Error, errorMessage: "Error al crear la tarea" };
-            }
-        }
-    };
-
-    const readTasks = async (): Promise<ActionResult<Task[]>> => {
-        try {
-            const response = await api.get<Task[]>(`tasks/my_tasks`);
-            return { data: response.data };
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                return { error, errorMessage: error.message };
-            } else {
-                return { error: error as Error, errorMessage: "Error al obtener las tareas" };
-            }
-        }
-    };
-
-    const updateTask = async (task: Task, id: string): Promise<ActionResult<Task>> => {
-        try {
-            const response = await api.put<Task>(`tasks/${id}`, task);
-            return { data: response.data };
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                return { error, errorMessage: error.message };
-            } else {
-                return { error: error as Error, errorMessage: "Error al actualizar la tarea" };
-            }
-        }
-    };
+    
+    const updateTask=async (id:number,task:Task): Promise<ActionResult<Task>> => {
+        return api.update(id, task)
+    }
 
     const deleteTask=async(id:number):Promise<ActionResult<Task>>=>{
-        try{
-            const response=await api.delete<Task>(`tasks/${id}`)
-            return{data: response.data};
-        }catch(error){
-            if(axios.isAxiosError(error)){
-                return{error, errorMessage:error.message}
-            }else{
-                return { error: error as Error, errorMessage: "Error al eliminar la tarea" }
-            }
-        }
+        return api.deleteById(id)
     }
 
-    return { createTask, readTasks, updateTask, getTaskById, deleteTask};
+    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask}
 }
+    
