@@ -15,8 +15,8 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("get",`${baseUrl}/${id}`)
     }
 
-    const getItemsByUserId=async():Promise<ActionResult<T[]>>=>{
-        return handleApiRequest<T[]>("get",`${baseUrl}`)
+    const getItems=async(extraURL:string=""):Promise<ActionResult<T[]>>=>{
+        return handleApiRequest<T[]>("get",`${baseUrl}${extraURL}`)
     }
 
     const getItemsPaginated=async(offset:number, limit:number)=>{
@@ -33,7 +33,7 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("delete", `/${baseUrl}/${id}`);
     };
 
-    return { create, read_by_id,update, deleteById, getItemsPaginated,getItemsByUserId};
+    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems};
     }
 
 

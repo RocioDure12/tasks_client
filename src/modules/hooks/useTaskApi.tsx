@@ -14,7 +14,7 @@ export default function useTaskApi() {
     }
 
     const readMyTasks= async (): Promise<ActionResult<Task[]>> => {
-        return api.getItemsByUserId()
+        return api.getItems("/my_tasks")
 
     }
     
