@@ -13,8 +13,8 @@ export default function useTaskApi() {
         return api.create(task as Task)
     }
 
-    const readMyTasks= async (userId:number): Promise<ActionResult<Task[]>> => {
-        return api.getItemsByUserId(userId)
+    const readMyTasks= async (): Promise<ActionResult<Task[]>> => {
+        return api.getItemsByUserId()
 
     }
     

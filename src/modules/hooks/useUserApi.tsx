@@ -28,5 +28,5 @@ export default function useUserApi(){
   }
 
   
-  return {createUser, verifyEmailAccount, currentUser,logout}
+  return {createUser, verifyEmailAccount,currentUser,logout}
 }
