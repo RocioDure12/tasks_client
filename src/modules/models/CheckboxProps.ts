@@ -5,5 +5,6 @@ export interface CheckboxProps{
     label?:string
     disabled?:boolean
     className?:string
+    options?:{ value: string; label: string }[];
 
 }
