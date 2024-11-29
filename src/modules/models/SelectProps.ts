@@ -1,4 +1,5 @@
 export interface SelectProps{
+    id:string
     name:string
     value?:string
     onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;

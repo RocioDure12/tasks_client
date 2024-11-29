@@ -1,6 +1,6 @@
 import { RadioProps} from "../models/RadioProps"
 
-export const Select: React.FC<RadioProps> = (props) => {
+export const Radio: React.FC<RadioProps> = (props) => {
     return(
         <></>
 
