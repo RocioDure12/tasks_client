@@ -14,7 +14,7 @@ const taskFormFields: Field[] = [
     required: true,
   },
   {
-    type: "text",
+    type: "textarea",
     name: "description",
     label: "Descripcion",
   },
