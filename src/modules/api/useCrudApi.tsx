@@ -25,12 +25,12 @@ export default function useCrudApi<T>(baseUrl:string){
 
     // Actualizar entidad por ID
     const update = async (id: number, data: T) => {
-        return handleApiRequest<T>("put", `/${baseUrl}/${id}`, data);
+        return handleApiRequest<T>("put",`/${baseUrl}/${id}`, data);
     };
 
     // Eliminar entidad por ID
     const deleteById= async (id: number) => {
-        return handleApiRequest<T>("delete", `/${baseUrl}/${id}`);
+        return handleApiRequest<T>("delete",`/${baseUrl}/${id}`);
     };
 
     return { create, read_by_id,update, deleteById, getItemsPaginated,getItems};

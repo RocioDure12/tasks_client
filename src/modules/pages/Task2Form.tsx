@@ -32,6 +32,12 @@ export const Task2Form = () => {
   const taskApi = useTaskApi();
   const { id } = useParams<{ id: string }>();
 
+  const parseId = (id: string): number => {
+    const numericId = parseInt(id, 10);
+    return numericId
+  };
+  
+
   useEffect(() => {
     if (id !== undefined) {
       getTaskById(id);
@@ -41,7 +47,9 @@ export const Task2Form = () => {
   }, [id]);
 
   const handleEditTask = async (data: Task, id: string) => {
-    const result = await taskApi.updateTask(id, data);
+    const numericId=parseId(id)
+
+    const result = await taskApi.updateTask(numericId, data);
   };
 
   const handleCreateTask = async (data: Task) => {
@@ -49,7 +57,8 @@ export const Task2Form = () => {
   };
 
   const getTaskById = async (id: string) => {
-    const result = await taskApi.getTaskById(id);
+    const numericId=parseId(id)
+    const result = await taskApi.getTaskById(numericId);
     if (result.data) {
       setTask(result.data);
     } else {

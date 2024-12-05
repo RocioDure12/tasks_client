@@ -13,7 +13,7 @@ interface Task{
     updated_at?:Date;
     user_id?:number;
     category_id:number;
-    subtask?:Subtask
+    subtask?:Subtask[]
     
 }
 
