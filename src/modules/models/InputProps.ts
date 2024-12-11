@@ -8,7 +8,4 @@ export interface InputProps{
     label?: string;
     id?: string;
     className?: string;
-    checked?:Boolean;
-    options?: { label: string; value: string | number }[]; // Opciones para select o radio
-
 }

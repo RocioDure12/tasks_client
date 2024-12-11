@@ -3,7 +3,7 @@ import { SelectProps } from "../models/SelectProps"
 export const Select: React.FC<SelectProps> = (props) => {
     return(
         <div>
-            <label>{props.label}</label>
+            <label htmlFor={props.id}>{props.label}</label>
             <select 
             name={props.name}
             id={props.id}

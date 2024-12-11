@@ -8,6 +8,7 @@ export interface SelectProps{
     required?: boolean;
     disabled?: boolean;
     label?: string;
+    className?: string;
 
 
 }
