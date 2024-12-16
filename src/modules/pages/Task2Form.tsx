@@ -15,22 +15,30 @@ const taskFormFields: Field[] = [
     required: true,
   },
   {
+    type: "date",
+    name: "due_date",
+    label: "Fecha de vencimiento",
+    required:true,
+  },
+  {
     type:"time",
     name:"start_time",
-    label:"Comienzo",
+    label:"Horario",
     required:false,
+  },
+  {
+    type:"time",
+    name:"end_time",
+    label:"",
+    required:false,
+
   },
   {
     type: "textarea",
     name: "description",
     label: "Descripcion o nota (opcional)",
   },
-  {
-    type: "datetime-local",
-    name: "due_date",
-    label: "Fecha de vencimiento",
-    required:true,
-  },
+
 ];
 
 export const Task2Form = () => {

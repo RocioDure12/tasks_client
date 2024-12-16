@@ -63,7 +63,8 @@ export const OtroForm = <T extends {}>({
               "range",
               "tel",
               "number",
-              "textarea"
+              "textarea",
+              "time",
             ].includes(field.type)
           ) {
             return (
