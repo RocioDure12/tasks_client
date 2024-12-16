@@ -3,7 +3,7 @@ import Subtask from "./Subtask";
 interface Task{
     id: number;
     task_name: string;
-    description: string;
+    description?: string;
     status:boolean;
     due_date:Date;
     start_time?:Date;
@@ -12,7 +12,7 @@ interface Task{
     created_at:Date;
     updated_at?:Date;
     user_id?:number;
-    category_id:number;
+    category_id?:number;
     subtask?:Subtask[]
     
 }

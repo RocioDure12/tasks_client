@@ -48,7 +48,7 @@ export const OtroForm = <T extends {}>({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="m-2 rounded-lg bg-white h-full p-7 flex flex-col gap-2 shadow-lg" onSubmit={handleSubmit}>
       <div>
         {fields.map((field) => {
           if (
@@ -63,15 +63,20 @@ export const OtroForm = <T extends {}>({
               "range",
               "tel",
               "number",
+              "textarea"
             ].includes(field.type)
           ) {
             return (
               <Input
+                label={field.label}
                 key={field.name}
                 type={field.type}
                 name={field.name}
                 onChange={handleChange}
-                value={field.type === 'number' ? Number(values[field.name as keyof T] || 0) : String(values[field.name as keyof T] || "")}
+                value={field.type === 'number' 
+                  ? Number(values[field.name as keyof T] || 0)
+                  :String(values[field.name as keyof T] || "")
+                }
                 required={field.required}
               />
             );

@@ -12,7 +12,7 @@ export default function useCrudApi<T>(baseUrl:string){
     };*/
 
     const read_by_id=async(id:number)=>{
-        return handleApiRequest<T>("get",`${baseUrl}/${id}`)
+        return handleApiRequest<T>("get",`${baseUrl}/tasks/${id}`)
     }
 
     const getItems=async(extraURL:string=""):Promise<ActionResult<T[]>>=>{

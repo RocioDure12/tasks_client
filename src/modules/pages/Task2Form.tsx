@@ -5,18 +5,25 @@ import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
+import { OtroForm } from "../components/otroForm";
 
 const taskFormFields: Field[] = [
   {
     type: "text",
     name: "task_name",
-    label: "Tarea",
+    label: "Titulo",
     required: true,
+  },
+  {
+    type:"time",
+    name:"start_time",
+    label:"Comienzo",
+    required:false,
   },
   {
     type: "textarea",
     name: "description",
-    label: "Descripcion",
+    label: "Descripcion o nota (opcional)",
   },
   {
     type: "datetime-local",
@@ -48,7 +55,6 @@ export const Task2Form = () => {
 
   const handleEditTask = async (data: Task, id: string) => {
     const numericId=parseId(id)
-
     const result = await taskApi.updateTask(numericId, data);
   };
 
@@ -69,6 +75,7 @@ export const Task2Form = () => {
   const handleSubmit = (data: Task) => {
     if (id !== undefined) {
       handleEditTask(data, id);
+   
     } else {
       handleCreateTask(data as Task) // Crea una nueva tarea si taskId no está definido
     }
@@ -76,7 +83,7 @@ export const Task2Form = () => {
   console.log(task);
   return (
     <MainLayout >
-      <Form
+      <OtroForm
         fields={taskFormFields}
         initialValues={task} // Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
