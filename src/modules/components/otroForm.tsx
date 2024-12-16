@@ -20,7 +20,7 @@ export const OtroForm = <T extends {}>({
   }, [initialValues]);
 
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (evt: React.ChangeEvent<any>) => {
     const { name, value, type, checked } = evt.target;
     let updatedValue: any;
 
@@ -83,10 +83,23 @@ export const OtroForm = <T extends {}>({
             );
 
           }
-          
-          
-          
-        })}
+          else if (field.type === "select") {
+            return(
+              <Select
+                key={field.name}
+                name={field.name}
+                options={field.options || []}
+                onChange={handleChange}
+                required={field.required}
+                label={field.label}
+              />
+
+            )
+          }
+        
+        }
+        )}
+   
       </div>
 
       <Button type="submit">{buttonText}</Button>

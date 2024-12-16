@@ -34,6 +34,18 @@ const taskFormFields: Field[] = [
 
   },
   {
+    type:"select",
+    name:"categories",
+    label:"Categorias",
+    required:true,
+    options: [
+      { value: "1", label: "Trabajo" },
+      { value: "2", label: "Estudios" },
+      { value: "3", label: "Hogar" },
+      { value: "4", label: "Personal" },
+    ],
+  },
+  {
     type: "textarea",
     name: "description",
     label: "Descripcion o nota (opcional)",

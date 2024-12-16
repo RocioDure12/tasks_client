@@ -5,5 +5,5 @@ export default interface Field {
     label: string;
     type: InputType;
     required?: boolean;
-    options?:Array<{ value: string | number; label: string }>; 
+    options?: { value: string; label: string }[]
   }
