@@ -2,7 +2,7 @@ import Category from "../models/Category";
 import useCrudApi from "../api/useCrudApi";
 import { ActionResult } from "../api/useApi";
 
-export default function useTaskApi() {
+export default function useCategoryApi() {
     const api=useCrudApi<Category>("categories")
 
     /*const getTaskById=async(id:number):Promise<ActionResult<Task>>=>{
