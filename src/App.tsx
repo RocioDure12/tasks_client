@@ -10,6 +10,7 @@ import { Task2Form } from "./modules/pages/Task2Form";
 import { TasksList } from "./modules/pages/TasksList";
 import Home from "./modules/pages/Home";
 import { MantineProvider } from "@mantine/core";
+import {Categories} from "./modules/pages/Categories";
 
 export default function App() {
   return (
@@ -61,6 +62,15 @@ export default function App() {
                     <TasksList></TasksList>
                   </RequireAuth>
                 }
+              />
+              <Route
+                path="/categories"
+                element={
+                  <RequireAuth>
+                    <Categories></Categories>
+                  </RequireAuth>
+                }
+              
               />
             </Routes>
           </Router>
