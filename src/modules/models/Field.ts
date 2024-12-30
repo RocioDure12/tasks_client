@@ -6,4 +6,6 @@ export default interface Field {
     type: InputType;
     required?: boolean;
     options?: { value: string; label: string }[]
+    rows?:number
+    cols?:number
   }

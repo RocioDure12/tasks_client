@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { OtroForm } from "../components/otroForm";
+import dayjs from "dayjs";
 
 const taskFormFields: Field[] = [
   {
@@ -16,7 +17,7 @@ const taskFormFields: Field[] = [
   },
   {
     type: "date",
-    name: "due_date",
+    name: "due_date",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     label: "Fecha de vencimiento",
     required:true,
   },
@@ -49,6 +50,9 @@ const taskFormFields: Field[] = [
     type: "textarea",
     name: "description",
     label: "Descripcion o nota (opcional)",
+    required:false,
+    rows:6,
+    cols:8
   },
 
 ];

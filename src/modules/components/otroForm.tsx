@@ -1,8 +1,6 @@
-import { Checkbox } from "./Checkbox";
 import { FormProps } from "../models/FormProps";
 import { Input } from "./Input";
 import { useEffect, useState } from "react";
-import { Radio } from "./Radio";
 import { Select } from "./Select";
 import { Textarea } from "./Textarea";
 import { Button } from "./Button";
@@ -96,9 +94,26 @@ export const OtroForm = <T extends {}>({
 
             )
           }
+          else if(field.type === "textarea"){
+            return(
+              <Textarea
+              type={field.type}
+              key={field.name}
+              name={field.name}
+              label={field.label}
+              onChange={handleChange}
+              rows={field.rows}
+              cols={field.cols}
+    
+              />
+            )
+          }
+          
         
         }
+        
         )}
+        
    
       </div>
 

@@ -5,7 +5,7 @@ import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 
 export const Categories:React.FC=()=>{
-//const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 const [newCategory, setNewCategory]=useState<Partial<Category>>({})
 const categoriesApi = useCategoriesApi();
 
@@ -14,6 +14,7 @@ const categoriesApi = useCategoriesApi();
         setNewCategory({category_name:evt.target.value})
         //setCategoriesList(evt.target.value)
     }
+
 //deberia agregar una funcion handle submit para que se lleve a cbo en el onClick event 
     return(
     

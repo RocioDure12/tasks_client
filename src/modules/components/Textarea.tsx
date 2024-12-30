@@ -1,23 +1,16 @@
 import { TextareaProps } from "../models/TextareaProps"
 
-export const Textarea: React.FC<TextareaProps> = ({
-    name,
-    value,
-    onChange,
-    label,
-    placeholder,
-    rows = 4,
-    cols = 50,
-  }) => (
-    <label>
-      {label && <span>{label}</span>}
+export const Textarea: React.FC<TextareaProps> = (props) => (
+    <label className="flex flex-col gap-2">
+      {props.label && <span className="text-sm font-medium text-gray-700">{props.label}</span>}
       <textarea
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        rows={rows}
-        cols={cols}
-        onChange={(e) => onChange(name, e.target.value)}
+        name={props.name}
+        value={props.value}
+        placeholder={props.placeholder}
+        rows={props.rows}
+        cols={props.cols}
+        onChange={props.onChange}
+        className="w-full rounded-md border border-gray-300 p-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
       />
     </label>
   );

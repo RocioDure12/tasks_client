@@ -6,8 +6,8 @@ interface Task{
     description?: string;
     status:boolean;
     due_date:Date;
-    start_time?:Date;
-    end_time?:Date;
+    start_time?:string;
+    end_time?:string;
     deleted_at?:Date;
     created_at:Date;
     updated_at?:Date;

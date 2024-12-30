@@ -1,7 +1,8 @@
 export interface TextareaProps {
+    type:string
     name: string;
-    value: string;
-    onChange: (name: string, value: string) => void;
+    value?: string | number;
+    onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     label?: string;
     placeholder?: string;
     rows?: number;
