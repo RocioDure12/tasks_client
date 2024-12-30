@@ -2,7 +2,7 @@ import { FormProps } from "../models/FormProps";
 import { Input } from "./Input";
 import { useEffect, useState } from "react";
 import { Select } from "./Select";
-import { Textarea } from "./Textarea";
+import { Textarea } from "../components/Textarea"
 import { Button } from "./Button";
 
 export const OtroForm = <T extends {}>({
@@ -49,65 +49,65 @@ export const OtroForm = <T extends {}>({
     <form className="m-2 rounded-lg bg-white h-full p-7 flex flex-col gap-2 shadow-lg" onSubmit={handleSubmit}>
       <div>
         {fields.map((field) => {
-          if (
-            [
-              "text",
-              "email",
-              "password",
-              "date",
-              "datetime-local",
-              "color",
-              "url",
-              "range",
-              "tel",
-              "number",
-              "textarea",
-              "time",
-            ].includes(field.type)
-          ) {
-            return (
-              <Input
-                label={field.label}
-                key={field.name}
-                type={field.type}
-                name={field.name}
-                onChange={handleChange}
-                value={field.type === 'number' 
-                  ? Number(values[field.name as keyof T] || 0)
-                  :String(values[field.name as keyof T] || "")
-                }
-                required={field.required}
-              />
-            );
-
-          }
-          else if (field.type === "select") {
-            return(
+          switch (field.type){
+            case "select":
+              return(
               <Select
+                  key={field.name}
+                  name={field.name}
+                  options={field.options || []}
+                  onChange={handleChange}
+                  required={field.required}
+                  label={field.label}
+              />
+            )
+
+            case "textarea":
+              return(
+              <Textarea
+                type={field.type}
                 key={field.name}
                 name={field.name}
-                options={field.options || []}
-                onChange={handleChange}
-                required={field.required}
                 label={field.label}
-              />
-
-            )
-          }
-          else if(field.type === "textarea"){
-            return(
-              <Textarea
-              type={field.type}
-              key={field.name}
-              name={field.name}
-              label={field.label}
-              onChange={handleChange}
-              rows={field.rows}
-              cols={field.cols}
+                onChange={handleChange}
+                rows={field.rows}
+                cols={field.cols}
     
               />
             )
+
+              case "text":
+              case "email":
+              case "password":
+              case "date":
+              case "datetime-local":
+              case "color":
+              case "url":
+              case "range":
+              case "tel":
+              case "number":
+              case "textarea":
+              case"time":
+              return (
+                <Input
+                  label={field.label}
+                  key={field.name}
+                  type={field.type}
+                  name={field.name}
+                  onChange={handleChange}
+                  value={field.type === 'number' 
+                    ? Number(values[field.name as keyof T] || 0)
+                    :String(values[field.name as keyof T] || "")
+                  }
+                  required={field.required}
+                />
+            );
+            default:
+              console.warn(`Tipo de campo desconocido: ${field.type}`);
+              return null
+
           }
+          
           
         
         }
