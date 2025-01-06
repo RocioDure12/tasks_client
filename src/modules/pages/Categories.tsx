@@ -4,6 +4,7 @@ import { Input } from "../components/Input"
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 
+
 export const Categories:React.FC=()=>{
 const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 const [newCategory, setNewCategory]=useState<Partial<Category>>({})
@@ -26,7 +27,7 @@ const categoriesApi = useCategoriesApi();
             name="category"
             onChange={handleChange}
             />
-            <Button onClick={()=>categoriesApi.createCategory(newCategory)}>Agregar</Button>
+            <Button onClick={()=>categoriesApi.createCategory(newCategory)}>+</Button>
             </>
             <>
             <Input
@@ -36,16 +37,12 @@ const categoriesApi = useCategoriesApi();
             onChange={handleChange}
 
             />
-            <Button>Buscar</Button>
+            <Button>🔍</Button>
             </>
             
-            <div>
-                <ul>
-                    <li>popo</li>
-                    <li>skjdf</li>
-                </ul>
-                
-            </div>
+            <div></div>
+            
+         
             
             
         </div>
