@@ -1,95 +1,136 @@
-import { useState } from "react"
-import { Button } from "../components/Button"
-import { Input } from "../components/Input"
+import { useRef, useState } from "react";
+import { Button } from "../components/Button";
+import { Input } from "../components/Input";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 import { useEffect } from "react";
 
-export const Categories:React.FC=()=>{
-const [categoriesList, setCategoriesList] = useState<Category[]>([]);
-const [newCategory, setNewCategory]=useState<Partial<Category>>({})
-const categoriesApi = useCategoriesApi();
+export const Categories: React.FC = () => {
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const [category, setCategory] = useState<Partial<Category>>({});
+  const [searchText, setSearchText]=useState("")
+  const categoriesApi = useCategoriesApi();
 
+
+  //const initialized = useRef(false)
+  useEffect(() => {
+    /*if(!initialized.current){
+        initialized.current = true;
+        readCategories();
+    }*/
+    readCategories();
+  }, []);
+
+  /*
   useEffect(() => {
     if (categoriesList !== undefined) {
-      readCategories();
+        readCategories();
+
     } else {
       setCategoriesList([]);
     }
-  }, [categoriesList]);
+  }, [categoriesList]);*/
 
-const handleChange=(evt :React.ChangeEvent<HTMLInputElement>)=>{
-    setNewCategory({category_name:evt.target.value})
-        //setCategoriesList(evt.target.value)
+  const handleCategoryChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setCategory({ category_name: evt.target.value });
+    //setCategoriesList(evt.target.value)
+  };
+
+  const handleSearchChange=(evt:React.ChangeEvent<HTMLInputElement>)=>{
+    setSearchText(evt.target.value)
+
+  }
+
+  const createCategory = async () => {
+    if (category.category_name) {
+      const result = await categoriesApi.createCategory(
+        category as Category
+      );
+      await readCategories();
+    } else alert("Por favor, escribe un nombre para la categoría.");
+  };
+
+  const filterCategories =categoriesList.filter((category:Category)=>!searchText || category.category_name.toLowerCase().includes(searchText.toLowerCase()))
+
+
+  const readCategories = async () => {
+    const result = await categoriesApi.readMyCategories();
+    if (result.data) {
+      setCategoriesList(result.data);
+    } else {
+      console.log("Error al obtener las categorias");
     }
+  };
 
-const createCategory=async ()=>{
-    if (newCategory.category_name){
-        const result= await categoriesApi.createCategory(newCategory as Category)
-        
-       
-    }
-    else alert("Por favor, escribe un nombre para la categoría.")
-   
-}
+  const deleteCategory = async (id: number) => {
+    const result = await categoriesApi.deleteCategory(id);
+    await readCategories();
+  };
 
-const filteredCategories=()=>{
-return
-}
+  return (
+    <div className="m-2 rounded-lg bg-white  p-7 flex-col shadow-lg">
+      <>
+        <Input
+          type="text"
+          label="Categoria"
+          name="category"
+          onChange={handleCategoryChange}
+        />
+        <Button onClick={createCategory}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
+          </svg>
+        </Button>
+      </>
+      <>
+        <Input
+          type="text"
+          label="Buscar"
+          name="search"
+          onChange={handleSearchChange}
+        />
+      </>
 
-
-const readCategories=async()=>{
-    const result= await categoriesApi.readMyCategories()
-    if (result.data){
-        setCategoriesList(result.data)
-    }else{
-        console.log("Error al obtener las categorias")
-    }
-}
-
-
-
-
-    return(
-    
-        <div className="m-2 rounded-lg bg-white  p-7 flex-col shadow-lg">
-            <>
-            <Input
-            type="text"
-            label="Categoria"
-            name="category"
-            onChange={handleChange}
-            />
-            <Button onClick={createCategory}>+</Button>
-            </>
-            <>
-            <Input
-            type="text"
-            label="Buscar"
-            name="search"
-            onChange={handleChange}
-
-            />
-            <Button onClick={readCategories}>🔍</Button>
-            </>
-            
-            <div>
-                <ul>
-                {categoriesList.map((item:Category)=>(
-                    <li key={item.id}>{item.category_name}</li>
-                ))}
-                </ul> 
-            </div>
-            
-         
-            
-            
-        </div>
-
-        
-        
-       
-
-
-    )
-}
+      <div>
+        <ul>
+          {filterCategories.map((item: Category) => (
+            <li key={item.id}>
+              {item.category_name}
+              <Button onClick={()=>deleteCategory(item.id)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-x"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M18 6l-12 12" />
+                  <path d="M6 6l12 12" />
+                </svg>
+              </Button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
