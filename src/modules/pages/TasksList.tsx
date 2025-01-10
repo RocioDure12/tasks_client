@@ -42,10 +42,10 @@ export const TasksList = () => {
   //funcion para filtrar las tareas por la fecha
 
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
-  //const filteredList = list.filter(item => {
-    //const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
-    //return formattedDate === date;
-  //});
+  const filteredList = list.filter(item => {
+    const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
+    return formattedDate === date;
+  });
 
 
 
@@ -53,7 +53,7 @@ export const TasksList = () => {
     <MainLayout>
   
         <ul>
-          {list.map((item) => (
+          {filteredList.map((item) => (
     
             <Card key={item.id}>
             <li key={item.id}>
@@ -72,6 +72,7 @@ export const TasksList = () => {
               >
                 Eliminar
               </Button>
+              <Button>Visualizar</Button>
             </li>
             </Card>
           ))}

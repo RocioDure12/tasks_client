@@ -41,12 +41,7 @@ const taskFormFields: Field[] = [
     name:"categories",
     label:"Categorias",
     required:true,
-    options: [
-      { value: "1", label: "Trabajo" },
-      { value: "2", label: "Estudios" },
-      { value: "3", label: "Hogar" },
-      { value: "4", label: "Personal" },
-    ],
+    options: []
   },
   {
     type: "textarea",
@@ -71,7 +66,7 @@ export const Task2Form = () => {
   const categoriesApi=useCategoriesApi()
 
   const parseId = (id: string): number => {
-    const numericId = parseInt(id, 10);
+    const numericId = parseInt(id);
     return numericId
   };
   
@@ -79,10 +74,10 @@ export const Task2Form = () => {
   useEffect(() => {
     if (id !== undefined) {
       getTaskById(id);
-      readCategories()
     } else {
       setTask({});
     }
+    readCategories()
   }, [id]);
 
   const readCategories = async () => {
