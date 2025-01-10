@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { OtroForm } from "../components/otroForm";
 import dayjs from "dayjs";
+import Category from "../models/Category";
+import useCategoriesApi from "../hooks/useCategoriesApi";
 
 const taskFormFields: Field[] = [
   {
@@ -61,9 +63,12 @@ const taskFormFields: Field[] = [
 
 export const Task2Form = () => {
   const [task, setTask] = useState<Partial<Task>>({});
+  const [categoriesList, setCategoriesList]=useState<{ value: string; label: string }[]>([]);
+
 
   const taskApi = useTaskApi();
   const { id } = useParams<{ id: string }>();
+  const categoriesApi=useCategoriesApi()
 
   const parseId = (id: string): number => {
     const numericId = parseInt(id, 10);
@@ -74,10 +79,29 @@ export const Task2Form = () => {
   useEffect(() => {
     if (id !== undefined) {
       getTaskById(id);
+      readCategories()
     } else {
       setTask({});
     }
   }, [id]);
+
+  const readCategories = async () => {
+    const result = await categoriesApi.readMyCategories();
+    if (result.data) {
+      setCategoriesList(
+        result.data.map((category:Category)=>({
+          value:category.id.toString(),
+          label:category.category_name,
+        }))
+      );
+    } else {
+      console.log("Error al obtener las categorias");
+    }
+  };
+
+  const dynamicTaskFormFields = taskFormFields.map((field) =>
+    field.name === "categories" ? { ...field, options: categoriesList } : field
+  ) 
 
   const handleEditTask = async (data: Task, id: string) => {
     const numericId=parseId(id)
@@ -98,19 +122,19 @@ export const Task2Form = () => {
     }
   };
 
-  const handleSubmit = (data: Task) => {
+  const handleSubmit = async(data: Task) => {
     if (id !== undefined) {
-      handleEditTask(data, id);
+      await handleEditTask(data, id);
    
     } else {
-      handleCreateTask(data as Task) // Crea una nueva tarea si taskId no está definido
+      await handleCreateTask(data as Task) // Crea una nueva tarea si taskId no está definido
     }
   };
-  console.log(task);
+
   return (
     <MainLayout >
       <OtroForm
-        fields={taskFormFields}
+        fields={dynamicTaskFormFields}
         initialValues={task} // Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
         buttonText={id ? "Editar" : "Guardar"}

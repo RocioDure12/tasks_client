@@ -7,18 +7,17 @@ import MainLayout from "../components/MainLayout";
 import { Card } from "../components/Card";
 import dayjs from 'dayjs';
 
-
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
 
   const {date}=useParams<{ date: string }>() //a confirmar
-
   const taskApi = useTaskApi();
   const navigate = useNavigate();
   
 
   useEffect(() => {
     getTasks();
+  
   }, []);
 
   const getTasks = async () => {
@@ -43,10 +42,10 @@ export const TasksList = () => {
   //funcion para filtrar las tareas por la fecha
 
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
-  const filteredList = list.filter(item => {
-    const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
-    return formattedDate === date;
-  });
+  //const filteredList = list.filter(item => {
+    //const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
+    //return formattedDate === date;
+  //});
 
 
 
@@ -54,7 +53,8 @@ export const TasksList = () => {
     <MainLayout>
   
         <ul>
-          {filteredList.map((item) => (
+          {list.map((item) => (
+    
             <Card key={item.id}>
             <li key={item.id}>
               {item.task_name}
