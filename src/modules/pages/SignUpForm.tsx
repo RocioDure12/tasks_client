@@ -55,7 +55,6 @@ export const SignUpForm:React.FC=()=>{
         //validaciones
         // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
         const result=await userApi.createUser(data)
-        console.log(result)
         if (result.data){
             navigate("/verifyemail")
         } else{
