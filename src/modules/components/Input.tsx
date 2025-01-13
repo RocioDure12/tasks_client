@@ -11,6 +11,7 @@ export const Input: React.FC<InputProps> = (props) => {
         onChange={props.onChange}
         required={props.required}
         value={props.value}
+        placeholder={props.placeholder}
       ></input>
     </div>
   );

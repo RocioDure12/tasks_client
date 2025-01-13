@@ -91,7 +91,7 @@ export const OtroForm = <T extends {}>({
               case"time":
               return (
                 <Input
-                  label={field.label}
+                  placeholder={field.name}
                   key={field.name}
                   type={field.type}
                   name={field.name}

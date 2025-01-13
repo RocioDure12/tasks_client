@@ -11,6 +11,7 @@ import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 import { Button } from "../components/Button";
 
+
 const taskFormFields: Field[] = [
   {
     type: "text",
@@ -32,21 +33,25 @@ const taskFormFields: Field[] = [
     options: []
   },
   {
+    type:"text",
+    name:"category",
+    label:"Category"
+  },
+  {
     type: "textarea",
     name: "description",
     label: "Descripcion o nota (opcional)",
     required:false,
     rows:4,
     cols:4
-  },
-
-  
+  }
 
 ];
 
 export const Task2Form = () => {
   const [task, setTask] = useState<Partial<Task>>({});
   const [categoriesList, setCategoriesList]=useState<{ value: string; label: string }[]>([]);
+  const [category, setCategory] = useState<Partial<Category>>({});
 
 
   const taskApi = useTaskApi();
@@ -83,7 +88,7 @@ export const Task2Form = () => {
   };
 
   const dynamicTaskFormFields = taskFormFields.map((field) =>
-    field.name === "categories" ? { ...field, options: categoriesList } : field
+    field.name === "categories" ? { ...field, options: categoriesList} : field
   ) 
 
   const handleEditTask = async (data: Task, id: string) => {
@@ -124,7 +129,7 @@ export const Task2Form = () => {
         buttonText={id ? "Editar" : "Guardar"}
         
       />
-      <Button>Checklist</Button>
+      
       
 
     </MainLayout>

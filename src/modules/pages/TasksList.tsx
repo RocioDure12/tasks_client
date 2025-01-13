@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { Card } from "../components/Card";
 import dayjs from 'dayjs';
+import { Checkbox } from "../components/Checkbox"
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -45,6 +46,7 @@ export const TasksList = () => {
   }
 
   //FALTA LA LOGICA Y EL COMPONENTE QUE RENDERICE LA INFORMACION DEL DETALLE DE LA TAREA EN UN MODAL
+  //TAMBIEN FALTA AGREGAR COMPONENTE CHECKBOX EL CUAL NECESITO PARA SACAR EL PORCENTAJE DE TAREAS COMPLETADAS
 
   //funcion para filtrar las tareas por la fecha
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);

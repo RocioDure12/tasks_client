@@ -8,9 +8,10 @@ import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { Task2Form } from "./modules/pages/Task2Form";
 import { TasksList } from "./modules/pages/TasksList";
-import Home from "./modules/pages/Home";
+import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import {Categories} from "./modules/pages/Categories";
+import { DatesProvider } from "@mantine/dates";
 
 export default function App() {
   return (
@@ -74,6 +75,7 @@ export default function App() {
               />
             </Routes>
           </Router>
+    
         </MantineProvider>
       </CartProvider>
     </ThemeProvider>
