@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
 
-  const {date}=useParams<{ date: string }>() //a confirmar
+  const {date}=useParams<{ date: string }>() 
   const taskApi = useTaskApi();
   const navigate = useNavigate();
   
@@ -39,11 +39,17 @@ export const TasksList = () => {
     await getTasks();
   };
 
-  //funcion para filtrar las tareas por la fecha
+  const viewDetailTask=async(id:number)=>{
+  //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
+  const result= await taskApi.getTaskById(id)
+  }
 
+  //FALTA LA LOGICA Y EL COMPONENTE QUE RENDERICE LA INFORMACION DEL DETALLE DE LA TAREA EN UN MODAL
+
+  //funcion para filtrar las tareas por la fecha
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
   const filteredList = list.filter(item => {
-    const formattedDate = dayjs(item.due_date).format('DD-MM-YYYY');
+    const formattedDate = dayjs(item.due_date).format('YYYY-MM-dd');
     return formattedDate === date;
   });
 
@@ -51,10 +57,9 @@ export const TasksList = () => {
 
   return (
     <MainLayout>
-  
         <ul>
-          {filteredList.map((item) => (
-    
+          {list.map((item) => (
+   
             <Card key={item.id}>
             <li key={item.id}>
               {item.task_name}
@@ -72,7 +77,7 @@ export const TasksList = () => {
               >
                 Eliminar
               </Button>
-              <Button>Visualizar</Button>
+              <Button onClick={()=>{viewDetailTask(item.id)}}>Visualizar</Button>
             </li>
             </Card>
           ))}
