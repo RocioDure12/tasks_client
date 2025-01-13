@@ -5,5 +5,6 @@ export interface FormProps<T>{
     initialValues:Partial<T>
     onFormSubmit:(data:T)=>void
     buttonText:string
+    buttons?:{ label: string; onClick: (e: React.FormEvent<HTMLFormElement>, values: Partial<T>) => void }[];
 
 }

@@ -10,6 +10,7 @@ export const OtroForm = <T extends {}>({
   initialValues,
   onFormSubmit,
   buttonText,
+  buttons=[],
 }: FormProps<T>) => {
   const [values, setValues] = useState<Partial<T>>({});
 

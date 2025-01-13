@@ -9,6 +9,7 @@ import { OtroForm } from "../components/otroForm";
 import dayjs from "dayjs";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
+import { Button } from "../components/Button";
 
 const taskFormFields: Field[] = [
   {
@@ -22,19 +23,6 @@ const taskFormFields: Field[] = [
     name: "due_date",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     label: "Fecha de vencimiento",
     required:true,
-  },
-  {
-    type:"time",
-    name:"start_time",
-    label:"Horario",
-    required:false,
-  },
-  {
-    type:"time",
-    name:"end_time",
-    label:"",
-    required:false,
-
   },
   {
     type:"select",
@@ -128,12 +116,17 @@ export const Task2Form = () => {
 
   return (
     <MainLayout >
+
       <OtroForm
         fields={dynamicTaskFormFields}
         initialValues={task} // Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
         buttonText={id ? "Editar" : "Guardar"}
+        
       />
+      <Button>Checklist</Button>
+      
+
     </MainLayout>
     );
 };
