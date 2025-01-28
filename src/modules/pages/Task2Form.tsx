@@ -8,7 +8,7 @@ import { OtroForm } from "../components/otroForm";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 
-
+// Definición de los campos del formulario para crear/editar tareas
 const taskFormFields: Field[] = [
   {
     type: "text",
@@ -24,10 +24,10 @@ const taskFormFields: Field[] = [
   },
   {
     type:"select",
-    name:"category_id", // Usamos directamente el campo de la base de datos
+    name:"category_id", // Relaciona la tarea con una categoría por su ID
     label:"Categorias",
     required:true,
-    options: []
+    options: [] // Las opciones se llenarán dinámicamente
   },
   {
     type:"text",
@@ -45,31 +45,34 @@ const taskFormFields: Field[] = [
 
 ];
 
+// Componente principal para crear/editar tareas
 export const Task2Form = () => {
-  const [task, setTask] = useState<Partial<Task>>({});
-  const [categoriesList, setCategoriesList]=useState<{ value: string; label: string }[]>([]); 
-  const [newCategory, setNewCategory] = useState<Partial<Category>>({});
+  const [task, setTask] = useState<Partial<Task>>({}); //Estado local para la tarea
+  const [categoriesList, setCategoriesList]=useState<{ value: string; label: string }[]>([]);  //Lista de categorias disponibles para el select
+  const [newCategory, setNewCategory] = useState<Partial<Category>>({}); //Estado para manejar una nueva categoria
 
 
-  const taskApi = useTaskApi();
-  const { id } = useParams<{ id: string }>();
+  const taskApi = useTaskApi(); 
+  const { id } = useParams<{ id: string }>(); // Obtiene el ID de la tarea desde la URL
   const categoriesApi=useCategoriesApi()
 
+  //Convierte el ID de string a número
   const parseId = (id: string): number => {
     const numericId = parseInt(id);
     return numericId
   };
   
-
+  // Efecto para cargar datos iniciales (tarea y categorías) cuando cambia el ID
   useEffect(() => {
     if (id !== undefined) {
-      getTaskById(id);
+      getTaskById(id); // Carga la tarea si el ID existe
     } else {
-      setTask({});
+      setTask({}); // Limpia el estado si no hay ID
     }
-    readCategories()
+    readCategories() // Carga la lista de categorías
   }, [id]);
 
+  // Obtiene todas las categorías disponibles desde la API
   const readCategories = async () => {
     const result = await categoriesApi.readMyCategories();
     console.log(result.data)
@@ -85,6 +88,7 @@ export const Task2Form = () => {
     }
   };
 
+  // Modifica dinámicamente los campos del formulario para incluir las categorías
   const dynamicTaskFormFields = taskFormFields.map((field) =>
     field.name === "category_id" ? { ...field, options: categoriesList} : field
   ) 
