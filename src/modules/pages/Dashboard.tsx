@@ -46,10 +46,10 @@ export default function Dashboard() {
       navigate(`/list/${dayjs(date).format('DD-MM-YYYY')}`)
     }
   };*/
-  
+
   return (
     <MainLayout>
-      {tasks.length > 0 ? (
+      {tasks.length === 0 ? (
         <div>
           <div>¡Bienvenido/a! </div>
           <div>Comienza a crear tareas</div>

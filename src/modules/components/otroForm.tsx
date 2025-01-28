@@ -46,6 +46,10 @@ export const OtroForm = <T extends {}>({
     setValues({});
   };
 
+  const handleAddCategory=()=>{
+
+  }
+
   return (
     <form className="m-2 rounded-lg bg-white h-full p-7 flex flex-col gap-2 shadow-lg" onSubmit={handleSubmit}>
       <div>
@@ -90,6 +94,7 @@ export const OtroForm = <T extends {}>({
               case "textarea":
               case"time":
               return (
+                <>
                 <Input
                   placeholder={field.name}
                   key={field.name}
@@ -102,6 +107,14 @@ export const OtroForm = <T extends {}>({
                   }
                   required={field.required}
                 />
+                {field.name ==="category" && (
+                  <Button onClick={handleAddCategory}>+</Button>
+                  //SOLUCIONAR EL TEMA DEL INPUT CON BOTON Y SIN BOTON LA LINEA DE ARRIBA NO SERIA LA SOLUCION
+                )}
+               </>
+                
+
+            
             );
             default:
               console.warn(`Tipo de campo desconocido: ${field.type}`);
