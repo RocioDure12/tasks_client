@@ -70,7 +70,9 @@ export default function Dashboard() {
           progress={60}
           color="#2d1c59"
           ></ProgressBar>
+         
           <CardCategory></CardCategory>
+
       
           <Button>Add Category</Button>
   
