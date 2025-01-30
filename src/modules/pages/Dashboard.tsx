@@ -8,6 +8,8 @@ import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button"
 import ProgressBar from "../components/ProgressBar";
+import CardCategory from "../components/CardCategory";
+import ProgressRing from "../components/RingProgress";
 
 
 export default function Dashboard() {
@@ -68,6 +70,10 @@ export default function Dashboard() {
           progress={60}
           color="#2d1c59"
           ></ProgressBar>
+          <CardCategory></CardCategory>
+      
+          <Button>Add Category</Button>
+  
         </div>
       )}
     </MainLayout>
