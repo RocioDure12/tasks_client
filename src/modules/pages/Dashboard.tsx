@@ -19,7 +19,8 @@ export default function Dashboard() {
   const taskApi=useTaskApi()
 
   useEffect(() => {
-    getTasks();
+    const result=getTasks();
+    console.log(result)
   
   }, []);
 
