@@ -15,19 +15,20 @@ import ProgressRing from "../components/RingProgress";
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [progress, setProgress] = useState(0);
   const navigate=useNavigate()
   const taskApi=useTaskApi()
 
   useEffect(() => {
-    const result=getTasks();
-    console.log(result)
-  
+    getTasks() 
   }, []);
+
 
   const getTasks= async() => {
     const result=await taskApi.readMyTasks()
     if(result.data){
       setTasks(result.data)
+      console.log(result.data)
     }else{
       console.log("Error al obtener tareas")
     }
@@ -50,6 +51,15 @@ export default function Dashboard() {
       navigate(`/list/${dayjs(date).format('DD-MM-YYYY')}`)
     }
   };*/
+
+//funcion para calcular porcentaje de tareas realizadas (bar progress)
+const calculateTaskProgress = () => {
+  const totalTasks = tasks.length;
+  if (totalTasks === 0) return 0;
+
+  const completedTasks = tasks.filter(task => task.status).length;
+  return (completedTasks / totalTasks) * 100;
+};
 
   return (
     <MainLayout>
