@@ -7,6 +7,7 @@ import { DatesProvider } from '@mantine/dates';
 import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button"
+import ProgressBar from "../components/ProgressBar";
 
 
 export default function Dashboard() {
@@ -55,9 +56,18 @@ export default function Dashboard() {
           <div>Comienza a crear tareas</div>
           <Button onClick={handleAddTask}>add Task</Button>
         </div>
-      ) : (
+      ) 
+      
+      :
+      
+      (
         <div className="grid gap-10">
+          <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
           <PickDate />
+          <ProgressBar 
+          progress={60}
+          color="#2d1c59"
+          ></ProgressBar>
         </div>
       )}
     </MainLayout>
