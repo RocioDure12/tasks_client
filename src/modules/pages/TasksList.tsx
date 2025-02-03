@@ -26,6 +26,7 @@ export const TasksList = () => {
     const result = await taskApi.readMyTasks();
     if (result.data) {
       setList(result.data);
+
     } else {
       console.log("error al obtener tareas");
     }

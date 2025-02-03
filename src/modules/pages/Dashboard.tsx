@@ -10,17 +10,25 @@ import { Button } from "../components/Button"
 import ProgressBar from "../components/ProgressBar";
 import CardCategory from "../components/CardCategory";
 import ProgressRing from "../components/RingProgress";
+import CategoryCarousel from "../components/CategoryCarousel";
+import Category from "../models/Category";
+import useCategoryApi from "../hooks/useCategoriesApi";
 
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [progress, setProgress] = useState(0);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoryProgressInfo, setCategoryProgressInfo] = useState<{ name: string; progress: number }[]>([]);
+
   const navigate=useNavigate()
   const taskApi=useTaskApi()
+  const categoriesApi=useCategoryApi()
 
   useEffect(() => {
-    getTasks() 
+    getTasks()
+    getCategories()
+
   }, []);
 
 
@@ -28,12 +36,21 @@ export default function Dashboard() {
     const result=await taskApi.readMyTasks()
     if(result.data){
       setTasks(result.data)
-      console.log(result.data)
+
     }else{
       console.log("Error al obtener tareas")
     }
     }
+  
+  const getCategories=async()=>{
+    const result=await categoriesApi.readMyCategories()
+    if (result.data){
+      setCategories(result.data)
+    }else{
+      console.log("Error al obtener categorias")
+    }
 
+  }
   
   const handleAddTask=()=>{
     navigate(`/taskform`)
@@ -58,10 +75,7 @@ const getCompletionPercentage = () => {
   if (totalTasks === 0) return 0;
   const completedTasks = tasks.filter(task => task.status === true).length;
   return Math.round((completedTasks / totalTasks) * 100)
-
 };
-
-
   return (
     <MainLayout>
       {tasks.length === 0 ? (
@@ -79,14 +93,14 @@ const getCompletionPercentage = () => {
           <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
           <PickDate />
           <ProgressBar 
-          progress={60}
+          progress={getCompletionPercentage()}
           color="#2d1c59"
           ></ProgressBar>
          
-          <CardCategory></CardCategory>
+      
 
       
-          <Button>Add Category</Button>
+          <Button>Add Task</Button>
   
         </div>
       )}

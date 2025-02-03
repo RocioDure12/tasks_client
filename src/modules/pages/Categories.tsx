@@ -66,7 +66,7 @@ export const Categories: React.FC = () => {
     const result = await categoriesApi.deleteCategory(id);
     await readCategories();
   };
-
+console.log(categoriesList)
   return (
     <div className="m-2 rounded-lg bg-white  p-7 flex-col shadow-lg">
       <>
