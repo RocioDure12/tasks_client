@@ -53,13 +53,14 @@ export default function Dashboard() {
   };*/
 
 //funcion para calcular porcentaje de tareas realizadas (bar progress)
-const calculateTaskProgress = () => {
+const getCompletionPercentage = () => {
   const totalTasks = tasks.length;
   if (totalTasks === 0) return 0;
+  const completedTasks = tasks.filter(task => task.status === true).length;
+  return Math.round((completedTasks / totalTasks) * 100)
 
-  const completedTasks = tasks.filter(task => task.status).length;
-  return (completedTasks / totalTasks) * 100;
 };
+
 
   return (
     <MainLayout>
