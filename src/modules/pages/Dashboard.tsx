@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [categoryProgressInfo, setCategoryProgressInfo] = useState<{ name: string; progress: number }[]>([]);
+  
 
   const navigate=useNavigate()
   const taskApi=useTaskApi()
@@ -96,8 +96,9 @@ const getCompletionPercentage = () => {
           progress={getCompletionPercentage()}
           color="#2d1c59"
           ></ProgressBar>
-         
-      
+          <CategoryCarousel
+          categories={categories}></CategoryCarousel>
+    
 
       
           <Button>Add Task</Button>

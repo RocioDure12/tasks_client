@@ -6,9 +6,9 @@ import Category from "../models/Category";
 
 
 interface CategoryCarouselProps {
-    tasks: Task[];
-    categories: Category[];
-    calculateCategoryProgress: (categoryId: number) => number;
+    tasks?: Task[];
+    categories?: Category[];
+    //calculateCategoryProgress: (categoryId: number) => number;
 }
   
 export default function CategoryCarousel(props:CategoryCarouselProps)  {
@@ -16,9 +16,14 @@ export default function CategoryCarousel(props:CategoryCarouselProps)  {
     
     return (
       <Carousel slideSize="33%" slideGap="md" align="start" withControls>
-        {props.categories.map((category, index) => (
+        {props.categories?.map((category, index) => (
           <Carousel.Slide key={category.id}>
-            <CardCategory/>
+            <CardCategory
+            title={category.category_name}
+            progressValue={70}
+            color="blue"
+
+            />
           </Carousel.Slide>
         ))}
       </Carousel>
