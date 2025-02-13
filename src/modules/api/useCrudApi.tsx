@@ -12,7 +12,7 @@ export default function useCrudApi<T>(baseUrl:string){
     };*/
 
     const read_by_id=async(id:number)=>{
-        return handleApiRequest<T>("get",`${baseUrl}/tasks/${id}`)
+        return handleApiRequest<T>("get",`${baseUrl}/${id}`)
     }
 
     const getItems=async(extraURL:string=""):Promise<ActionResult<T[]>>=>{
@@ -33,7 +33,12 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("delete",`/${baseUrl}/${id}`);
     };
 
-    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems};
+    const getCountItems = async () => {
+        return handleApiRequest<T>("get",`/${baseUrl}/count`);
+    };
+    
+
+    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems,getCountItems};
     }
 
 

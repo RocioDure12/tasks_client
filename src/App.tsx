@@ -10,7 +10,7 @@ import { Task2Form } from "./modules/pages/Task2Form";
 import { TasksList } from "./modules/pages/TasksList";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
-import {Categories} from "./modules/pages/Categories";
+import {Categories} from "./modules/pages/PanelCategories";
 import { DatesProvider } from "@mantine/dates";
 
 export default function App() {

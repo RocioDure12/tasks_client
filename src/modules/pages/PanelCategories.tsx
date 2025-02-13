@@ -42,13 +42,31 @@ export const Categories: React.FC = () => {
   }
 
   const createCategory = async () => {
-    if (category.category_name) {
-      const result = await categoriesApi.createCategory(
-        category as Category
-      );
-      await readCategories();
-    } else alert("Por favor, escribe un nombre para la categoría.");
+    try {
+      const response = await categoriesApi.getCategoriesCount();
+      // Verificar si response.data está definido y si es un número
+      if (response.data && typeof response.data === 'number') {
+        if (response.data >= 25) {
+          alert("No puedes crear más categorías");
+          return; // Detener la ejecución de la función
+        }
+      } else {
+        alert("Error al obtener el conteo de categorías.");
+        return;
+      }
+  
+      if (category.category_name) {
+        const result = await categoriesApi.createCategory(category as Category);
+        await readCategories();
+      } else {
+        alert("Por favor, escribe un nombre para la categoría.");
+      }
+    } catch (error) {
+      console.error("Error al crear la categoría:", error);
+      alert("Hubo un error al procesar la solicitud.");
+    }
   };
+  
 
   const filterCategories =categoriesList.filter((category:Category)=>!searchText || category.category_name.toLowerCase().includes(searchText.toLowerCase()))
 
@@ -66,7 +84,7 @@ export const Categories: React.FC = () => {
     const result = await categoriesApi.deleteCategory(id);
     await readCategories();
   };
-console.log(categoriesList)
+
   return (
     <div className="m-2 rounded-lg bg-white  p-7 flex-col shadow-lg">
       <>
