@@ -62,6 +62,8 @@ export const OtroForm = <T extends {}>({
                   name={field.name}
                   options={field.options || []}
                   onChange={handleChange}
+                  //@ts-ignore
+                  value={values[field.name]}
                   required={field.required}
                   label={field.label}
               />

@@ -34,7 +34,7 @@ const taskFormFields: Field[] = [
     name: "description",
     label: "Descripcion o nota (opcional)",
     rows:4,
-    cols:4
+    cols:4,
   }
 
 ];
@@ -122,14 +122,18 @@ export const Task2Form = () => {
     } else {
       await handleCreateTask(data as Task) // Crea una nueva tarea si taskId no está definido
     }
+
+    setTask({})
+
   };
+ 
 
   return (
     <MainLayout >
 
       <OtroForm
         fields={dynamicTaskFormFields}
-        initialValues={task} // Pasa los valores actuales de la tarea al formulario
+        initialValues={task} //Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}
         buttonText={id ? "Editar" : "Guardar"}
         
