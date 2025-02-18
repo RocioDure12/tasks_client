@@ -13,6 +13,8 @@ export const Select: React.FC<SelectProps> = (props) => {
             onChange={props.onChange}
 
             >
+                  <option disabled selected > -- select an option -- </option>
+
                 {props.options.map((option, index)=>
                 <option key={index} value={option.value}>
                     {option.label}

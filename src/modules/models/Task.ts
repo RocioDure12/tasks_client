@@ -12,7 +12,7 @@ interface Task{
     created_at:Date;
     updated_at?:Date;
     user_id?:number;
-    category_id?:number;
+    category_id:number;
     subtask?:Subtask[]
     
 }

@@ -112,9 +112,7 @@ export const OtroForm = <T extends {}>({
                   //SOLUCIONAR EL TEMA DEL INPUT CON BOTON Y SIN BOTON LA LINEA DE ARRIBA NO SERIA LA SOLUCION
                 )}
                </>
-                
-
-            
+                          
             );
             default:
               console.warn(`Tipo de campo desconocido: ${field.type}`);

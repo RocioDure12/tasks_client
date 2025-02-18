@@ -1,7 +1,7 @@
 import Field from "../models/Field";
 import Task from "../models/Task";
 import useTaskApi from "../hooks/useTaskApi";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { OtroForm } from "../components/otroForm";
@@ -17,7 +17,7 @@ const taskFormFields: Field[] = [
     required: true,
   },
   {
-    type: "date",
+    type: "datetime-local",
     name: "due_date",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     label: "Fecha de vencimiento",
     required:true,
@@ -30,15 +30,9 @@ const taskFormFields: Field[] = [
     options: [] // Las opciones se llenarán dinámicamente
   },
   {
-    type:"text",
-    name:"category",
-    label:"Category"
-  },
-  {
     type: "textarea",
     name: "description",
     label: "Descripcion o nota (opcional)",
-    required:false,
     rows:4,
     cols:4
   }
@@ -93,13 +87,20 @@ export const Task2Form = () => {
     field.name === "category_id" ? { ...field, options: categoriesList} : field
   ) 
 
+  /*
+  useMemo(()=>
+  taskFormFields.map((field) =>
+    field.name === "category_id" ? { ...field, options: categoriesList} : field
+  ), [categoriesList, taskFormFields]) 
+  */
+
   const handleEditTask = async (data: Task, id: string) => {
     const numericId=parseId(id)
     const result = await taskApi.updateTask(numericId, data);
   };
 
   const handleCreateTask = async (data: Task) => {
-   
+  
     const result = await taskApi.createTask(data as Task);
     
   };

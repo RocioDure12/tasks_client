@@ -45,6 +45,7 @@ export const Categories: React.FC = () => {
     try {
       const response = await categoriesApi.getCategoriesCount();
       // Verificar si response.data está definido y si es un número
+     //la verificacion antes de crear una categoria deberia estar en el backend (corregir eso)
       if (response.data && typeof response.data === 'number') {
         if (response.data >= 25) {
           alert("No puedes crear más categorías");
