@@ -94,7 +94,7 @@ export const OtroForm = <T extends {}>({
               case "textarea":
               case"time":
               return (
-                <>
+                <div key={field.name}>
                 <Input
                   placeholder={field.name}
                   key={field.name}
@@ -111,7 +111,7 @@ export const OtroForm = <T extends {}>({
                   <Button onClick={handleAddCategory}>+</Button>
                   //SOLUCIONAR EL TEMA DEL INPUT CON BOTON Y SIN BOTON LA LINEA DE ARRIBA NO SERIA LA SOLUCION
                 )}
-               </>
+               </div>
                           
             );
             default:
