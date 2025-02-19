@@ -12,12 +12,13 @@ import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import {Categories} from "./modules/pages/PanelCategories";
 import { DatesProvider } from "@mantine/dates";
+import { theme } from "./theme";
 
 export default function App() {
   return (
     <ThemeProvider>
       <CartProvider>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
           <Router>
             <Routes>
               <Route path="/users/login" element={<LoginForm></LoginForm>} />

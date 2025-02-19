@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import  ThemeContext  from "./ThemeContext";
+import { useLocalStorage } from "@mantine/hooks";
+import { MantineProvider } from "@mantine/core";
+
 
 interface ThemeProviderProps
 {
