@@ -12,7 +12,7 @@ import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import {Categories} from "./modules/pages/PanelCategories";
 import { DatesProvider } from "@mantine/dates";
-import { theme } from "./theme";
+import theme from "./theme";
 
 export default function App() {
   return (

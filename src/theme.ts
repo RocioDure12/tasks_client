@@ -1,6 +1,6 @@
 import { createTheme } from "@mantine/core";
 
-export const theme = createTheme({
+const theme = createTheme({
   colors: {
     primary: [
       "#f5f5fd", "#ececfb", "#ddddf7", "#c3c1f1", "#a39de8",
@@ -17,3 +17,5 @@ export const theme = createTheme({
   },
   primaryColor: "primary",
 });
+
+export default theme; // 🔹 Exportación correcta

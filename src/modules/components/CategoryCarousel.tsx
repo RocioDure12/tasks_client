@@ -21,8 +21,6 @@ export default function CategoryCarousel(props:CategoryCarouselProps)  {
             <CardCategory
             title={category.category_name}
             progressValue={70}
-            color="blue"
-
             />
           </Carousel.Slide>
         ))}

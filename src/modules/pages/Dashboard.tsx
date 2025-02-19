@@ -15,6 +15,7 @@ import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
 
 
+
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -94,7 +95,6 @@ const getCompletionPercentage = () => {
           <PickDate />
           <ProgressBar 
           progress={getCompletionPercentage()}
-          color="#2d1c59"
           ></ProgressBar>
           <CategoryCarousel
           categories={categories}></CategoryCarousel>
