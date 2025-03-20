@@ -71,6 +71,8 @@ export default function Dashboard() {
   };*/
 
 //funcion para calcular porcentaje de tareas realizadas (bar progress)
+//esta logica deberia ir en la api, es decir hacer un endpoint que maneje esta logica
+//es algo a tener en cuenta para CAMBIAR 
 const getCompletionPercentage = () => {
   const totalTasks = tasks.length;
   if (totalTasks === 0) return 0;
@@ -93,14 +95,9 @@ const getCompletionPercentage = () => {
         <div className="grid gap-10">
           <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
           <PickDate />
-          <ProgressBar 
+          <ProgressBar
           progress={getCompletionPercentage()}
           ></ProgressBar>
-          <CategoryCarousel
-          categories={categories}></CategoryCarousel>
-    
-
-      
           <Button className="rounded-xs">Add Task</Button>
   
         </div>

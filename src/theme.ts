@@ -3,8 +3,7 @@ import { createTheme } from "@mantine/core";
 const theme = createTheme({
   colors: {
     primary: [
-      "#f5f5fd", "#ececfb", "#ddddf7", "#c3c1f1", "#a39de8",
-      "#8476dc", "#7058cf", "#5f45bc", "#4f3a9d", "#433181", "#291e57"
+     "#f4f2ff","#ece7ff","#dad2ff","#c0aeff","#a180ff","#854dff","##843dff", "#6816eb","#5812c5","#4911a1","#2b076e"
     ],
     primaryContrast: [
       "#291e57", "#291e57", "#291e57", "#291e57", "#ffffff",

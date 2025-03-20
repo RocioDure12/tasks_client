@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        //colores que contrastan con la paleta principal
         "primary-contrast": {
           50: "#291e57",
           100: "#291e57",
@@ -17,19 +18,21 @@ export default {
           900: "#ffffff",
           950: "#ffffff",
         },
+        //paleta principal
         primary: {
-          50: "#f5f5fd",
-          100: "#ececfb",
-          200: "#ddddf7",
-          300: "#c3c1f1",
-          400: "#a39de8",
-          500: "#8476dc",
-          600: "#7058cf",
-          700: "#5f45bc",
-          800: "#4f3a9d",
-          900: "#433181",
-          950: "#291e57",
+          50: "#f4f2ff",
+          100: "#ece7ff",
+          200: "#dad2ff",
+          300: "#c0aeff",
+          400: "#a180ff",
+          500: "#854dff",
+          600: "##843dff",
+          700: "#6816eb",
+          800: "#5812c5",
+          900: "#4911a1",
+          950: "#2b076e",
         },
+        //color mas claro a mas oscuro
         neutralScale: {
           50: "#f6f6f6",
           100: "#e7e7e7", 
