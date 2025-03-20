@@ -5,7 +5,7 @@ export const Input: React.FC<InputProps> = (props) => {
     <div className="flex flex-col gap-0.5 mb-4">
       <label htmlFor={props.id} className="mb-1 text-sm">{props.label}</label>
       <input
-        className="mb-1 rounded-lg p-2 border-solid border border-gray-200 outline-primary-400 bg-gray-50"
+        className="mb-1 rounded-lg p-3 border-solid border border-neutralScale-200 outline-primary-400 dark:outline-primary-800 dark:bg-neutralScale-600 dark:text-neutralScale-50"
         type={props.type}
         name={props.name}
         onChange={props.onChange}

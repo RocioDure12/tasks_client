@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
-
-import {Form} from "../components/Form"
+import { OtroForm } from "../components/Form";
 import Field from "../models/Field";
 import FormLayout from "../components/FormLayout";
 
@@ -64,12 +63,12 @@ export const SignUpForm:React.FC=()=>{
 
     return(
     <FormLayout>
-        <Form
+        <OtroForm
           fields={userSignUpFields}
           initialValues={user}
           onFormSubmit={handleSubmit}
           buttonText="Guardar"
-        ></Form>
+        ></OtroForm>
 
     </FormLayout>
     )
