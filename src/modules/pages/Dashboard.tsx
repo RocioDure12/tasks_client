@@ -101,7 +101,7 @@ const getCompletionPercentage = () => {
     
 
       
-          <Button>Add Task</Button>
+          <Button className="rounded-xs">Add Task</Button>
   
         </div>
       )}
