@@ -4,6 +4,9 @@ import { Input } from "../components/Input";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 import { useEffect } from "react";
+import { Plus, X} from 'lucide-react';
+
+
 
 export const Categories: React.FC = () => {
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
@@ -87,65 +90,40 @@ export const Categories: React.FC = () => {
   };
 
   return (
-    <div className="m-2 rounded-lg bg-white  p-7 flex-col shadow-lg">
-      <>
+    <div className="max-w-sm mx-auto dark:bg-neutralScale-800 dark:text-neutralScale-200 p-10 text-primary-800">
+      <div className=" flex flex-col gap-3 mb-4">
+        <div className="flex items-center gap-2">
         <Input
           type="text"
           label="Categoria"
           name="category"
           onChange={handleCategoryChange}
         />
-        <Button onClick={createCategory}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 5l0 14" />
-            <path d="M5 12l14 0" />
-          </svg>
-        </Button>
-      </>
+        <Plus size={30} className="p-1 bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900" onClick={createCategory}></Plus>
+  
+        </div>
+
+      </div>
+
+
       <>
         <Input
           type="text"
           label="Buscar"
           name="search"
           onChange={handleSearchChange}
+       
         />
       </>
 
-      <div>
+      <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg">
         <ul>
           {filterCategories.map((item: Category) => (
-            <li key={item.id}>
+            <li 
+            key={item.id}
+            className="flex justify-between items-center p-3 bg-white rounded-lg shadow hover:shadow-md transition m-2 text-primary-500">
               {item.category_name}
-              <Button onClick={()=>deleteCategory(item.id)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-x"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M18 6l-12 12" />
-                  <path d="M6 6l12 12" />
-                </svg>
-              </Button>
+              <X className="hover:text-red-500 transition" onClick={()=>deleteCategory(item.id)}></X>
             </li>
           ))}
         </ul>

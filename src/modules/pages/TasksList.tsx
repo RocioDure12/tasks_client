@@ -5,28 +5,25 @@ import { Button } from "../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { Card } from "../components/Card";
-import dayjs from 'dayjs';
-import { Checkbox } from "../components/Checkbox"
+import dayjs from "dayjs";
+import { Checkbox } from "../components/Checkbox";
+import { Pencil, Trash2, Eye, Edit } from "lucide-react";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
 
-  const {date}=useParams<{ date: string }>() 
+  const { date } = useParams<{ date: string }>();
   const taskApi = useTaskApi();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     getTasks();
-  
   }, []);
 
   const getTasks = async () => {
-
     const result = await taskApi.readMyTasks();
     if (result.data) {
       setList(result.data);
-
     } else {
       console.log("error al obtener tareas");
     }
@@ -41,53 +38,61 @@ export const TasksList = () => {
     await getTasks();
   };
 
-  const viewDetailTask=async(id:number)=>{
-  //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
-  const result= await taskApi.getTaskById(id)
-  }
+  const viewDetailTask = async (id: number) => {
+    //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
+    const result = await taskApi.getTaskById(id);
+  };
 
   //FALTA LA LOGICA Y EL COMPONENTE QUE RENDERICE LA INFORMACION DEL DETALLE DE LA TAREA EN UN MODAL
   //TAMBIEN FALTA AGREGAR COMPONENTE CHECKBOX EL CUAL NECESITO PARA SACAR EL PORCENTAJE DE TAREAS COMPLETADAS
 
   //funcion para filtrar las tareas por la fecha
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
-  const filteredList = list.filter(item => {
-    const formattedDate = dayjs(item.due_date).format('YYYY-MM-dd');
+  const filteredList = list.filter((item) => {
+    const formattedDate = dayjs(item.due_date).format("YYYY-MM-dd");
     return formattedDate === date;
   });
 
-
-
   return (
-    <MainLayout>
-        <ul>
-          {list.map((item) => (
-   
-            <Card key={item.id}>
-            <li key={item.id}>
-              {item.task_name}
-              <Button
+    <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
+      {list.map((item) => (
+        <div key={item.id}>
+          <li
+            key={item.id}
+            className="flex justify-between items-center p-6 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
+          >
+            <div className="flex-1">
+              <span className="block">{item.task_name}</span>
+              <span className="block font-bold text-sm text-primary-800">
+                10:00
+              </span>
+            </div>
+            <div className="flex space-x-3">
+              <Pencil
                 onClick={() => {
                   handleEditTask(item.id);
                 }}
               >
                 Editar
-              </Button>
-              <Button
+              </Pencil>
+              <Trash2
                 onClick={() => {
                   handleDeleteTask(item.id);
                 }}
               >
                 Eliminar
-              </Button>
-              <Button onClick={()=>{viewDetailTask(item.id)}}>Visualizar</Button>
-            </li>
-            </Card>
-          ))}
-        </ul>
- 
-    
-    </MainLayout>
-  
+              </Trash2>
+              <Eye
+                onClick={() => {
+                  viewDetailTask(item.id);
+                }}
+              >
+                Visualizar
+              </Eye>
+            </div>
+          </li>
+        </div>
+      ))}
+    </ul>
   );
 };
