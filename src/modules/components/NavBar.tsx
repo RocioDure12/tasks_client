@@ -1,5 +1,6 @@
 import useUserApi from "../hooks/useUserApi"
 import { useNavigate } from "react-router-dom";
+import { Sun,Moon } from 'lucide-react';
 
 
 export const NavBar:React.FC=()=>{
@@ -15,6 +16,8 @@ export const NavBar:React.FC=()=>{
             <a className="p-2"href="http://localhost:5173/categories">Panel de categorias</a>
             <a href="http://localhost:5173/list" className="p-2">Tasks List</a>
             <button onClick={logout}>Logout</button>
+            <Sun></Sun>
+            <Moon></Moon>
 
         </nav>
     )

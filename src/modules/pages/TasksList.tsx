@@ -63,7 +63,7 @@ export const TasksList = () => {
           >
             <div className="flex-1">
               <span className="block">{item.task_name}</span>
-              <span className="block font-bold text-sm text-primary-800">
+              <span className="block font-bold text-sm">
                 10:00
               </span>
             </div>
