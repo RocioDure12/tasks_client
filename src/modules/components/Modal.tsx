@@ -22,16 +22,9 @@ export const Modal: React.FC<ModalProps> = (props:ModalProps) => {
 
         <div className="p-4 space-y-4">
           <p className="text-base text-neutralScale-600">
-            With less than a month to go before the European Union enacts new
-            consumer privacy laws for its citizens, companies around the world
-            are updating their terms of service agreements to comply.
+            {props.hour}
           </p>
-          <p className="text-base text-neutralScale-600">
-            The European Union’s General Data Protection Regulation (G.D.P.R.)
-            goes into effect on May 25 and is meant to ensure a common set of
-            data rights in the European Union. It requires organizations to
-            notify users as soon as possible of high-risk data breaches that
-            could personally affect them.
+          <p className="text-base text-neutralScale-600">{props.description}
           </p>
         </div>
       </div>
