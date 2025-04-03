@@ -5,6 +5,7 @@ import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 import { useEffect } from "react";
 import { Plus, X } from "lucide-react";
+import { Modal } from "../components/Modal"
 
 export const Categories: React.FC = () => {
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
@@ -40,7 +41,12 @@ export const Categories: React.FC = () => {
     setSearchText(evt.target.value);
   };
 
-  const createCategory = async () => {
+  const createCategory=async()=>{
+    const response=await categoriesApi.createCategory(category as Category)
+    await readCategories()
+
+  }
+  /*const createCategory = async () => {
     try {
       const response = await categoriesApi.getCategoriesCount();
       // Verificar si response.data está definido y si es un número
@@ -66,7 +72,7 @@ export const Categories: React.FC = () => {
       alert("Hubo un error al procesar la solicitud.");
     }
   };
-
+*/
   const filterCategories = categoriesList.filter(
     (category: Category) =>
       !searchText ||
@@ -130,6 +136,7 @@ export const Categories: React.FC = () => {
           ))}
         </ul>
       </div>
+
     </div>
   );
 };

@@ -38,12 +38,13 @@ export const TasksList = () => {
     await getTasks();
   };
 
+  //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
   const viewDetailTask = async (id: number) => {
-    //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
+
     const result = await taskApi.getTaskById(id);
+
   };
 
-  //FALTA LA LOGICA Y EL COMPONENTE QUE RENDERICE LA INFORMACION DEL DETALLE DE LA TAREA EN UN MODAL
   //TAMBIEN FALTA AGREGAR COMPONENTE CHECKBOX EL CUAL NECESITO PARA SACAR EL PORCENTAJE DE TAREAS COMPLETADAS
 
   //funcion para filtrar las tareas por la fecha
@@ -63,11 +64,12 @@ export const TasksList = () => {
           >
             <div className="flex-1">
               <span className="block">{item.task_name}</span>
-              <span className="block font-bold text-sm">
+              <span className="block font-bold text-sm">0
                 10:00
               </span>
             </div>
             <div className="flex space-x-3">
+     
               <Pencil
                 onClick={() => {
                   handleEditTask(item.id);

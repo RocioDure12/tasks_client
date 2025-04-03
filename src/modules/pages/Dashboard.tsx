@@ -13,6 +13,8 @@ import ProgressRing from "../components/RingProgress";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
+import { Modal } from "../components/Modal"
+
 
 
 
@@ -20,6 +22,7 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
 
   const navigate=useNavigate()
@@ -93,13 +96,15 @@ const getCompletionPercentage = () => {
       
       (
         <div className="grid gap-10">
+          <div>
           <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
           <PickDate />
           <ProgressBar
           progress={getCompletionPercentage()}
           ></ProgressBar>
           <Button className="rounded-xs">Add Task</Button>
-  
+          </div>
+
         </div>
       )}
     </MainLayout>
