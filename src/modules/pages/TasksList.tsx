@@ -20,9 +20,9 @@ export const TasksList = () => {
 
   const getTasks = async () => {
     const result = await taskApi.readMyTasks();
-    console.log(result.data)
     if (result.data) {
       setList(result.data);
+      setIsOpen(true)
     } else {
       console.log("error al obtener tareas");
     }
@@ -42,7 +42,6 @@ export const TasksList = () => {
     const result = await taskApi.getTaskById(id);
     if (result.data){
       setTask(result.data)
-      console.log(result.data)
     }
   };
 
