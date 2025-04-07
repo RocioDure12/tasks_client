@@ -4,6 +4,8 @@ import Task from "../models/Task";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
+import { Modal } from "../components/Modal"
+
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -22,7 +24,7 @@ export const TasksList = () => {
     const result = await taskApi.readMyTasks();
     if (result.data) {
       setList(result.data);
-      setIsOpen(true)
+      
     } else {
       console.log("error al obtener tareas");
     }
@@ -54,47 +56,71 @@ export const TasksList = () => {
     return formattedDate === date;
   });
 
+  const onClose=()=>{
+    setIsOpen(false)
+
+  }
+
+  const formattedTime = (date: Date | string | undefined): string => {
+    if (!date) return "";
+    return new Date(date).toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+  
+  
+
   return (
-    <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
-      {list.map((item) => (
-        <div key={item.id}>
-          <li
-            key={item.id}
-            className="flex justify-between items-center p-6 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
-          >
-            <div className="flex-1">
-              <span className="block">{item.task_name}</span>
-              <span className="block font-bold text-sm">0
-                10:00
-              </span>
-            </div>
-            <div className="flex space-x-3">
+  <div>
+    {!isOpen && !Task && (
      
-              <Pencil
-                onClick={() => {
-                  handleEditTask(item.id);
-                }}
+          <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
+          {list.map((item) => (
+            <div key={item.id}>
+              <li
+                key={item.id}
+                className="flex justify-between items-center p-6 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
               >
-                Editar
-              </Pencil>
-              <Trash2
-                onClick={() => {
-                  handleDeleteTask(item.id);
-                }}
-              >
-                Eliminar
-              </Trash2>
-              <Eye
-                onClick={() => {
-                  viewDetailTask(item.id);
-                }}
-              >
-                Visualizar
-              </Eye>
+                <div className="flex-1">
+                  <span className="block">{item.task_name}</span>
+                  <span className="block font-bold text-sm">0
+                    {formattedTime(item.due_date)}
+                  </span>
+                </div>
+                <div className="flex space-x-3">
+         
+                  <Pencil
+                    onClick={() => {
+                      handleEditTask(item.id);
+                    }}
+                  >
+                    Editar
+                  </Pencil>
+                  <Trash2
+                    onClick={() => {
+                      handleDeleteTask(item.id);
+                    }}
+                  >
+                    Eliminar
+                  </Trash2>
+                  <Eye
+                    onClick={() => {
+                      viewDetailTask(item.id);
+                    }}
+                  >
+                    Visualizar
+                  </Eye>
+                </div>
+              </li>
             </div>
-          </li>
-        </div>
-      ))}
-    </ul>
+          ))}
+        </ul>
+    )  }
+    :
+    <Modal title={Task.task_name} onClose={onClose} description={Task.description} hour={formattedTime(Task.due_date)} ></Modal>
+
+  </div>
   );
+
 };
