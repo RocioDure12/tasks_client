@@ -20,6 +20,7 @@ export const TasksList = () => {
 
   const getTasks = async () => {
     const result = await taskApi.readMyTasks();
+    console.log(result.data)
     if (result.data) {
       setList(result.data);
     } else {

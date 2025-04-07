@@ -13,7 +13,7 @@ export default function useTaskApi() {
     }
 
     const readMyTasks= async (): Promise<ActionResult<Task[]>> => {
-        return api.getItems("/my_tasks")
+        return api.getItems()
 
     }
     

@@ -30,21 +30,12 @@ export default function Dashboard() {
   const categoriesApi=useCategoryApi()
 
   useEffect(() => {
-    getTasks()
+
     getCategories()
 
   }, []);
 
 
-  const getTasks= async() => {
-    const result=await taskApi.readMyTasks()
-    if(result.data){
-      setTasks(result.data)
-
-    }else{
-      console.log("Error al obtener tareas")
-    }
-    }
   
   const getCategories=async()=>{
     const result=await categoriesApi.readMyCategories()
