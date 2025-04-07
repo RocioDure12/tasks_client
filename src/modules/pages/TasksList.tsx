@@ -1,16 +1,14 @@
 import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useState } from "react";
 import Task from "../models/Task";
-import { Button } from "../components/Button";
 import { useNavigate, useParams } from "react-router-dom";
-import MainLayout from "../components/MainLayout";
-import { Card } from "../components/Card";
 import dayjs from "dayjs";
-import { Checkbox } from "../components/Checkbox";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
+  const [isOpen, setIsOpen]=useState(false);
+  const[Task, setTask]=useState<Partial<Task>>({})
 
   const { date } = useParams<{ date: string }>();
   const taskApi = useTaskApi();
@@ -40,9 +38,11 @@ export const TasksList = () => {
 
   //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
   const viewDetailTask = async (id: number) => {
-
     const result = await taskApi.getTaskById(id);
-
+    if (result.data){
+      setTask(result.data)
+      console.log(result.data)
+    }
   };
 
   //TAMBIEN FALTA AGREGAR COMPONENTE CHECKBOX EL CUAL NECESITO PARA SACAR EL PORCENTAJE DE TAREAS COMPLETADAS

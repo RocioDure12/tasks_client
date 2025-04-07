@@ -6,9 +6,8 @@ export default function useTaskApi() {
     const api=useCrudApi<Task>("tasks")
 
     const getTaskById=async(id:number):Promise<ActionResult<Task>>=>{
-        return await api.read_by_id(id)
+        return await api.read_by_id(id);
     }
-
     const createTask=async (task: Partial<Task>): Promise<ActionResult<Task>> => {
         return api.create(task as Task)
     }
