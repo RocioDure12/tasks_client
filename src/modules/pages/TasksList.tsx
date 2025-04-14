@@ -66,6 +66,7 @@ export const TasksList = () => {
 
   const closeModal=()=>{
     setIsOpen(false)
+    setTask({})
   }
 
   return (
