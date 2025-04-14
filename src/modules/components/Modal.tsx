@@ -16,7 +16,7 @@ export const Modal: React.FC<ModalProps> = (props:ModalProps) => {
             {props.title}
           </h3>
           <button className="absolute top-4 right-4 p-2 text-white bg-primary-400">
-            <X size={24} />
+            <X size={24} onClick={props.onClose}/>
           </button>
         </div>
 

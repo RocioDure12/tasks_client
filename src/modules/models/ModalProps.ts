@@ -2,7 +2,8 @@ interface Modal{
     title?:string
     hour?:string 
     description?:string
-    onClose: () => void; //funcion para cerrar el modal
+    onClose:()=>void
+ 
 }
 
 export default Modal

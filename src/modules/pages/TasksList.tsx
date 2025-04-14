@@ -4,13 +4,12 @@ import Task from "../models/Task";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
-import { Modal } from "../components/Modal"
-
+import { Modal } from "../components/Modal";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
-  const [isOpen, setIsOpen]=useState(false);
-  const[Task, setTask]=useState<Partial<Task>>({})
+  const [isOpen, setIsOpen] = useState(false);
+  const [task, setTask] = useState<Partial<Task>>({});
 
   const { date } = useParams<{ date: string }>();
   const taskApi = useTaskApi();
@@ -24,7 +23,6 @@ export const TasksList = () => {
     const result = await taskApi.readMyTasks();
     if (result.data) {
       setList(result.data);
-      
     } else {
       console.log("error al obtener tareas");
     }
@@ -42,8 +40,9 @@ export const TasksList = () => {
   //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
-    if (result.data){
-      setTask(result.data)
+    if (result.data) {
+      setTask(result.data);
+      setIsOpen(true)
     }
   };
 
@@ -56,10 +55,6 @@ export const TasksList = () => {
     return formattedDate === date;
   });
 
-  const onClose=()=>{
-    setIsOpen(false)
-
-  }
 
   const formattedTime = (date: Date | string | undefined): string => {
     if (!date) return "";
@@ -68,14 +63,22 @@ export const TasksList = () => {
       minute: "2-digit",
     });
   };
-  
-  
+
+  const closeModal=()=>{
+    setIsOpen(false)
+  }
 
   return (
-  <div>
-    {!isOpen && !Task && (
-     
-          <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
+    <div>
+      {isOpen ? (
+        <Modal
+          title={task.task_name}
+          description={task.description}
+          hour={formattedTime(task.due_date)}
+          onClose={closeModal}
+        ></Modal>
+      ) : (
+        <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
           {list.map((item) => (
             <div key={item.id}>
               <li
@@ -84,12 +87,11 @@ export const TasksList = () => {
               >
                 <div className="flex-1">
                   <span className="block">{item.task_name}</span>
-                  <span className="block font-bold text-sm">0
+                  <span className="block font-bold text-sm">
                     {formattedTime(item.due_date)}
                   </span>
                 </div>
                 <div className="flex space-x-3">
-         
                   <Pencil
                     onClick={() => {
                       handleEditTask(item.id);
@@ -116,11 +118,7 @@ export const TasksList = () => {
             </div>
           ))}
         </ul>
-    )  }
-    :
-    <Modal title={Task.task_name} onClose={onClose} description={Task.description} hour={formattedTime(Task.due_date)} ></Modal>
-
-  </div>
+      )}
+    </div>
   );
-
 };
