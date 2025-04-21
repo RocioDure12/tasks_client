@@ -6,7 +6,8 @@ export function PickDate() {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <DatePickerInput
-      placeholder="Filter by date"
+    valueFormat=''
+      placeholder="Pick date"
       value={value}
       onChange={setValue}
     />

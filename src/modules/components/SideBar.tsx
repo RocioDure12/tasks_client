@@ -50,7 +50,7 @@ export const SideBar: React.FC = () => {
             Panel de categorías
           </Link>
           <Link to="/list" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
-            Tasks List
+            Tareas para hoy
           </Link>
         </div>
 

@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { useEffect, useState } from "react";
 import dayjs from 'dayjs';
-import { PickDate } from "../components/PickDate";
-import { DatesProvider } from '@mantine/dates';
+import { DatePicker, DatesProvider,DatePickerInput } from '@mantine/dates';
 import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button"
@@ -14,6 +13,7 @@ import CategoryCarousel from "../components/CategoryCarousel";
 import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
 import { Modal } from "../components/Modal"
+import '@mantine/core/styles.css';
 
 
 
@@ -75,29 +75,29 @@ const getCompletionPercentage = () => {
 };
   return (
     <MainLayout>
-      {tasks.length === 0 ? (
+  
         <div>
           <div>¡Bienvenido/a! </div>
           <div>Comienza a crear tareas</div>
           <Button onClick={handleAddTask}>add Task</Button>
         </div>
-      ) 
       
-      :
       
-      (
+      
         <div className="grid gap-10">
           <div>
           <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
-          <PickDate />
+        
           <ProgressBar
           progress={getCompletionPercentage()}
           ></ProgressBar>
           <Button className="rounded-xs">Add Task</Button>
           </div>
 
+          <DatePickerInput placeholder="Pick date to see tasks" valueFormat="YYYY MMM DD "/>
+
         </div>
-      )}
+      
     </MainLayout>
   );
 }
