@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
 import { Modal } from "../components/Modal";
+import { Pagination } from "@mantine/core";
+import theme from "../../theme";
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -79,6 +81,7 @@ export const TasksList = () => {
           onClose={closeModal}
         ></Modal>
       ) : (
+        <>
         <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
           {list.map((item) => (
             <div key={item.id}>
@@ -119,6 +122,8 @@ export const TasksList = () => {
             </div>
           ))}
         </ul>
+        <Pagination  total={20} boundaries={2} defaultValue={10} />
+        </>
       )}
     </div>
   );
