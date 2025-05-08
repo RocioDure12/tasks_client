@@ -52,6 +52,9 @@ export const SideBar: React.FC = () => {
           <Link to="/list" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
             Tareas para hoy
           </Link>
+          <Link to="/list" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+            Tareas para mañana
+          </Link>
         </div>
 
         {/* Espacio flexible para separar los iconos hacia abajo */}
