@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
 import { Modal } from "../components/Modal";
-import { Pagination } from "@mantine/core";
+import { Checkbox, Pagination } from "@mantine/core";
 import theme from "../../theme";
 
 export const TasksList = () => {
@@ -48,8 +48,6 @@ export const TasksList = () => {
     }
   };
 
-  //TAMBIEN FALTA AGREGAR COMPONENTE CHECKBOX EL CUAL NECESITO PARA SACAR EL PORCENTAJE DE TAREAS COMPLETADAS
-
   //funcion para filtrar las tareas por la fecha
   //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
   const filteredList = list.filter((item) => {
@@ -70,6 +68,26 @@ export const TasksList = () => {
     setIsOpen(false)
     setTask({})
   }
+
+
+  const handleTaskStatus = async (id: number) => {
+    try {
+      const response = await taskApi.getTaskById(id);
+  
+      if (!response.data) {
+        throw new Error("No se encontró la tarea.");
+      }
+  
+      const task = response.data;
+      const updatedTask = { ...task, status: !task.status };
+  
+      await taskApi.updateTask(id, updatedTask);
+      await getTasks();
+    } catch (error) {
+      console.error("Error al cambiar el estado de la tarea:", error);
+    }
+  };
+  
 
   return (
     <div>
@@ -96,6 +114,19 @@ export const TasksList = () => {
                   </span>
                 </div>
                 <div className="flex space-x-3">
+
+                <Checkbox
+                checked={item.status}
+                onChange={()=>{handleTaskStatus(item.id)}}
+             
+                styles={(theme, params) => ({
+                  input: {
+                    borderColor: theme.colors.primary[5],
+                    backgroundColor: params.checked ? theme.colors.primary[5] : undefined,
+                  },
+                 })}
+                />
+
                   <Pencil
                     onClick={() => {
                       handleEditTask(item.id);
