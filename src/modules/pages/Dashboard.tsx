@@ -23,6 +23,7 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [numberOfTasks, setNumberOfTasks]=useState<number | undefined>(undefined);
   
 
   const navigate=useNavigate()
@@ -46,7 +47,17 @@ export default function Dashboard() {
     }
 
   }
-  
+
+  /*const get_task_count=async()=>{
+    const result=await taskApi.countTasks()
+    if (result.data){
+      setNumberOfTasks(result.data)
+
+    }else {
+      console.log("Error al obtener numero de tareas")
+    }
+  }
+  */
   const handleAddTask=()=>{
     navigate(`/taskform`)
   }

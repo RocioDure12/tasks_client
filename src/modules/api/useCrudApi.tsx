@@ -37,8 +37,11 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("get",`/${baseUrl}/count`);
     };
     
+    const countItems=async()=>{
+        return handleApiRequest<T>("get",`/${baseUrl}/count_tasks`)
+    }
 
-    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems,getCountItems};
+    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems,getCountItems, countItems};
     }
 
 
