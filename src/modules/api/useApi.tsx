@@ -1,4 +1,5 @@
-//Función genérica para manejar las solicitudes (como `handleApiRequest`)
+//Este archivo define una función genérica para manejar las solicitudes HTTP a una API utilizando AXIOS
+//La intencion es centralizar el manejo de erroresy el envio de solicitudes en una unica funcion reutilizable
 import axios, { AxiosError, isAxiosError } from "axios";
 
 
