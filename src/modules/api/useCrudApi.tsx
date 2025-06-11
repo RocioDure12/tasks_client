@@ -37,8 +37,8 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("get",`/${baseUrl}/count`);
     };*/
     
-    const countItems=async(extraURL:string=""):Promise<ActionResult<T>>=>{
-        return handleApiRequest<T>("get",`/${baseUrl}/${extraURL}`);
+    const countItems=async<K=T>(extraURL:string=""):Promise<ActionResult<K>>=>{
+        return handleApiRequest<K>("get",`/${baseUrl}/${extraURL}`);
     }
 
     return { create, read_by_id,update, deleteById, getItemsPaginated,getItems, countItems};

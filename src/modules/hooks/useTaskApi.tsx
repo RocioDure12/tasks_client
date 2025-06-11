@@ -5,6 +5,7 @@ import { ActionResult } from "../api/useApi";
 export default function useTaskApi() {
     const api=useCrudApi<Task>("tasks")
 
+
     const getTaskById=async(id:number):Promise<ActionResult<Task>>=>{
         return await api.read_by_id(id);
     }
@@ -26,7 +27,7 @@ export default function useTaskApi() {
     }
 
     const count_tasks=async()=>{
-        return api.countItems("/count_tasks")
+        return api.countItems<number>("count_tasks")
 
 
     }

@@ -33,6 +33,8 @@ export default function Dashboard() {
   useEffect(() => {
 
     getCategories()
+    get_task_count()
+   
 
   }, []);
 
@@ -48,16 +50,17 @@ export default function Dashboard() {
 
   }
 
-  /*const get_task_count=async()=>{
-    const result=await taskApi.countTasks()
+  const get_task_count=async()=>{
+    const result=await taskApi.count_tasks()
     if (result.data){
       setNumberOfTasks(result.data)
+      console.log(result.data)
 
     }else {
       console.log("Error al obtener numero de tareas")
     }
   }
-  */
+  
   const handleAddTask=()=>{
     navigate(`/taskform`)
   }
