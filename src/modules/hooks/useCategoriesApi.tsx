@@ -26,11 +26,13 @@ export default function useCategoryApi() {
         return api.deleteById(id)
     }
 
-    const getCategoriesCount = async () => {
+    /*const getCategoriesCount = async () => {
         return api.getCountItems();
     };
+    */
+
     
 
-    return {createCategory, readMyCategories, updateCategory, deleteCategory, getCategoriesCount}
+    return {createCategory, readMyCategories, updateCategory, deleteCategory}
 }
     

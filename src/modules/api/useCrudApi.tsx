@@ -33,15 +33,15 @@ export default function useCrudApi<T>(baseUrl:string){
         return handleApiRequest<T>("delete",`/${baseUrl}/${id}`);
     };
 
-    const getCountItems = async () => {
+   /* const getCountItems = async () => {
         return handleApiRequest<T>("get",`/${baseUrl}/count`);
-    };
+    };*/
     
-    const countItems=async()=>{
-        return handleApiRequest<T>("get",`/${baseUrl}/count_tasks`)
+    const countItems=async(extraURL:string=""):Promise<ActionResult<T>>=>{
+        return handleApiRequest<T>("get",`/${baseUrl}/${extraURL}`);
     }
 
-    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems,getCountItems, countItems};
+    return { create, read_by_id,update, deleteById, getItemsPaginated,getItems, countItems};
     }
 
 

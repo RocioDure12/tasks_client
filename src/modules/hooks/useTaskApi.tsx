@@ -25,11 +25,17 @@ export default function useTaskApi() {
         return api.deleteById(id)
     }
 
+    const count_tasks=async()=>{
+        return api.countItems("/count_tasks")
+
+
+    }
+
     //const countTasks=async():Promise<ActionResult<number>>=>{
         //return api.countItems()
 
     //}
 
-    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask}
+    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks}
 }
     
