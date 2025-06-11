@@ -1,13 +1,14 @@
 //Este archivo define una función genérica para manejar las solicitudes HTTP a una API utilizando AXIOS
-//La intencion es centralizar el manejo de erroresy el envio de solicitudes en una unica funcion reutilizable
+//La intencion es centralizar el manejo de errores y el envio de solicitudes en una unica funcion reutilizable
 import axios, { AxiosError, isAxiosError } from "axios";
 
-
+//Instancia personalizada de axios
 const api= axios.create({
     baseURL: "http://localhost:8000",
     withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
   });
 
+//Tipo generico de resultado
 export type ActionResult<T> =
   | {
       data: T;
