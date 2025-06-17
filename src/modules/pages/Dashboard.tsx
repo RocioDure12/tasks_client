@@ -23,7 +23,10 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [numberOfTasks, setNumberOfTasks]=useState<number | undefined>(undefined);
+  const [numberOfTasks, setNumberOfTasks]=useState<number>(0);
+  const [taskProgressValue, setTaskProgressValue] = useState<number>(0);
+
+
   
 
   const navigate=useNavigate()
@@ -34,6 +37,7 @@ export default function Dashboard() {
 
     getCategories()
     get_task_count()
+    getCompletionPercentage()
    
 
   }, []);
@@ -57,8 +61,19 @@ export default function Dashboard() {
       console.log(result.data)
 
     }else {
-      console.log("Error al obtener numero de tareas")
+      console.log("No existen tareas")
     }
+  }
+
+  const getCompletionPercentage=async()=>{
+    const result=await taskApi.calculate_percentage_tasks_completed()
+    if (result.data){
+      setTaskProgressValue(result.data)
+      console.log(result.data)
+    }else{
+      console.log("Error al calcular porcentaje de tareas completadas")
+    }
+
   }
   
   const handleAddTask=()=>{
@@ -78,40 +93,32 @@ export default function Dashboard() {
     }
   };*/
 
-//funcion para calcular porcentaje de tareas realizadas (bar progress)
-//esta logica deberia ir en la api, es decir hacer un endpoint que maneje esta logica
-//es algo a tener en cuenta para CAMBIAR 
-const getCompletionPercentage = () => {
-  const totalTasks = tasks.length;
-  if (totalTasks === 0) return 0;
-  const completedTasks = tasks.filter(task => task.status === true).length;
-  return Math.round((completedTasks / totalTasks) * 100)
-};
+
+
   return (
     <MainLayout>
+      {numberOfTasks > 0  ?
   
+        <div className="grid gap-10">
+          <div>
+          <DatePickerInput placeholder="Filter by date" valueFormat="YYYY MMM DD "/>
+ 
+          </div>
+
+          
+
+          <Button onClick={handleAddTask}>Add Task</Button>
+
+        </div>
+        
+        :
+
         <div>
           <div>¡Bienvenido/a! </div>
           <div>Comienza a crear tareas</div>
           <Button onClick={handleAddTask}>add Task</Button>
         </div>
-      
-      
-      
-        <div className="grid gap-10">
-          <div>
-          <span>Hey ¡Tienes trabajo que hacer! 💪🏼 </span>
-        
-          <ProgressBar
-          progress={getCompletionPercentage()}
-          ></ProgressBar>
-          <Button className="rounded-xs">Add Task</Button>
-          </div>
-
-          <DatePickerInput placeholder="Pick date to see tasks" valueFormat="YYYY MMM DD "/>
-
-        </div>
-      
+      }
     </MainLayout>
   );
 }

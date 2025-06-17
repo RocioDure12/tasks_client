@@ -1,6 +1,7 @@
 import Task from "../models/Task";
 import useCrudApi from "../api/useCrudApi";
 import { ActionResult } from "../api/useApi";
+import { handleApiRequest } from "../api/useApi";
 
 export default function useTaskApi() {
     const api=useCrudApi<Task>("tasks")
@@ -32,11 +33,12 @@ export default function useTaskApi() {
 
     }
 
-    //const countTasks=async():Promise<ActionResult<number>>=>{
-        //return api.countItems()
 
-    //}
+    const calculate_percentage_tasks_completed=async()=>{
+        return handleApiRequest<number>("get","/tasks/percentage")
 
-    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks}
+    }
+
+    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed}
 }
-    
+
