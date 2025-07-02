@@ -7,13 +7,14 @@ import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button"
 import ProgressBar from "../components/ProgressBar";
-import CardCategory from "../components/CardCategory";
+import CardCategory from "../components/CategoryCard";
 import ProgressRing from "../components/RingProgress";
 import CategoryCarousel from "../components/CategoryCarousel";
 import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
 import { Modal } from "../components/Modal"
 import '@mantine/core/styles.css';
+import { Paper, Title, Text } from '@mantine/core';
 
 
 
@@ -37,7 +38,6 @@ export default function Dashboard() {
 
     getCategories()
     get_task_count()
-    getCompletionPercentage()
    
 
   }, []);
@@ -58,7 +58,7 @@ export default function Dashboard() {
     const result=await taskApi.count_tasks()
     if (result.data){
       setNumberOfTasks(result.data)
-      console.log(result.data)
+      console.log("contador de",result.data)
 
     }else {
       console.log("No existen tareas")

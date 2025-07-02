@@ -1,5 +1,5 @@
 import {Carousel} from "@mantine/carousel"
-import CardCategory from "./CardCategory";
+import CardCategory from "./CategoryCard";
 import { useState } from "react";
 import Task from "../models/Task";
 import Category from "../models/Category";
