@@ -44,7 +44,7 @@ export default function useTaskApi() {
     }
 
     const get_upcoming_tasks=async():Promise<ActionResult<Task[]>> =>{
-        return handleApiRequest<Task[]>("get", "/tasks/upcoming");
+        return handleApiRequest<Task[]>("get", "/tasks/upcoming_tasks");
     }
 
     return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed, get_dates_for_calendar, get_upcoming_tasks}
