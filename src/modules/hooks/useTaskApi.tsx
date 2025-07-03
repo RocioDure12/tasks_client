@@ -39,6 +39,14 @@ export default function useTaskApi() {
 
     }
 
-    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed}
+    const get_dates_for_calendar=async():Promise<ActionResult<string[]>>=>{
+        return handleApiRequest<string[]>("get", "/tasks/dates_for_calendar");
+    }
+
+    const get_upcoming_tasks=async():Promise<ActionResult<Task[]>> =>{
+        return handleApiRequest<Task[]>("get", "/tasks/upcoming");
+    }
+
+    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed, get_dates_for_calendar, get_upcoming_tasks}
 }
 
