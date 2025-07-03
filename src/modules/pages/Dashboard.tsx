@@ -27,25 +27,6 @@ export default function Dashboard() {
   const [numberOfTasks, setNumberOfTasks]=useState<number>(0);
   const [taskProgressValue, setTaskProgressValue] = useState<number>(0);
 
-const getDatesForCalendar = async () => {
-  const result = await taskApi.get_dates_for_calendar();
-  if (result.data) {
-    console.log("Fechas con tareas:", result.data);
-  } else {
-    console.log("Error al obtener fechas");
-  }
-};
-
-const getUpcomingTasks = async () => {
-  const result = await taskApi.get_upcoming_tasks();
-  if (result.data) {
-    console.log("Tareas próximas:", result.data);
-  } else {
-    console.log("Error al obtener tareas próximas");
-  }
-};
-
-  
 
   const navigate=useNavigate()
   const taskApi=useTaskApi()
@@ -55,10 +36,6 @@ const getUpcomingTasks = async () => {
 
     getCategories()
     get_task_count()
-    getDatesForCalendar()
-    getUpcomingTasks()
-   
-
   }, []);
 
 
