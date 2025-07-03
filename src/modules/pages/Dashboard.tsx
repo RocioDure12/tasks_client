@@ -26,20 +26,33 @@ export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [numberOfTasks, setNumberOfTasks]=useState<number>(0);
   const [taskProgressValue, setTaskProgressValue] = useState<number>(0);
+  const [tasksDates, setTasksDates]=useState<string[]>([]);
+  
 
 
   const navigate=useNavigate()
   const taskApi=useTaskApi()
   const categoriesApi=useCategoryApi()
 
+
   useEffect(() => {
 
     getCategories()
     get_task_count()
+    get_tasks_dates()
   }, []);
 
 
-  
+  const get_tasks_dates=async()=>{
+    const result=await taskApi.get_dates_for_calendar()
+    if(result.data){
+      setTasksDates(result.data)
+    }else{
+      console.log("Error al obtener las fechas")
+
+    }
+
+  }
   const getCategories=async()=>{
     const result=await categoriesApi.readMyCategories()
     if (result.data){
