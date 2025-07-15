@@ -7,7 +7,7 @@ import { SignUpForm } from "./modules/pages/SignUpForm"
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { Task2Form } from "./modules/pages/Task2Form";
-import { TasksList } from "./modules/pages/TasksList";
+import { TasksList } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import {Categories} from "./modules/pages/PanelCategories";

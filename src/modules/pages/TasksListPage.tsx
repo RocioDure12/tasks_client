@@ -153,7 +153,7 @@ export const TasksList = () => {
             </div>
           ))}
         </ul>
-        <Pagination  total={20} boundaries={2} defaultValue={10} />
+        
         </>
       )}
     </div>
