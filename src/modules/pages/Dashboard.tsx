@@ -9,9 +9,9 @@ import Task from "../models/Task";
 import { Button } from "../components/Button";
 import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
-import { Modal } from "../components/Modal";
 import '@mantine/core/styles.css';
-import { Paper, Title, Text , useMantineTheme} from '@mantine/core';
+import { Paper, Title, Text , useMantineTheme, } from '@mantine/core';
+import {Pagination} from "../components/Pagination"
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -130,12 +130,14 @@ export default function Dashboard() {
           </div>
 
           <Button onClick={handleAddTask}>Add Task</Button>
+          <Pagination currentPage={1} totalPages={10}></Pagination>
         </div>
       ) : (
         <div>
           <div>¡Bienvenido/a!</div>
           <div>Comienza a crear tareas</div>
           <Button onClick={handleAddTask}>Add Task</Button>
+         
         </div>
       )}
     </MainLayout>

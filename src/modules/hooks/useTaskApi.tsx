@@ -47,6 +47,13 @@ export default function useTaskApi() {
         return handleApiRequest<Task[]>("get", "/tasks/upcoming_tasks");
     }
 
-    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed, get_dates_for_calendar, get_upcoming_tasks}
+    const get_tasks_paginated = async (limit: number, offset: number): Promise<ActionResult<[Task[], number]>> => {
+    return handleApiRequest<[Task[], number]>("get", `/tasks/pagination?limit=${limit}&offset=${offset}`);};
+
+
+
+
+    return {createTask, getTaskById, readMyTasks, updateTask, deleteTask, count_tasks, calculate_percentage_tasks_completed, get_dates_for_calendar,
+         get_upcoming_tasks, get_tasks_paginated}
 }
 

@@ -5,8 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit } from "lucide-react";
 import { Modal } from "../components/Modal";
-import { Checkbox, Pagination } from "@mantine/core";
+import { Checkbox } from "@mantine/core";
 import theme from "../../theme";
+import {Pagination} from "../components/Pagination"
 
 export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
@@ -151,11 +152,14 @@ export const TasksList = () => {
                 </div>
               </li>
             </div>
+            
           ))}
         </ul>
         
+        
         </>
       )}
+      <Pagination currentPage={1} totalPages={2}></Pagination>
     </div>
   );
 };
