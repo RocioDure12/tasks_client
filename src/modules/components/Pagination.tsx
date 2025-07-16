@@ -6,13 +6,19 @@ import { Button } from "./Button";
 export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
+  onPageChange,
 }) => {
+    const handlePrev=()=>{
+        if (currentPage > 1 && onPageChange){
+            onPageChange(currentPage -1)
+        }
+    }
 
-    
-  
-
-    
-
+    const handleNext=()=>{
+        if(currentPage < totalPages && onPageChange){
+            onPageChange(currentPage+1)
+        }
+    }
 
   return (
     <div className="flex items-center justify-center gap-6 p-4 bg-primary-50 rounded-xl shadow-md text-primary-950">
