@@ -16,7 +16,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 
     const handleNext=()=>{
         if(currentPage < totalPages && onPageChange){
-            onPageChange(currentPage+1)
+            onPageChange(currentPage +1)
         }
     }
 
