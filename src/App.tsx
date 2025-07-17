@@ -6,7 +6,7 @@ import RequireAuth from "./modules/pages/RequireAuth";
 import { SignUpForm } from "./modules/pages/SignUpForm"
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
-import { Task2Form } from "./modules/pages/Task2Form";
+import { TaskFormPage } from "./modules/pages/TaskFormPage";
 import { TasksList } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
@@ -37,7 +37,7 @@ export default function App() {
                 path="/taskform"
                 element={
                   <RequireAuth>
-                    <Task2Form />
+                    <TaskFormPage />
                   </RequireAuth>
                 }
               />
@@ -50,10 +50,10 @@ export default function App() {
                 }
               />
               <Route
-                path="/formulario/:id?"
+                path="/taskform/:id?"
                 element={
                   <RequireAuth>
-                    <Task2Form></Task2Form>
+                    <TaskFormPage></TaskFormPage>
                   </RequireAuth>
                 }
               />

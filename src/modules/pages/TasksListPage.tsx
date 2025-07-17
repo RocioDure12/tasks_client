@@ -13,6 +13,7 @@ export const TasksList = () => {
   const [list, setList] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [task, setTask] = useState<Partial<Task>>({});
+  const [currentPage, setCurrentPage]=useState(1)
 
   const { date } = useParams<{ date: string }>();
   const taskApi = useTaskApi();
@@ -32,7 +33,7 @@ export const TasksList = () => {
   };
 
   const handleEditTask = (id: number) => {
-    navigate(`/formulario/${id}`);
+    navigate(`/taskform/${id}`);
   };
 
   const handleDeleteTask = async (id: number) => {

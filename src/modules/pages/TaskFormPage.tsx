@@ -40,7 +40,7 @@ const taskFormFields: Field[] = [
 ];
 
 // Componente principal para crear/editar tareas
-export const Task2Form = () => {
+export const TaskFormPage = () => {
   const [task, setTask] = useState<Partial<Task>>({}); //Estado local para la tarea
   const [categoriesList, setCategoriesList]=useState<{ value: string; label: string }[]>([]);  //Lista de categorias disponibles para el select
   const [newCategory, setNewCategory] = useState<Partial<Category>>({}); //Estado para manejar una nueva categoria
