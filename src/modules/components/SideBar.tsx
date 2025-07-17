@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useUserApi from "../hooks/useUserApi";
 import { Sun, Moon, Menu, X, LogOut } from "lucide-react";
+import dayjs from "dayjs";
 
 export const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userApi = useUserApi();
   const navigate = useNavigate();
+  const today = dayjs().format("YYYY-MM-DD");
+  const tomorrow = dayjs().add(1, "day").format("YYYY-MM-DD");
 
   const toggleMenu = () => setIsOpen((prevState) => !prevState);  // Asegura un comportamiento limpio y evita duplicaciones.
 
@@ -28,9 +31,8 @@ export const SideBar: React.FC = () => {
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full w-64 bg-primary-400 text-primary-contrast-700 p-5 flex flex-col shadow-xl transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } z-50 border-l-4 border-gray-400`} // Sombra izquierda
+        className={`fixed top-0 left-0 h-full w-64 bg-primary-400 text-primary-contrast-700 p-5 flex flex-col shadow-xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } z-50 border-l-4 border-gray-400`} // Sombra izquierda
         onClick={(e) => e.stopPropagation()} // Evita que el clic cierre el menú
       >
         {/* Botón para cerrar menú (X) dentro del menú */}
@@ -49,10 +51,10 @@ export const SideBar: React.FC = () => {
           <Link to="/categories" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
             Panel de categorías
           </Link>
-          <Link to="/list" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+          <Link to={`/list/${dayjs().format("YYYY-MM-DD")}`} className="p-3 text-primary-900 hover:text-primary-500 rounded block">
             Tareas para hoy
           </Link>
-          <Link to="/list" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+          <Link to={`/list/${dayjs().add(1, "day").format("YYYY-MM-DD")}`} className="p-3 text-primary-900 hover:text-primary-500 rounded block">
             Tareas para mañana
           </Link>
         </div>

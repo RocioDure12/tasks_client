@@ -10,7 +10,7 @@ import { TaskFormPage } from "./modules/pages/TaskFormPage";
 import { TasksList } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
-import {Categories} from "./modules/pages/PanelCategories";
+import { Categories } from "./modules/pages/PanelCategories";
 import { DatesProvider } from "@mantine/dates";
 import theme from "./theme";
 
@@ -72,11 +72,11 @@ export default function App() {
                     <Categories></Categories>
                   </RequireAuth>
                 }
-              
+
               />
             </Routes>
           </Router>
-    
+
         </MantineProvider>
       </CartProvider>
     </ThemeProvider>

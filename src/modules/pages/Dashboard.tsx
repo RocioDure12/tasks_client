@@ -10,8 +10,8 @@ import { Button } from "../components/Button";
 import Category from "../models/Category";
 import useCategoryApi from "../hooks/useCategoriesApi";
 import '@mantine/core/styles.css';
-import { Paper, Title, Text , useMantineTheme, } from '@mantine/core';
-import {Pagination} from "../components/Pagination"
+import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
+import { Pagination } from "../components/Pagination"
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -31,14 +31,14 @@ export default function Dashboard() {
 
 
   const get_tasks_dates = async () => {
-  const result = await taskApi.get_dates_for_calendar();
-  if (result.data) {
-    setTasksDates(result.data);
-    console.log(tasksDates)
-  } else {
-    console.log("Error al obtener las fechas");
-  }
-};
+    const result = await taskApi.get_dates_for_calendar();
+    if (result.data) {
+      setTasksDates(result.data);
+      console.log(tasksDates)
+    } else {
+      console.log("Error al obtener las fechas");
+    }
+  };
 
   const get_task_count = async () => {
     const result = await taskApi.count_tasks();
@@ -97,7 +97,7 @@ export default function Dashboard() {
                           width: 6,
                           height: 6,
                           borderRadius: '50%',
-                          backgroundColor:theme.colors.primary[6],
+                          backgroundColor: theme.colors.primary[6],
                         }}
                       />
                     )}
@@ -108,14 +108,14 @@ export default function Dashboard() {
           </div>
 
           <Button onClick={handleAddTask}>Add Task</Button>
-          <Pagination currentPage={1} totalPages={10}></Pagination>
+
         </div>
       ) : (
         <div>
           <div>¡Bienvenido/a!</div>
           <div>Comienza a crear tareas</div>
           <Button onClick={handleAddTask}>Add Task</Button>
-         
+
         </div>
       )}
     </MainLayout>
