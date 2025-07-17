@@ -10,25 +10,32 @@ import theme from "../../theme";
 import {Pagination} from "../components/Pagination"
 
 export const TasksList = () => {
-  const [list, setList] = useState<Task[]>([]);
+  const [TaskList, setTaskList] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [task, setTask] = useState<Partial<Task>>({});
   const [currentPage, setCurrentPage]=useState(1)
+  const[totalPages, setTotalPages]=useState<number>(0);
+  
+
 
   const { date } = useParams<{ date: string }>();
   const taskApi = useTaskApi();
   const navigate = useNavigate();
+  const limit=5
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [currentPage]);
 
   const getTasks = async () => {
-    const result = await taskApi.readMyTasks();
-    if (result.data) {
-      setList(result.data);
-    } else {
-      console.log("error al obtener tareas");
+    if (!date) return;
+    const offset = (currentPage - 1) * limit;    
+    const result = await taskApi.get_tasks_paginated(limit, offset, date);
+    if (result.data){
+      const [fetchedTasks, total]=result.data
+      setTaskList(fetchedTasks)
+      calculateTotalPages(total)
+
     }
   };
 
@@ -50,12 +57,15 @@ export const TasksList = () => {
     }
   };
 
-  //funcion para filtrar las tareas por la fecha
-  //const filteredList = list.filter(item => dayjs(item.due_date).format('DD/MM/YYYY') === date);
-  const filteredList = list.filter((item) => {
-    const formattedDate = dayjs(item.due_date).format("YYYY-MM-dd");
-    return formattedDate === date;
-  });
+
+  const calculateTotalPages=(totalItems:number)=>{
+    const result=Math.ceil(totalItems / limit)
+    setTotalPages(result)
+  }
+
+  const handlePageChange = (page: number) => {
+  setCurrentPage(page);
+};
 
 
   const formattedTime = (date: Date | string | undefined): string => {
@@ -103,7 +113,7 @@ export const TasksList = () => {
       ) : (
         <>
         <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
-          {list.map((item) => (
+          {TaskList.map((item) => (
             <div key={item.id}>
               <li
                 key={item.id}
@@ -160,7 +170,12 @@ export const TasksList = () => {
         
         </>
       )}
-      <Pagination currentPage={1} totalPages={2}></Pagination>
+      <Pagination 
+      currentPage={currentPage} 
+      totalPages={totalPages}
+      onPageChange={handlePageChange}      
+      >
+      </Pagination>
     </div>
   );
 };

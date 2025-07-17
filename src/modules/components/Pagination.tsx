@@ -23,7 +23,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="flex items-center justify-center gap-6 p-4 bg-primary-50 rounded-xl shadow-md text-primary-950">
       <Button
-     
+        onClick={handlePrev}
         disabled={currentPage === 1}
         className="
           flex items-center justify-center p-2 rounded-full
@@ -40,7 +40,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       </span>
 
       <Button
-        
+        onClick={handleNext}
         disabled={currentPage === totalPages}
         className="
           flex items-center justify-center p-2 rounded-full

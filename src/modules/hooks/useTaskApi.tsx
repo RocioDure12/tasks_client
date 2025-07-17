@@ -47,8 +47,9 @@ export default function useTaskApi() {
         return handleApiRequest<Task[]>("get", "/tasks/upcoming_tasks");
     }
 
-    const get_tasks_paginated = async (limit: number, offset: number): Promise<ActionResult<[Task[], number]>> => {
-    return handleApiRequest<[Task[], number]>("get", `/tasks/pagination?limit=${limit}&offset=${offset}`);};
+    const get_tasks_paginated = async (limit: number, offset: number, date:string): Promise<ActionResult<[Task[], number]>> => {
+        const url = `/tasks/pagination?limit=${limit}&offset=${offset}` + (date ? `&date=${date}` : "");
+        return handleApiRequest<[Task[], number]>("get", url);}
 
 
 

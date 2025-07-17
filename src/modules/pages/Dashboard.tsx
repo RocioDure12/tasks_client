@@ -66,7 +66,7 @@ export default function Dashboard() {
               valueFormat="YYYY MMM DD"
               onChange={(date) => {
                 if (date) {
-                  navigate(`/list/${dayjs(date).format('DD-MM-YYYY')}`);
+                  navigate(`/list/${dayjs(date).format("YYYY-MM-DD")}`);
                 }
               }}
               renderDay={(date) => {
