@@ -3,6 +3,7 @@ import MainLayout from "../components/MainLayout";
 import { useEffect, useState } from "react";
 import dayjs from 'dayjs';
 import { DatePickerInput } from '@mantine/dates';
+import { Calendar } from "lucide-react";
 
 import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
@@ -12,6 +13,7 @@ import useCategoryApi from "../hooks/useCategoriesApi";
 import '@mantine/core/styles.css';
 import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { Pagination } from "../components/Pagination"
+import { TasksList } from "../components/TasksList"
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -19,6 +21,7 @@ export default function Dashboard() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
+  const [upcomingTasks, setUpcomingTasks]=useState<Task[]>([]);
 
   const navigate = useNavigate();
   const taskApi = useTaskApi();
@@ -27,6 +30,7 @@ export default function Dashboard() {
   useEffect(() => {
     get_task_count();
     get_tasks_dates();
+    get_upcoming_tasks();
   }, []);
 
 
@@ -50,20 +54,74 @@ export default function Dashboard() {
     }
   };
 
+  const get_upcoming_tasks=async()=>{
+    const result=await taskApi.get_upcoming_tasks()
+    if(result.data){
+      console.log(result.data)
+      setUpcomingTasks(result.data)
+    }else{
+      console.log("no funko")
+    }
+  }
 
 
   const handleAddTask = () => {
     navigate(`/taskform`);
   };
+  
+  const handleEditTask = (id: number) => {
+    navigate(`/taskform/${id}`);
+  };
+
+  const handleDeleteTask = async (id: number) => {
+    const result = await taskApi.deleteTask(id);
+
+  };
+
+  const viewDetailTask = async (id: number) => {
+    const result = await taskApi.getTaskById(id);
+  };
+  
+  const formattedTime = (date: Date | string | undefined): string => {
+    if (!date) return "";
+    return new Date(date).toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const handleTaskStatus = async (id: number) => {
+    try {
+      const response = await taskApi.getTaskById(id);
+
+      if (!response.data) {
+        throw new Error("No se encontró la tarea.");
+      }
+
+      const task = response.data;
+      const updatedTask = { ...task, status: !task.status };
+
+      await taskApi.updateTask(id, updatedTask);
+   
+    } catch (error) {
+      console.error("Error al cambiar el estado de la tarea:", error);
+    }
+  };
+
+
+
+
 
   return (
     <MainLayout>
       {numberOfTasks > 0 ? (
-        <div className="grid gap-10">
-          <div>
+        <div className="min-h-[70vh] flex flex-col justify-center items-center gap-6 px-4">
+          <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg w-full">
             <DatePickerInput
+              classNames={{ input: "w-full max-w-lg" }}
               placeholder="Filter by date"
               valueFormat="YYYY MMM DD"
+              rightSection={<Calendar size={20}  style={{ color: theme.colors.primary[6] }}/>}
               onChange={(date) => {
                 if (date) {
                   navigate(`/list/${dayjs(date).format("YYYY-MM-DD")}`);
@@ -73,6 +131,7 @@ export default function Dashboard() {
                 const day = date.getDate();
                 const dateString = dayjs(date).format('YYYY-MM-DD');
                 const hasTask = tasksDates.includes(dateString);
+                
 
                 return (
                   <div style={{ position: 'relative', width: 36, height: 36 }}>
@@ -106,15 +165,29 @@ export default function Dashboard() {
               }}
             />
           </div>
+          <>
+          <Title>Tareas proximas... </Title>
+          <TasksList 
+          list={upcomingTasks}
+          handleDeleteTask={handleDeleteTask}
+          handleEditTask={handleEditTask}
+          handleTaskStatus={handleTaskStatus}
+          viewDetailTask={viewDetailTask}
+          formattedTime={formattedTime}
+          ></TasksList>
+          </>
+       
 
-          <Button onClick={handleAddTask}>Add Task</Button>
+       
+
+          <Button className="w-full sm:w-auto" onClick={handleAddTask}>Añadir tarea</Button>
 
         </div>
       ) : (
-        <div>
+        <div className="text-center space-y-2">
           <div>¡Bienvenido/a!</div>
           <div>Comienza a crear tareas</div>
-          <Button onClick={handleAddTask}>Add Task</Button>
+          <Button onClick={handleAddTask}>Añadir tarea </Button>
 
         </div>
       )}

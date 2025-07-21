@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import Task from "../models/Task";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { Pencil, Trash2, Eye, Edit } from "lucide-react";
+import { Pencil, Trash2, Eye, Edit, List } from "lucide-react";
 import { Modal } from "../components/Modal";
 import { Button, Checkbox } from "@mantine/core";
 import theme from "../../theme";
 import { Pagination } from "../components/Pagination"
+import { TasksList } from "../components/TasksList";
+import { Item } from "../components/Item";
 
-export const TasksList = () => {
+export const TasksListPage = () => {
   const [TaskList, setTaskList] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [task, setTask] = useState<Partial<Task>>({});
@@ -116,64 +118,14 @@ export const TasksList = () => {
         ></Modal>
       ) : (
         <>
-          <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
-            {TaskList.map((item) => (
-              <div key={item.id}>
-                <li
-                  key={item.id}
-                  className="flex justify-between items-center p-6 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
-                >
-                  <div className="flex-1">
-                    <span className="block">{item.task_name}</span>
-                    <span className="block font-bold text-sm">
-                      {formattedTime(item.due_date)}
-                    </span>
-                  </div>
-                  <div className="flex space-x-3">
+        <TasksList list={TaskList}
+         handleDeleteTask={handleDeleteTask}
+         handleEditTask={handleEditTask} 
+         viewDetailTask={viewDetailTask} 
+         handleTaskStatus={handleTaskStatus} 
+         formattedTime={formattedTime}>
 
-                    <Checkbox
-                      checked={item.status}
-                      onChange={() => { handleTaskStatus(item.id) }}
-
-                      styles={(theme, params) => ({
-                        input: {
-                          borderColor: theme.colors.primary[5],
-                          backgroundColor: params.checked ? theme.colors.primary[5] : undefined,
-                        },
-                      })}
-                    />
-
-                    <Pencil
-                      onClick={() => {
-                        handleEditTask(item.id);
-                      }}
-                    >
-                      Editar
-                    </Pencil>
-                    <Trash2
-                      onClick={() => {
-                        handleDeleteTask(item.id);
-                      }}
-                    >
-                      Eliminar
-                    </Trash2>
-                    <Eye
-                      onClick={() => {
-                        viewDetailTask(item.id);
-                      }}
-                    >
-                      Visualizar
-                    </Eye>
-                  </div>
-                </li>
-
-              </div>
-
-            ))}
-            <Button onClick={handleAddTask}>Add Task</Button>
-          </ul>
-
-
+         </TasksList>
         </>
       )}
       <Pagination

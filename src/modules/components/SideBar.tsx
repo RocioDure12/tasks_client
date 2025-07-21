@@ -8,8 +8,6 @@ export const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userApi = useUserApi();
   const navigate = useNavigate();
-  const today = dayjs().format("YYYY-MM-DD");
-  const tomorrow = dayjs().add(1, "day").format("YYYY-MM-DD");
 
   const toggleMenu = () => setIsOpen((prevState) => !prevState);  // Asegura un comportamiento limpio y evita duplicaciones.
 

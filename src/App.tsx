@@ -7,7 +7,7 @@ import { SignUpForm } from "./modules/pages/SignUpForm"
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { TaskFormPage } from "./modules/pages/TaskFormPage";
-import { TasksList } from "./modules/pages/TasksListPage";
+import { TasksListPage } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import { Categories } from "./modules/pages/PanelCategories";
@@ -61,7 +61,7 @@ export default function App() {
                 path="/list/:date?"
                 element={
                   <RequireAuth>
-                    <TasksList></TasksList>
+                    <TasksListPage></TasksListPage>
                   </RequireAuth>
                 }
               />
