@@ -15,22 +15,10 @@ export const Categories: React.FC = () => {
 
   //const initialized = useRef(false)
   useEffect(() => {
-    /*if(!initialized.current){
-        initialized.current = true;
-        readCategories();
-    }*/
+
     readCategories();
   }, []);
 
-  /*
-  useEffect(() => {
-    if (categoriesList !== undefined) {
-        readCategories();
-
-    } else {
-      setCategoriesList([]);
-    }
-  }, [categoriesList]);*/
 
   const handleCategoryChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setCategory({ category_name: evt.target.value });
@@ -46,33 +34,7 @@ export const Categories: React.FC = () => {
     await readCategories()
 
   }
-  /*const createCategory = async () => {
-    try {
-      const response = await categoriesApi.getCategoriesCount();
-      // Verificar si response.data está definido y si es un número
-      //la verificacion antes de crear una categoria deberia estar en el backend (corregir eso)
-      if (response.data && typeof response.data === "number") {
-        if (response.data >= 15) {
-          alert("No puedes crear más categorías");
-          return; // Detener la ejecución de la función
-        }
-      } else {
-        alert("Error al obtener el conteo de categorías.");
-        return;
-      }
-
-      if (category.category_name) {
-        const result = await categoriesApi.createCategory(category as Category);
-        await readCategories();
-      } else {
-        alert("Por favor, escribe un nombre para la categoría.");
-      }
-    } catch (error) {
-      console.error("Error al crear la categoría:", error);
-      alert("Hubo un error al procesar la solicitud.");
-    }
-  };
-*/
+  
   const filterCategories = categoriesList.filter(
     (category: Category) =>
       !searchText ||
