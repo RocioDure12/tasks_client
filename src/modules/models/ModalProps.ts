@@ -3,6 +3,7 @@ interface Modal{
     hour?:string 
     description?:string
     onClose:()=>void
+    children?: React.ReactNode;
  
 }
 

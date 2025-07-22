@@ -26,6 +26,7 @@ export const Modal: React.FC<ModalProps> = (props:ModalProps) => {
           </p>
           <p className="text-base text-neutralScale-600">{props.description}
           </p>
+          {props.children}
         </div>
       </div>
     </div>
