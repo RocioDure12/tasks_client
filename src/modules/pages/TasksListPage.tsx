@@ -9,7 +9,7 @@ import { Button, Checkbox } from "@mantine/core";
 import theme from "../../theme";
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList";
-import { Item } from "../components/Item";
+import { toast } from 'react-hot-toast';
 
 export const TasksListPage = () => {
   const [TaskList, setTaskList] = useState<Task[]>([]);
@@ -54,9 +54,15 @@ export const TasksListPage = () => {
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
     if (result.data) {
-      setTask(result.data);
-      setIsOpen(true)
-    }
+      if (!result.data.description) {
+        toast.error("No tiene descripción o nota");
+        return; // No abrimos el modal
+  }
+  setTask(result.data);
+  setIsOpen(true);
+}
+
+ 
   };
 
 
@@ -109,7 +115,7 @@ export const TasksListPage = () => {
 
   return (
     <div>
-      {isOpen ? (
+      {isOpen && task.description ? (
         <Modal
           title={task.task_name}
           description={task.description}

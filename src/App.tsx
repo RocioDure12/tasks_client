@@ -13,6 +13,7 @@ import { MantineProvider } from "@mantine/core";
 import { Categories } from "./modules/pages/PanelCategories";
 import { DatesProvider } from "@mantine/dates";
 import theme from "./theme";
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
       <CartProvider>
         <MantineProvider theme={theme}>
           <Router>
+            <Toaster></Toaster>
             <Routes>
               <Route path="/users/login" element={<LoginForm></LoginForm>} />
               <Route path="/signup" element={<SignUpForm />} />

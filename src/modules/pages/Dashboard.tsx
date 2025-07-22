@@ -14,6 +14,7 @@ import '@mantine/core/styles.css';
 import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList"
+import { toast } from 'react-hot-toast';
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -123,10 +124,18 @@ export default function Dashboard() {
               valueFormat="YYYY MMM DD"
               rightSection={<Calendar size={20}  style={{ color: theme.colors.primary[6] }}/>}
               onChange={(date) => {
-                if (date) {
-                  navigate(`/list/${dayjs(date).format("YYYY-MM-DD")}`);
-                }
-              }}
+                if (!date)return 
+
+                  const dateString = dayjs(date).format("YYYY-MM-DD");
+                  const hasTasksOnDate = tasksDates.includes(dateString);
+
+                   if (!hasTasksOnDate) {
+                    toast.error("No existen tareas creadas en esa fecha");
+                    return; // No navegamos porque no hay tareas para esa fecha
+                   }
+                   navigate(`/list/${dateString}`)}
+
+              }
               renderDay={(date) => {
                 const day = date.getDate();
                 const dateString = dayjs(date).format('YYYY-MM-DD');
@@ -166,7 +175,7 @@ export default function Dashboard() {
             />
           </div>
           <>
-          <Title>Tareas proximas... </Title>
+          <div>Proximas tareas...</div>
           <TasksList 
           list={upcomingTasks}
           handleDeleteTask={handleDeleteTask}
