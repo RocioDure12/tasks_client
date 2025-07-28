@@ -12,30 +12,7 @@ export interface UserLogin{
 const LoginForm:React.FC=()=>{
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
 
-    /*const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault()
-        console.log(userLogin)
-        if (!userLogin.username || !userLogin.password) {
-            alert("Por favor, completa todos los campos.");
-            return;
-        }
 
-        const result=await authApi.login(userLogin as UserLogin)
-        if(result.error){
-            console.log(result.errorMessage);
-            return
-        }
-        if (result.data){
-            
-            dispatch(authenticateUser(result.data))
-            navigate('/home')
-        }else{
-            alert("error desconocido")
-        }
-      
-
-    }
-*/
 
 
     const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -52,6 +29,8 @@ const LoginForm:React.FC=()=>{
 
         <AuthFormLayout>
             <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
+                
+                
                 <Input
                     type="text"
                     name="username"

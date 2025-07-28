@@ -63,11 +63,12 @@ export const SignUpForm:React.FC=()=>{
 
     return(
     <AuthFormLayout>
+      
         <Form
           fields={userSignUpFields}
           initialValues={user}
           onFormSubmit={handleSubmit}
-          buttonText="Guardar"
+          buttonText="Crear cuenta"
         ></Form>
 
     </AuthFormLayout>
