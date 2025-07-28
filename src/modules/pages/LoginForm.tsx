@@ -29,7 +29,7 @@ const LoginForm:React.FC=()=>{
 
         <AuthFormLayout>
             <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
-                
+                <h2 className="text-xl font-semibold text-center mb-4">Iniciar sesión  para continuar</h2>
                 
                 <Input
                     type="text"

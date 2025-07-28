@@ -1,6 +1,7 @@
 import Field from "./Field";
 
 export interface FormProps<T>{
+    title?: string;
     fields:Field[]
     initialValues:Partial<T>
     onFormSubmit:(data:T)=>void

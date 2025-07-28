@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
-import { useNavigate } from "react-router-dom";
 import { Form } from "../components/Form";
 import Field from "../models/Field";
 import AuthFormLayout from "../components/AuthFormLayout";
-
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const userSignUpFields:Field[]=[
 {
@@ -63,8 +63,14 @@ export const SignUpForm:React.FC=()=>{
 
     return(
     <AuthFormLayout>
+        <button onClick={() => navigate(-1)}
+        className="absolute top-4 left-4 p-2 bg-primary-500
+          text-primary-contrast-500"><ArrowLeft size={24} /></button>
+
+
       
         <Form
+          title="Crea tu cuenta"
           fields={userSignUpFields}
           initialValues={user}
           onFormSubmit={handleSubmit}
@@ -72,5 +78,4 @@ export const SignUpForm:React.FC=()=>{
         ></Form>
 
     </AuthFormLayout>
-    )
-}
+)}
