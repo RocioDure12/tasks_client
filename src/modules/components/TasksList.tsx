@@ -14,7 +14,7 @@ interface TaskListProps{
 
 export const TasksList: React.FC<TaskListProps> = (props) => {
   return (
-        <ul className="max-w-md mx-auto mt-10 p-4 bg-primary-300 shadow-lg rounded-lg ">
+        <ul className="p-4 w-full bg-primary-300 shadow-lg rounded-lg ">
           {props.list.map((item) => (
             <div key={item.id}>
               <li

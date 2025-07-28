@@ -4,7 +4,7 @@ import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
 import { OtroForm } from "../components/Form";
 import Field from "../models/Field";
-import FormLayout from "../components/FormLayout";
+import FormLayout from "../components/FormLoginLayout";
 
 
 const userSignUpFields:Field[]=[

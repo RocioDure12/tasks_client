@@ -20,11 +20,13 @@ export const SideBar: React.FC = () => {
   return (
     <div>
       {/* Botón hamburguesa siempre visible */}
-      <div
-        className="fixed top-4 left-4 z-50 p-2 rounded-lg  text-primary-contrast-700 bg-primary-400 border-2 border-shadow-xl"
-        onClick={toggleMenu}
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
+      <div className="fixed z-50 top-0 left-0 w-full flex p-2">
+        <div
+          className="p-2 rounded-lg flex items-center text-primary-contrast-700 bg-primary-400 border-2 border-shadow-xl"
+          onClick={toggleMenu}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </div>
       </div>
 
       {/* Sidebar */}

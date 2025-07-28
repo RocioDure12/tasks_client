@@ -116,10 +116,10 @@ export default function Dashboard() {
   return (
     <MainLayout>
       {numberOfTasks > 0 ? (
-        <div className="min-h-[70vh] flex flex-col justify-center items-center gap-6 px-4">
-          <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg w-full">
+        <div className="flex flex-col justify-center items-center gap-6">
+          <div className="p-4 bg-primary-200 shadow-lg rounded-lg w-full">
             <DatePickerInput
-              classNames={{ input: "w-full max-w-lg" }}
+              classNames={{ input: "w-full" }}
               placeholder="Filter by date"
               valueFormat="YYYY MMM DD"
               rightSection={<Calendar size={20}  style={{ color: theme.colors.primary[6] }}/>}
@@ -175,6 +175,7 @@ export default function Dashboard() {
             />
           </div>
           <>
+          <div>¡Tienes trabajo por hacer!</div>
           <div>Proximas tareas...</div>
           <TasksList 
           list={upcomingTasks}

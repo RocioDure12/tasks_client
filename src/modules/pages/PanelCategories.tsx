@@ -6,6 +6,7 @@ import useCategoriesApi from "../hooks/useCategoriesApi";
 import { useEffect } from "react";
 import { Plus, X } from "lucide-react";
 import { Modal } from "../components/Modal"
+import MainLayout from "../components/MainLayout";
 
 export const Categories: React.FC = () => {
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
@@ -29,12 +30,12 @@ export const Categories: React.FC = () => {
     setSearchText(evt.target.value);
   };
 
-  const createCategory=async()=>{
-    const response=await categoriesApi.createCategory(category as Category)
+  const createCategory = async () => {
+    const response = await categoriesApi.createCategory(category as Category)
     await readCategories()
 
   }
-  
+
   const filterCategories = categoriesList.filter(
     (category: Category) =>
       !searchText ||
@@ -56,49 +57,50 @@ export const Categories: React.FC = () => {
   };
 
   return (
-    <div className="max-w-sm mx-auto dark:bg-neutralScale-800 dark:text-neutralScale-200 p-10 text-primary-800 font-semibold">
-      <div className=" flex flex-col gap-3 mb-4">
-        <div className="flex items-center gap-2">
+    <MainLayout>
+      <div className="max-w-sm mx-auto dark:bg-neutralScale-800 dark:text-neutralScale-200 p-10 text-primary-800 font-semibold">
+        <div className=" flex flex-col gap-3 mb-4">
+          <div className="flex items-center gap-2">
+            <Input
+              type="text"
+              label="Categoria"
+              name="category"
+              onChange={handleCategoryChange}
+            />
+            <Plus
+              size={30}
+              className="p-1 bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
+              onClick={createCategory}
+            ></Plus>
+          </div>
+        </div>
+
+        <>
           <Input
             type="text"
-            label="Categoria"
-            name="category"
-            onChange={handleCategoryChange}
+            label="Buscar"
+            name="search"
+            onChange={handleSearchChange}
           />
-          <Plus
-            size={30}
-            className="p-1 bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
-            onClick={createCategory}
-          ></Plus>
+        </>
+
+        <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg">
+          <ul>
+            {filterCategories.map((item: Category) => (
+              <li
+                key={item.id}
+                className="flex justify-between items-center p-3 bg-white rounded-lg shadow hover:shadow-md transition m-2 text-primary-500"
+              >
+                {item.category_name}
+                <X
+                  className="hover:text-red-500 transition"
+                  onClick={() => deleteCategory(item.id)}
+                ></X>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-
-      <>
-        <Input
-          type="text"
-          label="Buscar"
-          name="search"
-          onChange={handleSearchChange}
-        />
-      </>
-
-      <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg">
-        <ul>
-          {filterCategories.map((item: Category) => (
-            <li
-              key={item.id}
-              className="flex justify-between items-center p-3 bg-white rounded-lg shadow hover:shadow-md transition m-2 text-primary-500"
-            >
-              {item.category_name}
-              <X
-                className="hover:text-red-500 transition"
-                onClick={() => deleteCategory(item.id)}
-              ></X>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-    </div>
+    </MainLayout>
   );
 };

@@ -5,8 +5,8 @@ export interface FormLayoutProps extends PropsWithChildren {
 }
 export default function FormLayout(props: FormLayoutProps) {
   return (
-    <div className={"bg-primary-50 h-full flex justify-center items-center"}>
-      <div className="p-6 max-w-sm mx-auto flex items-center justify-center">
+    <div className={"bg-primary-500 h-full flex justify-center items-center"}>
+      <div className="w-full max-w-md">
         {props.children}
         </div>
       </div>
