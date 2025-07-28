@@ -15,6 +15,7 @@ import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
+import { TaskCalendar } from "../components/TaskCalendar";
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -119,65 +120,13 @@ export default function Dashboard() {
       {numberOfTasks > 0 ? (
 
         <MainLayout>
-
-              <div className="p-4 bg-primary-200 shadow-lg rounded-lg">
-                <DatePickerInput
-                  classNames={{ input: "w-full" }}
-                  placeholder="Filter by date"
-                  valueFormat="YYYY MMM DD"
-                  rightSection={<Calendar size={20} style={{ color: theme.colors.primary[6] }} />}
-                  onChange={(date) => {
-                    if (!date) return
-
-                    const dateString = dayjs(date).format("YYYY-MM-DD");
-                    const hasTasksOnDate = tasksDates.includes(dateString);
-
-                    if (!hasTasksOnDate) {
-                      toast.error("No existen tareas creadas en esa fecha");
-                      return; // No navegamos porque no hay tareas para esa fecha
-                    }
-                    navigate(`/list/${dateString}`)
-                  }
-
-                  }
-                  renderDay={(date) => {
-                    const day = date.getDate();
-                    const dateString = dayjs(date).format('YYYY-MM-DD');
-                    const hasTask = tasksDates.includes(dateString);
+          
+          <TaskCalendar   
+          tasksDates={tasksDates}
+          onDateSelected={(dateString) => navigate(`/list/${dateString}`)}>
+          </TaskCalendar>
 
 
-                    return (
-                      <div style={{ position: 'relative', width: 36, height: 36 }}>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '100%',
-                            height: '100%',
-                          }}
-                        >
-                          {day}
-                        </div>
-                        {hasTask && (
-                          <div
-                            style={{
-                              position: 'absolute',
-                              bottom: 4,
-                              left: '50%',
-                              transform: 'translateX(-50%)',
-                              width: 6,
-                              height: 6,
-                              borderRadius: '50%',
-                              backgroundColor: theme.colors.primary[6],
-                            }}
-                          />
-                        )}
-                      </div>
-                    );
-                  }}
-                />
-              </div>
 
              <div>Tareas proximas...</div>    
               <TasksList
