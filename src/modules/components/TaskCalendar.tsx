@@ -17,7 +17,7 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
     <div className=" p-4 bg-primary-300 shadow-lg rounded-lg">
         <div className="flex justify-center p-2">
             <img 
-            src="/illustrations/appToDo.svg" alt="Logo" className="w-[120px]"
+            src="/illustrations/appToDo.svg" alt="Logo" className="w-[100px]"
             />
         </div>
       <DatePickerInput

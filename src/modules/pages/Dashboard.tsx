@@ -120,7 +120,7 @@ export default function Dashboard() {
       {numberOfTasks > 0 ? (
 
         <MainLayout>
-          
+
           <TaskCalendar   
           tasksDates={tasksDates}
           onDateSelected={(dateString) => navigate(`/list/${dateString}`)}>
@@ -128,7 +128,7 @@ export default function Dashboard() {
 
 
 
-             <div>Tareas proximas...</div>    
+             <div className="font-bold">Tareas proximas...</div>    
               <TasksList
                 list={upcomingTasks}
                 handleDeleteTask={handleDeleteTask}
