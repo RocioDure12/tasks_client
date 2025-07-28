@@ -14,21 +14,20 @@ interface TaskListProps{
 
 export const TasksList: React.FC<TaskListProps> = (props) => {
   return (
-        <ul className="p-4 w-full bg-primary-300 shadow-lg rounded-lg ">
+        <ul className="p-2 bg-primary-300 shadow-lg rounded-lg">
           {props.list.map((item) => (
             <div key={item.id}>
               <li
                 key={item.id}
-                className="flex justify-between items-center p-6 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
+                className="p-4 bg-primary-100 rounded-lg shadow hover:shadow-md transition m-2 text-primary-500 border-l-4 border-primary-500"
               >
-                <div className="flex-1">
+                <div className="flex flex-col space-y-2">
                   <span className="block">{item.task_name}</span>
-                  <span className="block font-bold text-sm">
+                  <span className="block">
                     {props.formattedTime(item.due_date)}
                   </span>
-                </div>
-                <div className="flex space-x-3">
-
+               
+              <div className="flex space-x-3 ">
                 <Checkbox
                 checked={item.status}
                 onChange={()=>{props.handleTaskStatus(item.id)}}
@@ -63,8 +62,10 @@ export const TasksList: React.FC<TaskListProps> = (props) => {
                     Visualizar
                   </Eye>
                 </div>
+                </div>
               </li>
             </div>
+       
           ))}
         </ul>
        

@@ -58,8 +58,6 @@ export const Categories: React.FC = () => {
 
   return (
     <MainLayout>
-      <div className="max-w-sm mx-auto dark:bg-neutralScale-800 dark:text-neutralScale-200 p-10 text-primary-800 font-semibold">
-        <div className=" flex flex-col gap-3 mb-4">
           <div className="flex items-center gap-2">
             <Input
               type="text"
@@ -73,18 +71,18 @@ export const Categories: React.FC = () => {
               onClick={createCategory}
             ></Plus>
           </div>
-        </div>
+        
 
-        <>
+        
           <Input
             type="text"
             label="Buscar"
             name="search"
             onChange={handleSearchChange}
           />
-        </>
+        
 
-        <div className="max-w-md mx-auto mt-10 p-4 bg-primary-200 shadow-lg rounded-lg">
+        <div className="mt-5 p-4 bg-primary-200 shadow-lg rounded-lg">
           <ul>
             {filterCategories.map((item: Category) => (
               <li
@@ -100,7 +98,8 @@ export const Categories: React.FC = () => {
             ))}
           </ul>
         </div>
-      </div>
+    
+
     </MainLayout>
   );
 };

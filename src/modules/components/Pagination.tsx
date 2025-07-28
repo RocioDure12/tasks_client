@@ -21,7 +21,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className="flex items-center justify-center gap-6 p-4 bg-primary-50 rounded-xl shadow-md text-primary-950">
+    <div className="flex items-center justify-center gap-6 p-4 bg-primary-50 rounded-xl  text-primary-950">
       <Button
         onClick={handlePrev}
         disabled={currentPage === 1}

@@ -5,7 +5,7 @@ import { Select } from "./Select";
 import { Textarea } from "./Textarea"
 import { Button } from "./Button";
 
-export const OtroForm = <T extends {}>({
+export const Form = <T extends {}>({
   fields,
   initialValues,
   onFormSubmit,
@@ -51,7 +51,7 @@ export const OtroForm = <T extends {}>({
   }
 
   return (
-    <form className="m-2 rounded-lg h-full p-7 flex flex-col gap-2 shadow-lg dark:bg-neutralScale-800 dark:text-neutralScale-50" onSubmit={handleSubmit}>
+    <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " onSubmit={handleSubmit}>
       <div>
         {fields.map((field) => {
           switch (field.type){

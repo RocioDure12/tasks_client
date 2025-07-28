@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { useNavigate } from "react-router-dom";
-import { OtroForm } from "../components/Form";
+import { Form } from "../components/Form";
 import Field from "../models/Field";
-import FormLayout from "../components/FormLoginLayout";
+import AuthFormLayout from "../components/AuthFormLayout";
 
 
 const userSignUpFields:Field[]=[
@@ -62,14 +62,14 @@ export const SignUpForm:React.FC=()=>{
     }
 
     return(
-    <FormLayout>
-        <OtroForm
+    <AuthFormLayout>
+        <Form
           fields={userSignUpFields}
           initialValues={user}
           onFormSubmit={handleSubmit}
           buttonText="Guardar"
-        ></OtroForm>
+        ></Form>
 
-    </FormLayout>
+    </AuthFormLayout>
     )
 }

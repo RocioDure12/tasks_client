@@ -10,6 +10,7 @@ import theme from "../../theme";
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList";
 import { toast } from 'react-hot-toast';
+import MainLayout from "../components/MainLayout";
 
 export const TasksListPage = () => {
   const [TaskList, setTaskList] = useState<Task[]>([]);
@@ -114,7 +115,7 @@ export const TasksListPage = () => {
 
 
   return (
-    <div>
+    <MainLayout>
       {isOpen && task.description ? (
         <Modal
           title={task.task_name}
@@ -140,6 +141,6 @@ export const TasksListPage = () => {
         onPageChange={handlePageChange}
       >
       </Pagination>
-    </div>
+    </MainLayout>
   );
 };

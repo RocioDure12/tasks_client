@@ -4,7 +4,7 @@ import useTaskApi from "../hooks/useTaskApi";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
-import { OtroForm } from "../components/Form";
+import { Form } from "../components/Form";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 
@@ -131,7 +131,7 @@ export const TaskFormPage = () => {
   return (
     <MainLayout >
 
-      <OtroForm
+      <Form
         fields={dynamicTaskFormFields}
         initialValues={task} //Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}

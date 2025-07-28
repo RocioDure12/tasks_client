@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
-  const [upcomingTasks, setUpcomingTasks]=useState<Task[]>([]);
+  const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
 
   const navigate = useNavigate();
   const taskApi = useTaskApi();
@@ -55,12 +55,12 @@ export default function Dashboard() {
     }
   };
 
-  const get_upcoming_tasks=async()=>{
-    const result=await taskApi.get_upcoming_tasks()
-    if(result.data){
+  const get_upcoming_tasks = async () => {
+    const result = await taskApi.get_upcoming_tasks()
+    if (result.data) {
       console.log(result.data)
       setUpcomingTasks(result.data)
-    }else{
+    } else {
       console.log("no funko")
     }
   }
@@ -69,7 +69,7 @@ export default function Dashboard() {
   const handleAddTask = () => {
     navigate(`/taskform`);
   };
-  
+
   const handleEditTask = (id: number) => {
     navigate(`/taskform/${id}`);
   };
@@ -82,7 +82,7 @@ export default function Dashboard() {
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
   };
-  
+
   const formattedTime = (date: Date | string | undefined): string => {
     if (!date) return "";
     return new Date(date).toLocaleTimeString("es-ES", {
@@ -103,7 +103,7 @@ export default function Dashboard() {
       const updatedTask = { ...task, status: !task.status };
 
       await taskApi.updateTask(id, updatedTask);
-   
+
     } catch (error) {
       console.error("Error al cambiar el estado de la tarea:", error);
     }
@@ -114,93 +114,97 @@ export default function Dashboard() {
 
 
   return (
-    <MainLayout>
+
+    <>
       {numberOfTasks > 0 ? (
-        <div className="flex flex-col justify-center items-center gap-6">
-          <div className="p-4 bg-primary-200 shadow-lg rounded-lg w-full">
-            <DatePickerInput
-              classNames={{ input: "w-full" }}
-              placeholder="Filter by date"
-              valueFormat="YYYY MMM DD"
-              rightSection={<Calendar size={20}  style={{ color: theme.colors.primary[6] }}/>}
-              onChange={(date) => {
-                if (!date)return 
 
-                  const dateString = dayjs(date).format("YYYY-MM-DD");
-                  const hasTasksOnDate = tasksDates.includes(dateString);
+        <MainLayout>
 
-                   if (!hasTasksOnDate) {
-                    toast.error("No existen tareas creadas en esa fecha");
-                    return; // No navegamos porque no hay tareas para esa fecha
-                   }
-                   navigate(`/list/${dateString}`)}
+              <div className="p-4 bg-primary-200 shadow-lg rounded-lg">
+                <DatePickerInput
+                  classNames={{ input: "w-full" }}
+                  placeholder="Filter by date"
+                  valueFormat="YYYY MMM DD"
+                  rightSection={<Calendar size={20} style={{ color: theme.colors.primary[6] }} />}
+                  onChange={(date) => {
+                    if (!date) return
 
-              }
-              renderDay={(date) => {
-                const day = date.getDate();
-                const dateString = dayjs(date).format('YYYY-MM-DD');
-                const hasTask = tasksDates.includes(dateString);
-                
+                    const dateString = dayjs(date).format("YYYY-MM-DD");
+                    const hasTasksOnDate = tasksDates.includes(dateString);
 
-                return (
-                  <div style={{ position: 'relative', width: 36, height: 36 }}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '100%',
-                        height: '100%',
-                      }}
-                    >
-                      {day}
-                    </div>
-                    {hasTask && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          bottom: 4,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: 6,
-                          height: 6,
-                          borderRadius: '50%',
-                          backgroundColor: theme.colors.primary[6],
-                        }}
-                      />
-                    )}
-                  </div>
-                );
-              }}
-            />
-          </div>
-          <>
-          <div>¡Tienes trabajo por hacer!</div>
-          <div>Proximas tareas...</div>
-          <TasksList 
-          list={upcomingTasks}
-          handleDeleteTask={handleDeleteTask}
-          handleEditTask={handleEditTask}
-          handleTaskStatus={handleTaskStatus}
-          viewDetailTask={viewDetailTask}
-          formattedTime={formattedTime}
-          ></TasksList>
-          </>
-       
+                    if (!hasTasksOnDate) {
+                      toast.error("No existen tareas creadas en esa fecha");
+                      return; // No navegamos porque no hay tareas para esa fecha
+                    }
+                    navigate(`/list/${dateString}`)
+                  }
 
-       
+                  }
+                  renderDay={(date) => {
+                    const day = date.getDate();
+                    const dateString = dayjs(date).format('YYYY-MM-DD');
+                    const hasTask = tasksDates.includes(dateString);
 
-          <Button className="w-full sm:w-auto" onClick={handleAddTask}>Añadir tarea</Button>
 
-        </div>
+                    return (
+                      <div style={{ position: 'relative', width: 36, height: 36 }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
+                          }}
+                        >
+                          {day}
+                        </div>
+                        {hasTask && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              bottom: 4,
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              width: 6,
+                              height: 6,
+                              borderRadius: '50%',
+                              backgroundColor: theme.colors.primary[6],
+                            }}
+                          />
+                        )}
+                      </div>
+                    );
+                  }}
+                />
+              </div>
+
+             <div>Tareas proximas...</div>    
+              <TasksList
+                list={upcomingTasks}
+                handleDeleteTask={handleDeleteTask}
+                handleEditTask={handleEditTask}
+                handleTaskStatus={handleTaskStatus}
+                viewDetailTask={viewDetailTask}
+                formattedTime={formattedTime}
+              ></TasksList>
+              <Button onClick={handleAddTask}>Añadir tarea</Button>
+          
+
+        </MainLayout>
+
+
       ) : (
-        <div className="text-center space-y-2">
-          <div>¡Bienvenido/a!</div>
-          <div>Comienza a crear tareas</div>
-          <Button onClick={handleAddTask}>Añadir tarea </Button>
+        <MainLayout>
+          <div className="text-center space-y-2">
+            <div>¡Bienvenido/a!</div>
+            <div>Comienza a crear tareas</div>
+            <Button onClick={handleAddTask}>Añadir tarea </Button>
 
-        </div>
+          </div>
+        </MainLayout>
       )}
-    </MainLayout>
-  );
+    </>
+
+  )
 }
