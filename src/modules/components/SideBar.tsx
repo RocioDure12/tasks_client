@@ -1,15 +1,20 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import useUserApi from "../hooks/useUserApi";
+import { useNavigate } from "react-router-dom";
 import { Sun, Moon, Menu, X, LogOut } from "lucide-react";
 import dayjs from "dayjs";
+import useUserApi from "../hooks/useUserApi";
+import useTaskApi from "../hooks/useTaskApi";
+import toast from "react-hot-toast";
+import theme from "../../theme";
 
 export const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userApi = useUserApi();
   const navigate = useNavigate();
+  const taskApi = useTaskApi();
 
-  const toggleMenu = () => setIsOpen((prevState) => !prevState);  // Asegura un comportamiento limpio y evita duplicaciones.
+
+  const toggleMenu = () => setIsOpen((prev) => !prev);
 
   const logout = async () => {
     await userApi.logout();
@@ -17,56 +22,76 @@ export const SideBar: React.FC = () => {
     setIsOpen(false);
   };
 
+  const hasTasks = async (date: string) => {
+    const result = await taskApi.get_tasks_paginated(1, 0, date);
+    if (result.data && result.data[0].length > 0) {
+      navigate(`/list/${date}`);
+    } else {
+      toast.error("No hay tareas para esa fecha");
+    }
+  };
+
+
+
   return (
     <div>
-      {/* Botón hamburguesa siempre visible */}
+      {/* Botón hamburguesa */}
       <div className="fixed z-50 top-0 left-0 w-full flex p-2">
-        <div
-          className="p-2 rounded-lg flex items-center text-primary-contrast-700 bg-primary-400 border-2 border-shadow-xl"
+        <button
+          className="p-2 rounded-lg flex items-center text-primary-contrast-400 hover:none bg-primary-400 border-2 border-shadow-xl border-transparent"
           onClick={toggleMenu}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </div>
+        </button>
       </div>
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full w-64 bg-primary-400 text-primary-contrast-700 p-5 flex flex-col shadow-xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } z-50`} // Sombra izquierda
-        onClick={(e) => e.stopPropagation()} // Evita que el clic cierre el menú
+        className={`fixed top-0 left-0 h-full w-64 bg-primary-400 text-primary-contrast-700 p-5 flex flex-col shadow-xl transition-transform duration-300 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } z-50`}
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Botón para cerrar menú (X) dentro del menú */}
+        {/* Botón cerrar dentro del sidebar */}
         <button
-          className="absolute top-4 right-4 p-2 text-white bg-primary-400 border-none"
+          className="absolute top-4 right-4 p-2 text-white bg-primary-400 "
           onClick={toggleMenu}
         >
           <X size={24} />
         </button>
 
-        {/* Links de navegación */}
-        <div className="mt-16 space-y-4 ">
-          <Link to="/" className="p-3 text-primary-900 hover:text-primary-500 rounded block ">
+        {/* Navegación */}
+        <div className="mt-16 space-y-4 text-primary-900 font-semibold">
+          <button onClick={() => navigate("/")} >
             Inicio
-          </Link>
-          <Link to="/categories" className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+          </button>
+          <button onClick={() => navigate("/categories")} >
             Panel de categorías
-          </Link>
-          <Link to={`/list/${dayjs().format("YYYY-MM-DD")}`} className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+          </button>
+          <button
+            onClick={() => hasTasks(dayjs().format("YYYY-MM-DD"))}
+         
+          >
             Tareas para hoy
-          </Link>
-          <Link to={`/list/${dayjs().add(1, "day").format("YYYY-MM-DD")}`} className="p-3 text-primary-900 hover:text-primary-500 rounded block">
+          </button>
+          <button
+            onClick={() => hasTasks(dayjs().add(1, "day").format("YYYY-MM-DD"))}
+          >
             Tareas para mañana
-          </Link>
+          </button>
         </div>
 
-        {/* Espacio flexible para separar los iconos hacia abajo */}
+        {/* Espaciador */}
         <div className="flex-grow" />
 
-        {/* Íconos de sol, luna y logout */}
+        {/* Iconos */}
         <div className="flex gap-3 justify-center mb-4">
-          <LogOut onClick={logout} className="cursor-pointer text-xl text-primary-900 hover:text-primary-400 " />
-          <Sun className="cursor-pointer text-xl text-primary-900 hover:text-primary-400" />
-          <Moon className="cursor-pointer text-xl text-primary-900 hover:text-primary-400" />
+          <LogOut
+            onClick={logout}
+            className="cursor-pointer text-xl text-primary-900 hover:text-primary-700"
+          />
+          <Sun className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />
+          <Moon className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />
         </div>
       </nav>
     </div>

@@ -58,6 +58,7 @@ export const Categories: React.FC = () => {
 
   return (
     <MainLayout>
+      <div className="bg-primary-300 p-8 rounded-lg text-primary-900 font-semibold">
           <div className="flex items-center gap-2">
             <Input
               type="text"
@@ -67,7 +68,7 @@ export const Categories: React.FC = () => {
             />
             <Plus
               size={30}
-              className="p-1 bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
+              className="bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
               onClick={createCategory}
             ></Plus>
           </div>
@@ -99,7 +100,7 @@ export const Categories: React.FC = () => {
           </ul>
         </div>
     
-
+      </div>
     </MainLayout>
   );
 };

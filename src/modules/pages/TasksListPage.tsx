@@ -11,12 +11,16 @@ import { TasksList } from "../components/TasksList";
 import { toast } from 'react-hot-toast';
 import MainLayout from "../components/MainLayout";
 import { Button } from "../components/Button"
+import { TaskCalendar } from "../components/TaskCalendar";
+
+
 export const TasksListPage = () => {
-  const [TaskList, setTaskList] = useState<Task[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [task, setTask] = useState<Partial<Task>>({});
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [tasksDates, setTasksDates] = useState<string[]>([]);
 
 
 
@@ -27,7 +31,9 @@ export const TasksListPage = () => {
 
   useEffect(() => {
     getTasks();
-  }, [currentPage]);
+    get_tasks_dates()
+
+  }, [currentPage, date]);
 
   const getTasks = async () => {
     if (!date) return;
@@ -50,7 +56,7 @@ export const TasksListPage = () => {
     await getTasks();
   };
 
-  //esta funcion deberia conducir a un modal que muestra la informacion de la tarea seleccionada
+
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
     if (result.data) {
@@ -112,36 +118,51 @@ export const TasksListPage = () => {
     }
   };
 
-return (
-  <MainLayout>
-   
-          <TasksList
-            list={TaskList}
-            handleDeleteTask={handleDeleteTask}
-            handleEditTask={handleEditTask}
-            viewDetailTask={viewDetailTask}
-            handleTaskStatus={handleTaskStatus}
-            formattedTime={formattedTime}
-          />
+  const get_tasks_dates = async () => {
+    const result = await taskApi.get_dates_for_calendar();
+    if (result.data) {
+      setTasksDates(result.data);
+      console.log(tasksDates)
+    } else {
+      console.log("Error al obtener las fechas");
+    }
+  };
 
-          <Button onClick={handleAddTask}>
-            Nueva Tarea
-          </Button>
+  return (
+    <MainLayout>
+      <TaskCalendar
+        tasksDates={tasksDates}
+        onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+      ></TaskCalendar>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+      <TasksList
+        list={taskList}
+        handleDeleteTask={handleDeleteTask}
+        handleEditTask={handleEditTask}
+        viewDetailTask={viewDetailTask}
+        handleTaskStatus={handleTaskStatus}
+        formattedTime={formattedTime}
+      />
 
-          {isOpen && task.description && (
-            <Modal
-              title={task.task_name}
-              description={task.description}
-              hour={formattedTime(task.due_date)}
-              onClose={closeModal}
-            />
-          )}
-        
-  </MainLayout>
-);}
+      <Button onClick={handleAddTask}>
+        Nueva Tarea
+      </Button>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+
+      {isOpen && task.description && (
+        <Modal
+          title={task.task_name}
+          description={task.description}
+          hour={formattedTime(task.due_date)}
+          onClose={closeModal}
+        />
+      )}
+
+    </MainLayout>
+  );
+}

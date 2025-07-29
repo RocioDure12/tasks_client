@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button";
-import Category from "../models/Category";
 import '@mantine/core/styles.css';
 import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
-import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
+
+
 export default function Dashboard() {
+  
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
