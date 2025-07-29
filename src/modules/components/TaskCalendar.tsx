@@ -14,7 +14,7 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
   const theme = useMantineTheme();
 
   return (
-    <div className=" p-4 bg-primary-300 shadow-lg rounded-lg">
+    <div className=" p-4 bg-primary-500 shadow-lg rounded-lg">
         <div className="flex justify-center p-2">
             <img 
             src="/illustrations/appToDo.svg" alt="Logo" className="w-[100px]"
