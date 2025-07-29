@@ -32,12 +32,12 @@ export const SideBar: React.FC = () => {
       {/* Sidebar */}
       <nav
         className={`fixed top-0 left-0 h-full w-64 bg-primary-400 text-primary-contrast-700 p-5 flex flex-col shadow-xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } z-50 border-l-4 border-gray-400`} // Sombra izquierda
+          } z-50`} // Sombra izquierda
         onClick={(e) => e.stopPropagation()} // Evita que el clic cierre el menú
       >
         {/* Botón para cerrar menú (X) dentro del menú */}
         <button
-          className="absolute top-4 right-4 p-2 text-white bg-primary-400"
+          className="absolute top-4 right-4 p-2 text-white bg-primary-400 border-none"
           onClick={toggleMenu}
         >
           <X size={24} />

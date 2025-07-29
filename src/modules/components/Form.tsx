@@ -52,7 +52,7 @@ export const Form = <T extends {}>({
   }
 
   return (
-    <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " onSubmit={handleSubmit}>
+    <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 text-primary-900" onSubmit={handleSubmit}>
       <div>
         {title && <h2 className="text-xl font-semibold text-center mb-4">{title}</h2>}
         {fields.map((field) => {

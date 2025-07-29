@@ -5,13 +5,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { Pencil, Trash2, Eye, Edit, List } from "lucide-react";
 import { Modal } from "../components/Modal";
-import { Button, Checkbox } from "@mantine/core";
 import theme from "../../theme";
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList";
 import { toast } from 'react-hot-toast';
 import MainLayout from "../components/MainLayout";
-
+import { Button } from "../components/Button"
 export const TasksListPage = () => {
   const [TaskList, setTaskList] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -58,12 +57,12 @@ export const TasksListPage = () => {
       if (!result.data.description) {
         toast.error("No tiene descripción o nota");
         return; // No abrimos el modal
-  }
-  setTask(result.data);
-  setIsOpen(true);
-}
+      }
+      setTask(result.data);
+      setIsOpen(true);
+    }
 
- 
+
   };
 
 
@@ -113,34 +112,36 @@ export const TasksListPage = () => {
     }
   };
 
+return (
+  <MainLayout>
+   
+          <TasksList
+            list={TaskList}
+            handleDeleteTask={handleDeleteTask}
+            handleEditTask={handleEditTask}
+            viewDetailTask={viewDetailTask}
+            handleTaskStatus={handleTaskStatus}
+            formattedTime={formattedTime}
+          />
 
-  return (
-    <MainLayout>
-      {isOpen && task.description ? (
-        <Modal
-          title={task.task_name}
-          description={task.description}
-          hour={formattedTime(task.due_date)}
-          onClose={closeModal}
-        ></Modal>
-      ) : (
-        <>
-        <TasksList list={TaskList}
-         handleDeleteTask={handleDeleteTask}
-         handleEditTask={handleEditTask} 
-         viewDetailTask={viewDetailTask} 
-         handleTaskStatus={handleTaskStatus} 
-         formattedTime={formattedTime}>
+          <Button onClick={handleAddTask}>
+            Nueva Tarea
+          </Button>
 
-         </TasksList>
-        </>
-      )}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      >
-      </Pagination>
-    </MainLayout>
-  );
-};
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+
+          {isOpen && task.description && (
+            <Modal
+              title={task.task_name}
+              description={task.description}
+              hour={formattedTime(task.due_date)}
+              onClose={closeModal}
+            />
+          )}
+        
+  </MainLayout>
+);}

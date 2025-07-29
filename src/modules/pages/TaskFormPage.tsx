@@ -132,6 +132,8 @@ export const TaskFormPage = () => {
     <MainLayout >
 
       <Form
+        title={id ? "Formulario de edición" : "Nueva tarea"}
+        
         fields={dynamicTaskFormFields}
         initialValues={task} //Pasa los valores actuales de la tarea al formulario
         onFormSubmit={handleSubmit}

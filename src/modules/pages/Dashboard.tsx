@@ -1,26 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { useEffect, useState } from "react";
-import dayjs from 'dayjs';
-import { DatePickerInput } from '@mantine/dates';
-import { Calendar } from "lucide-react";
-
 import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button";
 import Category from "../models/Category";
-import useCategoryApi from "../hooks/useCategoriesApi";
 import '@mantine/core/styles.css';
 import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
-
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
@@ -128,8 +121,11 @@ export default function Dashboard() {
 
 
 
-             <div className="font-bold">Tareas proximas...</div>    
+
+
+             
               <TasksList
+                title="🕒 Proximas tareas..."
                 list={upcomingTasks}
                 handleDeleteTask={handleDeleteTask}
                 handleEditTask={handleEditTask}
@@ -137,7 +133,8 @@ export default function Dashboard() {
                 viewDetailTask={viewDetailTask}
                 formattedTime={formattedTime}
               ></TasksList>
-              <Button onClick={handleAddTask}>Añadir tarea</Button>
+              <Button onClick={handleAddTask}>Nueva tarea </Button>
+   
           
 
         </MainLayout>
@@ -148,7 +145,7 @@ export default function Dashboard() {
           <div className="text-center space-y-2">
             <div>¡Bienvenido/a!</div>
             <div>Comienza a crear tareas</div>
-            <Button onClick={handleAddTask}>Añadir tarea </Button>
+            <Button onClick={handleAddTask}>Nueva tarea </Button>
 
           </div>
         </MainLayout>
