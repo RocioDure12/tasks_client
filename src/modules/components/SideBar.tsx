@@ -92,8 +92,8 @@ export const SideBar: React.FC = () => {
             onClick={logout}
             className="cursor-pointer text-xl text-primary-900 hover:text-primary-700"
           />
-          <Sun className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />
-          <Moon className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />
+          {/*<Sun className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />
+          <Moon className="cursor-pointer text-xl text-primary-900 hover:text-primary-700" />*/}
         </div>
       </nav>
     </div>

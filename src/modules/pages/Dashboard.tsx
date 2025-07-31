@@ -13,7 +13,7 @@ import { Modal } from "../components/Modal"
 
 
 export default function Dashboard() {
-  
+
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
@@ -75,14 +75,14 @@ export default function Dashboard() {
   const handleDeleteTask = async (id: number) => {
     const result = await taskApi.deleteTask(id);
     await get_upcoming_tasks()
-    
+
 
   };
 
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
-    if (result.data){
-      if (!result.data.description){
+    if (result.data) {
+      if (!result.data.description) {
         toast.error("No tiene descripción o nota");
         return;
 
@@ -119,7 +119,7 @@ export default function Dashboard() {
     }
   };
 
-    const closeModal = () => {
+  const closeModal = () => {
     setIsOpen(false)
     setTask({})
   }
@@ -129,45 +129,45 @@ export default function Dashboard() {
 
 
   return (
-  <>
-    <MainLayout>
-      {numberOfTasks > 0 ? (
-  <>
-    <TaskCalendar
-      tasksDates={tasksDates}
-      onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
-    />
+    <>
+      <MainLayout>
+        {numberOfTasks > 0 ? (
+          <>
+            <TaskCalendar
+              tasksDates={tasksDates}
+              onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+            />
 
-    {upcomingTasks.length > 0 ? (
-      <TasksList
-        title="🕒 Próximas tareas..."
-        list={upcomingTasks}
-        handleDeleteTask={handleDeleteTask}
-        handleEditTask={handleEditTask}
-        handleTaskStatus={handleTaskStatus}
-        viewDetailTask={viewDetailTask}
-        formattedTime={formattedTime}
-      />
-    ) : (
-      <div className="text-center text-neutral-500 italic mb-4">
-        No hay tareas próximas.
-      </div>
-    )}
+            {upcomingTasks.length > 0 ? (
+              <TasksList
+                title="🕒 Próximas tareas..."
+                list={upcomingTasks}
+                handleDeleteTask={handleDeleteTask}
+                handleEditTask={handleEditTask}
+                handleTaskStatus={handleTaskStatus}
+                viewDetailTask={viewDetailTask}
+                formattedTime={formattedTime}
+              />
+            ) : (
+              <div className="text-center text-neutral-500 italic mb-4">
+                No hay tareas próximas.
+              </div>
+            )}
 
-    <Button className=" bg-primary-500" onClick={handleAddTask}>Nueva tarea</Button>
-  </>
-) : (
-  <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl shadow-md bg-primary-100 m-4">
-    <h2 className=" font-bold text-primary-800">¡Bienvenido/a!</h2>
-    <h3 className="font-semibold italic text-primary-800">Comienza a crear tareas</h3>
-    <Button onClick={handleAddTask}>Nueva tarea</Button>
-  </div>
-)}
+            <Button className=" bg-primary-500" onClick={handleAddTask}>Nueva tarea</Button>
+          </>
+        ) : (
+          <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl shadow-md bg-primary-100 m-4">
+            <h2 className=" font-bold text-primary-800">¡Bienvenido/a!</h2>
+            <h3 className="font-semibold italic text-primary-800">Comienza a crear tareas</h3>
+            <Button onClick={handleAddTask}>Nueva tarea</Button>
+          </div>
+        )}
 
-      
-    </MainLayout>
-  </>
-);
+
+      </MainLayout>
+    </>
+  );
 
 
 }

@@ -140,27 +140,39 @@ export const TasksListPage = () => {
         onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
       ></TaskCalendar>
 
-      <TasksList
-        title={capitalizedDay}
-        list={taskList}
-        handleDeleteTask={handleDeleteTask}
-        handleEditTask={handleEditTask}
-        viewDetailTask={viewDetailTask}
-        handleTaskStatus={handleTaskStatus}
-        formattedTime={formattedTime}
-      />
-      <div className="flex justify-center">
+      {taskList.length > 0 ? (
+        <>
 
-        <Button onClick={handleAddTask}>
-          Nueva Tarea +
-        </Button>
-      </div>
+          <TasksList
+            title={capitalizedDay}
+            list={taskList}
+            handleDeleteTask={handleDeleteTask}
+            handleEditTask={handleEditTask}
+            viewDetailTask={viewDetailTask}
+            handleTaskStatus={handleTaskStatus}
+            formattedTime={formattedTime}
+          />
+          <div className="flex justify-center">
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+            <Button onClick={handleAddTask}>
+              Nueva Tarea +
+            </Button>
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+
+        </>
+
+      ) : (
+        <div className="text-center text-neutral-500 italic mb-4">
+          No hay tareas.
+        </div>
+
+      )}
 
       {isOpen && task.description && (
         <Modal
