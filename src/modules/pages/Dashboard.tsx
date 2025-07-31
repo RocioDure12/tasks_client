@@ -132,41 +132,39 @@ export default function Dashboard() {
   <>
     <MainLayout>
       {numberOfTasks > 0 ? (
-        <>
-          <TaskCalendar
-            tasksDates={tasksDates}
-            onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
-          />
+  <>
+    <TaskCalendar
+      tasksDates={tasksDates}
+      onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+    />
 
-          <TasksList
-            title="🕒 Próximas tareas..."
-            list={upcomingTasks}
-            handleDeleteTask={handleDeleteTask}
-            handleEditTask={handleEditTask}
-            handleTaskStatus={handleTaskStatus}
-            viewDetailTask={viewDetailTask}
-            formattedTime={formattedTime}
-          />
+    {upcomingTasks.length > 0 ? (
+      <TasksList
+        title="🕒 Próximas tareas..."
+        list={upcomingTasks}
+        handleDeleteTask={handleDeleteTask}
+        handleEditTask={handleEditTask}
+        handleTaskStatus={handleTaskStatus}
+        viewDetailTask={viewDetailTask}
+        formattedTime={formattedTime}
+      />
+    ) : (
+      <div className="text-center text-neutral-500 italic mb-4">
+        No hay tareas próximas.
+      </div>
+    )}
 
-          <Button onClick={handleAddTask}>Nueva tarea</Button>
-        </>
-      ) : (
-        <div className="text-center space-y-2">
-          <div>¡Bienvenido/a!</div>
-          <div>Comienza a crear tareas</div>
-          <Button onClick={handleAddTask}>Nueva tarea</Button>
-        </div>
-      )}
+    <Button onClick={handleAddTask}>Nueva tarea</Button>
+  </>
+) : (
+  <div className="text-center space-y-2">
+    <div>¡Bienvenido/a!</div>
+    <div>Comienza a crear tareas</div>
+    <Button onClick={handleAddTask}>Nueva tarea</Button>
+  </div>
+)}
 
-      {/* ✅ Modal fuera del condicional */}
-      {isOpen && task.description && (
-        <Modal
-          title={task.task_name}
-          description={task.description}
-          hour={formattedTime(task.due_date)}
-          onClose={closeModal}
-        />
-      )}
+      
     </MainLayout>
   </>
 );
