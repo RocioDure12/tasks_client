@@ -12,6 +12,8 @@ import { toast } from 'react-hot-toast';
 import MainLayout from "../components/MainLayout";
 import { Button } from "../components/Button"
 import { TaskCalendar } from "../components/TaskCalendar";
+import "dayjs/locale/es";
+dayjs.locale("es");
 
 
 export const TasksListPage = () => {
@@ -28,6 +30,9 @@ export const TasksListPage = () => {
   const taskApi = useTaskApi();
   const navigate = useNavigate();
   const limit = 5
+
+  const dayName = date ? dayjs(date).format("dddd") : "";
+  const capitalizedDay = dayName.charAt(0).toUpperCase() + dayName.slice(1);
 
   useEffect(() => {
     getTasksList();
@@ -136,6 +141,7 @@ export const TasksListPage = () => {
       ></TaskCalendar>
 
       <TasksList
+        title={capitalizedDay}
         list={taskList}
         handleDeleteTask={handleDeleteTask}
         handleEditTask={handleEditTask}

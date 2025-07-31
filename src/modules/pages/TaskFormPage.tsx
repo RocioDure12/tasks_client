@@ -7,6 +7,10 @@ import MainLayout from "../components/MainLayout";
 import { Form } from "../components/Form";
 import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
+import { toast } from "react-hot-toast"; 
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+
 
 // Definición de los campos del formulario para crear/editar tareas
 const taskFormFields: Field[] = [
@@ -49,6 +53,9 @@ export const TaskFormPage = () => {
   const taskApi = useTaskApi(); 
   const { id } = useParams<{ id: string }>(); // Obtiene el ID de la tarea desde la URL
   const categoriesApi=useCategoriesApi()
+
+    const navigate = useNavigate();
+
 
   //Convierte el ID de string a número
   const parseId = (id: string): number => {
@@ -97,11 +104,33 @@ export const TaskFormPage = () => {
   const handleEditTask = async (data: Task, id: string) => {
     const numericId=parseId(id)
     const result = await taskApi.updateTask(numericId, data);
+    if(result.data){
+      toast.success("Tarea editada exitosamente ✅");
+      const date= dayjs(data.due_date).format("YYYY-MM-DD");
+      navigate(`/list/${date}`)
+
+
+    }else{
+      toast.error("Hubo un error al editar la tarea ❌");
+
+    }
+    
   };
 
   const handleCreateTask = async (data: Task) => {
   
     const result = await taskApi.createTask(data as Task);
+    if(result.data){
+      toast.success("Tarea creada exitosamente ✅");
+      const date= dayjs(data.due_date).format("YYYY-MM-DD");
+      navigate(`/list/${date}`)
+
+
+    }else{
+      toast.error("Hubo un error al crear la tarea ❌");
+
+    }
+
     
   };
 

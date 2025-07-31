@@ -154,7 +154,7 @@ export default function Dashboard() {
       </div>
     )}
 
-    <Button onClick={handleAddTask}>Nueva tarea</Button>
+    <Button className=" bg-primary-500" onClick={handleAddTask}>Nueva tarea</Button>
   </>
 ) : (
   <div className="text-center space-y-2">

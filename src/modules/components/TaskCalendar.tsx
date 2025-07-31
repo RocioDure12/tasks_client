@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { Calendar } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useMantineTheme } from "@mantine/core";
+import { useState } from "react";
 
 export interface TaskCalendarProps {
   tasksDates: string[];
@@ -11,6 +12,7 @@ export interface TaskCalendarProps {
 }
 
 export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const theme = useMantineTheme();
 
   return (
@@ -32,6 +34,7 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
 
           if (!hasTasksOnDate) {
             toast.error("No existen tareas creadas en esa fecha");
+            setSelectedDate(null)
             return;
           }
           onDateSelected(dateString);
