@@ -62,21 +62,21 @@ export const SideBar: React.FC = () => {
 
         {/* Navegación */}
         <div className="mt-16 space-y-4 text-primary-900 font-semibold">
-          <button className="border-0" onClick={() => navigate("/")} >
+          <button className="border-0 focus:outline-none" onClick={() => navigate("/")} >
             Inicio
           </button>
-          <button className="border-0" onClick={() => navigate("/categories")} >
+          <button className="border-0 focus:outline-none" onClick={() => navigate("/categories")} >
             Panel de categorías
           </button >
           <button
-            className="border-0"
+            className="border-0 focus:outline-none"
             onClick={() => hasTasks(dayjs().format("YYYY-MM-DD"))}
          
           >
             Tareas para hoy
           </button>
           <button
-            className="border-0"
+            className="border-0 focus:outline-none"
             onClick={() => hasTasks(dayjs().add(1, "day").format("YYYY-MM-DD"))}
           >
             Tareas para mañana

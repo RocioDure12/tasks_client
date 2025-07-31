@@ -68,7 +68,7 @@ export const Categories: React.FC = () => {
             />
             <Plus
               size={30}
-              className="bg-primary-500 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
+              className="bg-primary-400 rounded-md text-purple-50 cursor-pointer hover:bg-primary-900"
               onClick={createCategory}
             ></Plus>
           </div>
@@ -92,7 +92,7 @@ export const Categories: React.FC = () => {
               >
                 {item.category_name}
                 <X
-                  className="hover:text-red-500 transition"
+                  className="hover:text-primary-contrast-300 transition"
                   onClick={() => deleteCategory(item.id)}
                 ></X>
               </li>
