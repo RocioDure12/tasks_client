@@ -49,7 +49,7 @@ const LoginForm:React.FC=()=>{
                     label="Contraseña"
                 />
 
-                <Button className="bg-primary-500 text-neutralScale-50" type="submit">Iniciar sesión</Button>
+                <Button className="bg-primary-500 text-neutralScale-50" type="submit">Ingresar</Button>
 
                 <p className="text-sm p-1 mt-1 mb-1 text-center ">¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
 

@@ -38,7 +38,7 @@ export const SideBar: React.FC = () => {
       {/* Botón hamburguesa */}
       <div className="fixed z-50 top-0 left-0 w-full flex p-2">
         <button
-          className="p-2 rounded-lg flex items-center text-primary-contrast-400 hover:none bg-primary-400 border-2 border-shadow-xl border-transparent"
+          className="border-0 focus:outline-none p-2 rounded-lg flex items-center text-primary-contrast-400 bg-primary-400 "
           onClick={toggleMenu}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -54,7 +54,7 @@ export const SideBar: React.FC = () => {
       >
         {/* Botón cerrar dentro del sidebar */}
         <button
-          className="absolute top-4 right-4 p-2 text-white bg-primary-400 "
+          className="border-0 focus:outline-none  absolute top-4 right-4 p-2 text-white bg-primary-400 "
           onClick={toggleMenu}
         >
           <X size={24} />
@@ -62,19 +62,21 @@ export const SideBar: React.FC = () => {
 
         {/* Navegación */}
         <div className="mt-16 space-y-4 text-primary-900 font-semibold">
-          <button onClick={() => navigate("/")} >
+          <button className="border-0" onClick={() => navigate("/")} >
             Inicio
           </button>
-          <button onClick={() => navigate("/categories")} >
+          <button className="border-0" onClick={() => navigate("/categories")} >
             Panel de categorías
-          </button>
+          </button >
           <button
+            className="border-0"
             onClick={() => hasTasks(dayjs().format("YYYY-MM-DD"))}
          
           >
             Tareas para hoy
           </button>
           <button
+            className="border-0"
             onClick={() => hasTasks(dayjs().add(1, "day").format("YYYY-MM-DD"))}
           >
             Tareas para mañana
