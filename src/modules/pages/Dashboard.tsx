@@ -9,25 +9,28 @@ import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
+import { Modal } from "../components/Modal"
 
 
 export default function Dashboard() {
   
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [task, setTask] = useState<Partial<Task>>({});
 
   const navigate = useNavigate();
   const taskApi = useTaskApi();
-  const theme = useMantineTheme();
+
 
   useEffect(() => {
     get_task_count();
     get_tasks_dates();
     get_upcoming_tasks();
   }, []);
+
+
 
 
   const get_tasks_dates = async () => {
@@ -71,11 +74,22 @@ export default function Dashboard() {
 
   const handleDeleteTask = async (id: number) => {
     const result = await taskApi.deleteTask(id);
+    await get_upcoming_tasks()
+    
 
   };
 
   const viewDetailTask = async (id: number) => {
     const result = await taskApi.getTaskById(id);
+    if (result.data){
+      if (!result.data.description){
+        toast.error("No tiene descripción o nota");
+        return;
+
+      }
+      setTask(result.data);
+      setIsOpen(true);
+    }
   };
 
   const formattedTime = (date: Date | string | undefined): string => {
@@ -98,60 +112,64 @@ export default function Dashboard() {
       const updatedTask = { ...task, status: !task.status };
 
       await taskApi.updateTask(id, updatedTask);
+      await get_upcoming_tasks();
 
     } catch (error) {
       console.error("Error al cambiar el estado de la tarea:", error);
     }
   };
 
+    const closeModal = () => {
+    setIsOpen(false)
+    setTask({})
+  }
+
 
 
 
 
   return (
-
-    <>
+  <>
+    <MainLayout>
       {numberOfTasks > 0 ? (
+        <>
+          <TaskCalendar
+            tasksDates={tasksDates}
+            onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+          />
 
-        <MainLayout>
+          <TasksList
+            title="🕒 Próximas tareas..."
+            list={upcomingTasks}
+            handleDeleteTask={handleDeleteTask}
+            handleEditTask={handleEditTask}
+            handleTaskStatus={handleTaskStatus}
+            viewDetailTask={viewDetailTask}
+            formattedTime={formattedTime}
+          />
 
-          <TaskCalendar   
-          tasksDates={tasksDates}
-          onDateSelected={(dateString) => navigate(`/list/${dateString}`)}>
-          </TaskCalendar>
-
-
-
-
-
-             
-              <TasksList
-                title="🕒 Proximas tareas..."
-                list={upcomingTasks}
-                handleDeleteTask={handleDeleteTask}
-                handleEditTask={handleEditTask}
-                handleTaskStatus={handleTaskStatus}
-                viewDetailTask={viewDetailTask}
-                formattedTime={formattedTime}
-              ></TasksList>
-              <Button onClick={handleAddTask}>Nueva tarea </Button>
-   
-          
-
-        </MainLayout>
-
-
+          <Button onClick={handleAddTask}>Nueva tarea</Button>
+        </>
       ) : (
-        <MainLayout>
-          <div className="text-center space-y-2">
-            <div>¡Bienvenido/a!</div>
-            <div>Comienza a crear tareas</div>
-            <Button onClick={handleAddTask}>Nueva tarea </Button>
-
-          </div>
-        </MainLayout>
+        <div className="text-center space-y-2">
+          <div>¡Bienvenido/a!</div>
+          <div>Comienza a crear tareas</div>
+          <Button onClick={handleAddTask}>Nueva tarea</Button>
+        </div>
       )}
-    </>
 
-  )
+      {/* ✅ Modal fuera del condicional */}
+      {isOpen && task.description && (
+        <Modal
+          title={task.task_name}
+          description={task.description}
+          hour={formattedTime(task.due_date)}
+          onClose={closeModal}
+        />
+      )}
+    </MainLayout>
+  </>
+);
+
+
 }

@@ -30,12 +30,12 @@ export const TasksListPage = () => {
   const limit = 5
 
   useEffect(() => {
-    getTasks();
+    getTasksList();
     get_tasks_dates()
 
   }, [currentPage, date]);
 
-  const getTasks = async () => {
+  const getTasksList = async () => {
     if (!date) return;
     const offset = (currentPage - 1) * limit;
     const result = await taskApi.get_tasks_paginated(limit, offset, date);
@@ -53,7 +53,7 @@ export const TasksListPage = () => {
 
   const handleDeleteTask = async (id: number) => {
     const result = await taskApi.deleteTask(id);
-    await getTasks();
+    await getTasksList();
   };
 
 
@@ -112,7 +112,7 @@ export const TasksListPage = () => {
       const updatedTask = { ...task, status: !task.status };
 
       await taskApi.updateTask(id, updatedTask);
-      await getTasks();
+      await getTasksList();
     } catch (error) {
       console.error("Error al cambiar el estado de la tarea:", error);
     }
