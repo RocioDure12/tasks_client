@@ -5,11 +5,12 @@ export interface FormLayoutProps extends PropsWithChildren {
 }
 export default function AuthFormLayout(props: FormLayoutProps) {
   return (
-    <div className={"bg-primary-500 h-full flex justify-center items-center"}>
-      <div className="w-full max-w-md">
+    <div className={"bg-primary-500  flex justify-center items-center min-h-screen"}>
+      <main className="w-[90%] m-auto max-w-screen-sm p-4">
         {props.children}
-        </div>
-      </div>
+      
+      </main>
+    </div>
 
   );
 }

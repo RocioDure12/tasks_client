@@ -81,6 +81,7 @@ export const Form = <T extends {}>({
                   onChange={handleChange}
                   rows={field.rows}
                   cols={field.cols}
+                  value={String(values[field.name as keyof T] || "")} 
 
                 />
               )

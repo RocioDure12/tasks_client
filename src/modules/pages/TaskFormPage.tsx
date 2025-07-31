@@ -41,6 +41,8 @@ const taskFormFields: Field[] = [
     label: "Descripcion o nota (opcional)",
     rows:4,
     cols:4,
+
+
   }
 
 ];
