@@ -157,9 +157,9 @@ export default function Dashboard() {
     <Button className=" bg-primary-500" onClick={handleAddTask}>Nueva tarea</Button>
   </>
 ) : (
-  <div className="text-center space-y-2">
-    <div>¡Bienvenido/a!</div>
-    <div>Comienza a crear tareas</div>
+  <div className="flex flex-col items-center text-center gap-4 p-6 rounded-2xl shadow-md bg-primary-100 m-4">
+    <h2 className=" font-bold text-primary-800">¡Bienvenido/a!</h2>
+    <h3 className="font-semibold italic text-primary-800">Comienza a crear tareas</h3>
     <Button onClick={handleAddTask}>Nueva tarea</Button>
   </div>
 )}

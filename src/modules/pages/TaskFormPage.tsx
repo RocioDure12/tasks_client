@@ -9,6 +9,8 @@ import Category from "../models/Category";
 import useCategoriesApi from "../hooks/useCategoriesApi";
 import { toast } from "react-hot-toast"; 
 import dayjs from "dayjs";
+import FormLayout from "../components/FormLayout";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -158,7 +160,10 @@ export const TaskFormPage = () => {
  
 
   return (
-    <MainLayout >
+    <FormLayout >
+      <button  onClick={() => navigate(-1)}
+        className="border-0 focus:outline-none absolute top-4 left-4 p-2 bg-primary-500
+          text-primary-contrast-500"><ArrowLeft size={24} /></button>
 
       <Form
         title={id ? "Formulario de edición" : "Nueva tarea"}
@@ -172,6 +177,6 @@ export const TaskFormPage = () => {
       
       
 
-    </MainLayout>
+    </FormLayout>
     );
 };

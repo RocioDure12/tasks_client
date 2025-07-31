@@ -3,7 +3,7 @@ import User from "../models/User";
 import useUserApi from "../hooks/useUserApi";
 import { Form } from "../components/Form";
 import Field from "../models/Field";
-import AuthFormLayout from "../components/AuthFormLayout";
+import AuthFormLayout from "../components/FormLayout";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -63,8 +63,8 @@ export const SignUpForm:React.FC=()=>{
 
     return(
     <AuthFormLayout>
-        <button onClick={() => navigate(-1)}
-        className="absolute top-4 left-4 p-2 bg-primary-500
+        <button  onClick={() => navigate(-1)}
+        className="border-0 focus:outline-none absolute top-4 left-4 p-2 bg-primary-500
           text-primary-contrast-500"><ArrowLeft size={24} /></button>
 
 

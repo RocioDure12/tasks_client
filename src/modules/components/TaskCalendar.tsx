@@ -12,7 +12,6 @@ export interface TaskCalendarProps {
 }
 
 export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const theme = useMantineTheme();
 
   return (
@@ -34,7 +33,7 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
 
           if (!hasTasksOnDate) {
             toast.error("No existen tareas creadas en esa fecha");
-            setSelectedDate(null)
+            
             return;
           }
           onDateSelected(dateString);

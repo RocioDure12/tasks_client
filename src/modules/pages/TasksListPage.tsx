@@ -149,10 +149,12 @@ export const TasksListPage = () => {
         handleTaskStatus={handleTaskStatus}
         formattedTime={formattedTime}
       />
+      <div className="flex justify-center">
 
-      <Button onClick={handleAddTask}>
-        Nueva Tarea
-      </Button>
+        <Button onClick={handleAddTask}>
+          Nueva Tarea +
+        </Button>
+      </div>
 
       <Pagination
         currentPage={currentPage}

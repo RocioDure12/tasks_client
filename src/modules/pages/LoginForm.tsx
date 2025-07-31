@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button"
-import AuthFormLayout from "../components/AuthFormLayout";
+import AuthFormLayout from "../components/FormLayout";
 
 export interface UserLogin{
     username:string
