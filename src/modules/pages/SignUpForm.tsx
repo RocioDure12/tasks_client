@@ -6,6 +6,7 @@ import Field from "../models/Field";
 import AuthFormLayout from "../components/FormLayout";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const userSignUpFields:Field[]=[
 {
@@ -54,10 +55,13 @@ export const SignUpForm:React.FC=()=>{
         //validaciones
         // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
         const result=await userApi.createUser(data)
-        if (result.data){
+        const userDB=await userApi.currentUser()
+        
+        if (userDB){
+            toast.success("Usuario creado exitosamente")
             navigate("/verifyemail")
         } else{
-            console.log("Error al crear usuario")
+            toast.error("Error al crear usuario")
         }
     }
 
