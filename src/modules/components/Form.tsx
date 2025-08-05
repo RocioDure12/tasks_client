@@ -12,6 +12,7 @@ export const Form = <T extends {}>({
   onFormSubmit,
   buttonText,
   buttons = [],
+
 }: FormProps<T>) => {
   const [values, setValues] = useState<Partial<T>>({});
 
@@ -135,6 +136,7 @@ export const Form = <T extends {}>({
       </div>
 
       <Button className="bg-primary-500 text-neutralScale-50" type="submit">{buttonText}</Button>
+   
     </form>
   );
 };

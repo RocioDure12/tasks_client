@@ -12,9 +12,8 @@ export default function useUserApi(){
   const api=useCrudApi<User>("users")
 
   const createUser=async (user: Partial<User>): Promise<ActionResult<User>> => {
-    return await api.create(user as User);
-  
-}
+    return await api.create(user as User);}
+
   const verifyEmailAccount = async (token: string):Promise<ActionResult<User>>=> {
     return await handleApiRequest("post",`users/verification/${token}`);
       

@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ThemeProvider from "./modules/context/ThemeProvider";
 import CartProvider from "./modules/context/CartProvider";
-import LoginForm from "./modules/pages/LoginForm";
 import RequireAuth from "./modules/pages/RequireAuth";
-import { SignUpForm } from "./modules/pages/SignUpForm"
+import { SignUpForm } from "./modules/pages/SignUpForm";
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
 import { Profile } from "./modules/old/Profile";
 import { TaskFormPage } from "./modules/pages/TaskFormPage";
@@ -11,22 +10,22 @@ import { TasksListPage } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
 import { MantineProvider } from "@mantine/core";
 import { Categories } from "./modules/pages/PanelCategories";
-import { DatesProvider } from "@mantine/dates";
-import theme from "./theme";
 import { Toaster } from 'react-hot-toast';
+import theme from "./theme";
+import LoginForm from "./modules/pages/LoginForm";
 
-export default function App() {
+
+const App = () => {
   return (
     <ThemeProvider>
       <CartProvider>
         <MantineProvider theme={theme}>
           <Router>
-            <Toaster></Toaster>
+            <Toaster />
             <Routes>
-              <Route path="/users/login" element={<LoginForm></LoginForm>} />
+              <Route path="/users/login" element={<LoginForm />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/verifyemail/:token?" element={<VerifyEmailAccount />} />
-
               <Route
                 path="/"
                 element={
@@ -55,7 +54,7 @@ export default function App() {
                 path="/taskform/:id?"
                 element={
                   <RequireAuth>
-                    <TaskFormPage></TaskFormPage>
+                    <TaskFormPage />
                   </RequireAuth>
                 }
               />
@@ -63,7 +62,7 @@ export default function App() {
                 path="/list/:date?"
                 element={
                   <RequireAuth>
-                    <TasksListPage></TasksListPage>
+                    <TasksListPage />
                   </RequireAuth>
                 }
               />
@@ -71,16 +70,16 @@ export default function App() {
                 path="/categories"
                 element={
                   <RequireAuth>
-                    <Categories></Categories>
+                    <Categories />
                   </RequireAuth>
                 }
-
               />
             </Routes>
           </Router>
-
         </MantineProvider>
       </CartProvider>
     </ThemeProvider>
   );
-}
+};
+
+export default App;
