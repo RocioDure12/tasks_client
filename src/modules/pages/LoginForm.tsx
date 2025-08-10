@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button"
 import AuthFormLayout from "../components/FormLayout";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from 'react-hot-toast';
 
 export interface UserLogin{
     username:string
@@ -11,6 +14,33 @@ export interface UserLogin{
 
 const LoginForm:React.FC=()=>{
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
+    const [params] = useSearchParams();
+
+    useEffect(() => {
+    const toastType = params.get("toast");
+    if (toastType) {
+      switch (toastType) {
+        case "email_not_verified":
+          toast.error("Tu email no está verificado. Revisa tu correo.");
+          break;
+        case "disabled_account":
+          toast.error("Tu cuenta está deshabilitada. Contacta soporte.");
+          break;
+        case "invalid_credentials":
+          toast.error("Usuario o contraseña incorrectos.");
+          break;
+        default:
+          break;
+      }
+          // Limpio el query param para que no se muestre de nuevo al refrescar
+    params.delete("toast");
+    // Para actualizar la URL sin recargar la página:
+    window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [params]);
+
+
+
 
 
 
