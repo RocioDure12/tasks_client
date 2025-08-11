@@ -7,6 +7,7 @@ import AuthFormLayout from "../components/FormLayout";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Loading from "../components/Loading";
 
 const userSignUpFields:Field[]=[
 {
@@ -49,8 +50,10 @@ export const SignUpForm:React.FC=()=>{
     const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
     const userApi=useUserApi()
     const navigate = useNavigate();
+      const [loading, setLoading] = useState(false); // <-- estado loading
 
     const handleSubmit = async (data: User) => {
+        setLoading(true)
         try {
             const result = await userApi.createUser(data);
 
@@ -73,7 +76,7 @@ export const SignUpForm:React.FC=()=>{
                 navigate("/verifyemail");
                 }
             }
-
+            setLoading(false)
             return; 
             }
 
@@ -88,16 +91,7 @@ export const SignUpForm:React.FC=()=>{
         };
 
 
-
-
-
-
-
-
-
-    
-
-
+    if (loading) return <Loading />; 
     return(
     <AuthFormLayout>
         <button  onClick={() => navigate(-1)}
