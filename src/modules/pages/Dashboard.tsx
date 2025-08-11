@@ -9,6 +9,7 @@ import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
 import { Modal } from "../components/Modal"
+import Loading from "../components/Loading";
 
 
 export default function Dashboard() {
@@ -18,16 +19,23 @@ export default function Dashboard() {
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [task, setTask] = useState<Partial<Task>>({});
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const taskApi = useTaskApi();
 
 
-  useEffect(() => {
-    get_task_count();
-    get_tasks_dates();
-    get_upcoming_tasks();
-  }, []);
+ useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
+
+    await Promise.all([get_task_count(), get_tasks_dates(), get_upcoming_tasks()]);
+
+    setLoading(false);
+  };
+
+  fetchData();
+}, []);
 
 
 
@@ -123,7 +131,7 @@ export default function Dashboard() {
     setTask({})
   }
 
-
+  if (loading) return <Loading />;
   return (
     <>
       <MainLayout>
