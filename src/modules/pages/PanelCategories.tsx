@@ -37,7 +37,9 @@ export const Categories: React.FC = () => {
       setCategory({});
       await readCategories();
     } else {
-      toast.error("No se pudo crear la categoría");
+      toast.error("La categoria ya existe");
+      setCategory({});
+      await readCategories();
     }
   };
 

@@ -4,7 +4,6 @@ import CartProvider from "./modules/context/CartProvider";
 import RequireAuth from "./modules/pages/RequireAuth";
 import { SignUpForm } from "./modules/pages/SignUpForm";
 import VerifyEmailAccount from "./modules/pages/VerifyEmailAccount";
-import { Profile } from "./modules/old/Profile";
 import { TaskFormPage } from "./modules/pages/TaskFormPage";
 import { TasksListPage } from "./modules/pages/TasksListPage";
 import Home from "./modules/pages/Dashboard";
@@ -42,14 +41,7 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-              <Route
-                path="/profile"
-                element={
-                  <RequireAuth>
-                    <Profile />
-                  </RequireAuth>
-                }
-              />
+             
               <Route
                 path="/taskform/:id?"
                 element={

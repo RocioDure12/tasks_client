@@ -50,21 +50,53 @@ export const SignUpForm:React.FC=()=>{
     const userApi=useUserApi()
     const navigate = useNavigate();
 
+    const handleSubmit = async (data: User) => {
+        try {
+            const result = await userApi.createUser(data);
 
-    const handleSubmit=async(data:User)=>{
-        //validaciones
-        // Aquí puedes realizar otras acciones, como enviar los datos a un servidor
-        const result=await userApi.createUser(data)
-        
-        const userDB=await userApi.currentUser()
-        
-        if (userDB){
-            toast.success("Usuario creado exitosamente")
-            navigate("/verifyemail")
-        } else{
-            toast.error("Error al crear usuario")
+
+            if (result.errorMessage) {       
+            toast.error("Username o email ya existen");
+            
+            // Detectamos si el error es un AxiosError con código HTTP
+            const axiosError = result.error;
+            if (
+                axiosError &&
+                typeof axiosError === "object" &&
+                "response" in axiosError &&
+                axiosError.response &&
+                typeof axiosError.response === "object"
+            ) {
+                const status = axiosError.response.status;
+                if (status === 409) {
+                // Usuario no verificado, redirigimos para que confirme email
+                navigate("/verifyemail");
+                }
+            }
+
+            return; 
+            }
+
+            // Si llegamos acá es porque el usuario fue creado correctamente
+            toast.success("Usuario creado exitosamente");
+            navigate("/verifyemail");
+
+        } catch (error: any) {
+            toast.error("Error de conexión con el servidor");
+            console.error(error);
         }
-    }
+        };
+
+
+
+
+
+
+
+
+
+    
+
 
     return(
     <AuthFormLayout>
