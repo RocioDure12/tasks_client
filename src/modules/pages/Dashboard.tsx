@@ -5,7 +5,6 @@ import useTaskApi from "../hooks/useTaskApi";
 import Task from "../models/Task";
 import { Button } from "../components/Button";
 import '@mantine/core/styles.css';
-import { Paper, Title, Text, useMantineTheme, } from '@mantine/core';
 import { TasksList } from "../components/TasksList"
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
@@ -123,9 +122,6 @@ export default function Dashboard() {
     setIsOpen(false)
     setTask({})
   }
-
-
-
 
 
   return (
