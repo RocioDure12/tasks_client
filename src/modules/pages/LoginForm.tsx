@@ -15,6 +15,7 @@ export interface UserLogin{
 const LoginForm:React.FC=()=>{
     const [userLogin, setUserLogin] =useState<Partial<UserLogin>>({});
     const [params] = useSearchParams();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
     const toastType = params.get("toast");
@@ -58,7 +59,7 @@ const LoginForm:React.FC=()=>{
 
 
         <AuthFormLayout>
-            <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data">
+            <form className="rounded-lg  p-5 flex flex-col gap-2 shadow-lg bg-primary-50 " action="http://localhost:8000/users/login" method="POST" encType="multipart/form-data" onSubmit={() => setLoading(true)}>
                 <h2 className="text-xl font-semibold text-center mb-4">Iniciar sesión  para continuar</h2>
                 
                 <Input
@@ -79,7 +80,7 @@ const LoginForm:React.FC=()=>{
                     label="Contraseña"
                 />
 
-                <Button className="bg-primary-500 text-neutralScale-50" type="submit">Ingresar</Button>
+                <Button disabled={loading} className="bg-primary-500 text-neutralScale-50" type="submit"> {loading ? "Cargando..." : "Ingresar"}</Button>
 
                 <p className="text-sm p-1 mt-1 mb-1 text-center ">¿No tienes una cuenta? Registrate <a href="http://localhost:5173/signup">aquí</a> </p>
 
