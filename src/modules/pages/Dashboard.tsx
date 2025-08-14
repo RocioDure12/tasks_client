@@ -132,7 +132,8 @@ export default function Dashboard() {
       <MainLayout>
         {numberOfTasks > 0 ? (
           <>
-            <TaskCalendar
+            <div className="mb-10">
+              <TaskCalendar
               tasksDates={tasksDates}
               onDateSelected={async (dateString) => {
                 setLoading(true); // Muestra el loader
@@ -141,6 +142,7 @@ export default function Dashboard() {
                 setLoading(false); // Se ocultará si sigues en la misma vista
               }}
             />
+            </div>
 
             {upcomingTasks.length > 0 ? (
               <TasksList
@@ -158,7 +160,7 @@ export default function Dashboard() {
               </div>
             )}
 
-            <Button className="bg-primary-500" onClick={handleAddTask}>
+            <Button className="bg-primary-500 mt-6" onClick={handleAddTask}>
               Nueva tarea
             </Button>
           </>

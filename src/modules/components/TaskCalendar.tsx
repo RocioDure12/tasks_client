@@ -4,16 +4,15 @@ import dayjs from "dayjs";
 import { Calendar } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useMantineTheme } from "@mantine/core";
-import { useState } from "react";
 
 export interface TaskCalendarProps {
   tasksDates: string[];
   onDateSelected: (date: string) => void;
+  initialValue?:Date | null
 }
 
-export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) {
+export function TaskCalendar({ tasksDates, onDateSelected, initialValue }: TaskCalendarProps) {
   const theme = useMantineTheme();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null); // Control del input
 
   return (
     <div className=" p-4 bg-primary-400 shadow-lg rounded-lg">
@@ -25,8 +24,9 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
       <DatePickerInput
         classNames={{ input: "w-full" }}
         placeholder="Filter by date"
-        valueFormat="YYYY MMM DD"
+        valueFormat="DD/MM/YYYY"
         rightSection={<Calendar size={20} style={{ color: theme.colors.primary[6] }} />}
+        value={initialValue}
         onChange={(date) => {
           if (!date) return;
           const dateString = dayjs(date).format("YYYY-MM-DD");
@@ -38,7 +38,6 @@ export function TaskCalendar({ tasksDates, onDateSelected }: TaskCalendarProps) 
             return;
           }
           onDateSelected(dateString);
-          setSelectedDate(null);
         }}
         renderDay={(date) => {
           const day = date.getDate();

@@ -143,13 +143,16 @@ export const TasksListPage = () => {
       console.log("Error al obtener las fechas");
     }
   };
-  if (loading) return <Loading />; 
+  if (loading) return <Loading />;
   return (
     <MainLayout>
-      <TaskCalendar
-        tasksDates={tasksDates}
-        onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
-      ></TaskCalendar>
+      <div className="mb-10">
+        <TaskCalendar
+          initialValue={date ? dayjs(date).toDate() : null}
+          tasksDates={tasksDates}
+          onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+        />
+      </div>
 
       {taskList.length > 0 ? (
         <>
@@ -163,7 +166,7 @@ export const TasksListPage = () => {
             handleTaskStatus={handleTaskStatus}
             formattedTime={formattedTime}
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
 
             <Button onClick={handleAddTask}>
               Nueva Tarea +

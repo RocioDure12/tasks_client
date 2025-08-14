@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { X } from "lucide-react";
 import ModalProps from "../models/ModalProps"
 
@@ -6,7 +5,7 @@ import ModalProps from "../models/ModalProps"
 
 export const Modal: React.FC<ModalProps> = (props:ModalProps) => {
   return (
-    <div onClick={props.onClose} className="fixed inset-0 z-50 flex items-center justify-center">
+    <div onClick={props.onClose} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 ">
       <div onClick={(e) => e.stopPropagation()}
         className="relative p-4 w-[90%] m-auto max-w-screen-sm bg-primary-50 rounded-lg shadow-lg"
         
@@ -15,7 +14,7 @@ export const Modal: React.FC<ModalProps> = (props:ModalProps) => {
           <h2 className="text-xl  text-neutralScale-950">
             {props.title}
           </h2>
-          <button onClick={props.onClose} className="absolute top-1 right-2 p-2 bg-primary-400 text-primary-contrast-400">
+          <button onClick={props.onClose} className="absolute top-3 right-3 p-2 bg-primary-400 text-primary-contrast-400">
             <X size={20} />
           </button>
         </div>
