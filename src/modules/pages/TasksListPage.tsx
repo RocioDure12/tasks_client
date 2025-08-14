@@ -12,6 +12,7 @@ import { toast } from 'react-hot-toast';
 import MainLayout from "../components/MainLayout";
 import { Button } from "../components/Button"
 import { TaskCalendar } from "../components/TaskCalendar";
+import Loading from "../components/Loading";
 import "dayjs/locale/es";
 dayjs.locale("es");
 
@@ -23,6 +24,8 @@ export const TasksListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+
 
 
 
@@ -42,15 +45,23 @@ export const TasksListPage = () => {
 
   const getTasksList = async () => {
     if (!date) return;
-    const offset = (currentPage - 1) * limit;
-    const result = await taskApi.get_tasks_paginated(limit, offset, date);
-    if (result.data) {
-      const [fetchedTasks, total] = result.data
-      setTaskList(fetchedTasks)
-      calculateTotalPages(total)
-
+    try {
+      setLoading(true); // <--- inicio del loader
+      const offset = (currentPage - 1) * limit;
+      const result = await taskApi.get_tasks_paginated(limit, offset, date);
+      if (result.data) {
+        const [fetchedTasks, total] = result.data;
+        setTaskList(fetchedTasks);
+        calculateTotalPages(total);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al cargar tareas");
+    } finally {
+      setLoading(false); // <--- fin del loader
     }
   };
+
 
   const handleEditTask = (id: number) => {
     navigate(`/taskform/${id}`);
@@ -132,7 +143,7 @@ export const TasksListPage = () => {
       console.log("Error al obtener las fechas");
     }
   };
-
+  if (loading) return <Loading />; 
   return (
     <MainLayout>
       <TaskCalendar

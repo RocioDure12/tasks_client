@@ -23,19 +23,26 @@ export default function Dashboard() {
   const taskApi = useTaskApi();
 
   useEffect(() => {
-    const fetchData = async () => {
-      console.log("Inicio carga...");
-      setLoading(true);
-
-
-      await Promise.all([get_task_count(), get_tasks_dates(), get_upcoming_tasks()]);
-
-      console.log("Carga finalizada");
-      setLoading(false);
-    };
-
-    fetchData();
+    loadDashboardData();
   }, []);
+
+  
+  const loadDashboardData = async () => {
+  try {
+    setLoading(true);
+    await Promise.all([
+      get_task_count(),
+      get_tasks_dates(),
+      get_upcoming_tasks(),
+    ]);
+  } catch (error) {
+    console.error(error);
+    toast.error("Error cargando datos");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const get_tasks_dates = async () => {
     const result = await taskApi.get_dates_for_calendar();
@@ -118,12 +125,8 @@ export default function Dashboard() {
     setTask({});
   };
 
-  // Mostrar spinner si está cargando
-  if (loading) {
-    console.log("Renderizando Loading...");
-    return <Loading />;
-  }
-
+  
+  if (loading) return <Loading />; 
   return (
     <>
       <MainLayout>
@@ -131,7 +134,12 @@ export default function Dashboard() {
           <>
             <TaskCalendar
               tasksDates={tasksDates}
-              onDateSelected={(dateString) => navigate(`/list/${dateString}`)}
+              onDateSelected={async (dateString) => {
+                setLoading(true); // Muestra el loader
+                // Simula un tiempo de carga o espera a que la nueva ruta cargue
+                navigate(`/list/${dateString}`);
+                setLoading(false); // Se ocultará si sigues en la misma vista
+              }}
             />
 
             {upcomingTasks.length > 0 ? (
