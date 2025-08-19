@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sun, Moon, Menu, X, LogOut } from "lucide-react";
+import {  Menu, X, LogOut } from "lucide-react";
 import dayjs from "dayjs";
 import useUserApi from "../hooks/useUserApi";
 import useTaskApi from "../hooks/useTaskApi";
 import toast from "react-hot-toast";
-import theme from "../../theme";
 
 export const SideBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

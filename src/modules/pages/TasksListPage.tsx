@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import Task from "../models/Task";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import { Pencil, Trash2, Eye, Edit, List } from "lucide-react";
 import { Modal } from "../components/Modal";
-import theme from "../../theme";
 import { Pagination } from "../components/Pagination"
 import { TasksList } from "../components/TasksList";
 import { toast } from 'react-hot-toast';
@@ -68,7 +66,7 @@ export const TasksListPage = () => {
   };
 
   const handleDeleteTask = async (id: number) => {
-    const result = await taskApi.deleteTask(id);
+    await taskApi.deleteTask(id);
     await getTasksList();
   };
 

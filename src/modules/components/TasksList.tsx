@@ -1,7 +1,6 @@
 import Task from "../models/Task";
 import { Checkbox } from "@mantine/core";
 import { Pencil, Trash2, Eye } from "lucide-react";
-import { Button } from "@mantine/core";
 
 interface TaskListProps {
   title?: string

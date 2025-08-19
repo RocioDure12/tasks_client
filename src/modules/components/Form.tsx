@@ -10,8 +10,7 @@ export const Form = <T extends {}>({
   fields,
   initialValues,
   onFormSubmit,
-  buttonText,
-  buttons = [],
+  buttonText
 
 }: FormProps<T>) => {
   const [values, setValues] = useState<Partial<T>>({});
@@ -97,7 +96,6 @@ export const Form = <T extends {}>({
             case "range":
             case "tel":
             case "number":
-            case "textarea":
             case "time":
               return (
                 <div key={field.name}>

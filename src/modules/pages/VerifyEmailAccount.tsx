@@ -10,17 +10,6 @@ export default function VerifyEmailAccount() {
     const navigate = useNavigate();
     const { token } = useParams<{ token: string }>();
 
-    useEffect(() => {
-        if (token) {
-            handle_email_verification(token)
-            navigate("/users/login")
-        }
-        else {
-            console.log("No se encontro el token")
-        }
-    }, [token]);
-
-
     const handle_email_verification = async (token: string) => {
         const result = await userApi.verifyEmailAccount(token)
         if (result.data) {
@@ -29,6 +18,16 @@ export default function VerifyEmailAccount() {
             console.log("error en verificacion del email")
         }
     }
+
+      useEffect(() => {
+        if (token) {
+            handle_email_verification(token)
+            navigate("/users/login")
+        }
+        else {
+            console.log("No se encontro el token")
+        }
+    }, [token]);
 
 
     return (

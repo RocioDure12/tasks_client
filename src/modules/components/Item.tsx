@@ -4,7 +4,7 @@ type ItemProps = {
   } & React.PropsWithChildren<React.ComponentPropsWithRef<'div'>>;
 
 export const Item: React.FC<ItemProps> = forwardRef(
-    ({  children, ...props }, ref) => {
+    ({  children }, _) => {
       return (
         <div>
           {children}

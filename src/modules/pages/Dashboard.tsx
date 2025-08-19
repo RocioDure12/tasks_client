@@ -8,15 +8,14 @@ import '@mantine/core/styles.css';
 import { TasksList } from "../components/TasksList";
 import { toast } from 'react-hot-toast';
 import { TaskCalendar } from "../components/TaskCalendar";
-import { Modal } from "../components/Modal";
 import Loading from "../components/Loading";
 
 export default function Dashboard() {
   const [numberOfTasks, setNumberOfTasks] = useState<number>(0);
   const [tasksDates, setTasksDates] = useState<string[]>([]);
   const [upcomingTasks, setUpcomingTasks] = useState<Task[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [task, setTask] = useState<Partial<Task>>({});
+  const [_, setIsOpen] = useState(false);
+  const [__, setTask] = useState<Partial<Task>>({});
   const [loading, setLoading] = useState(true); // <-- inicializa en true
 
   const navigate = useNavigate();
@@ -119,12 +118,6 @@ export default function Dashboard() {
       console.error("Error al cambiar el estado de la tarea:", error);
     }
   };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setTask({});
-  };
-
   
   if (loading) return <Loading />; 
   return (

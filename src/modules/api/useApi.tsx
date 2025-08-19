@@ -4,7 +4,7 @@ import axios, { AxiosError, isAxiosError } from "axios";
 
 //Instancia personalizada de axios
 const api= axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL:import.meta.env.VITE_API_URL,
     withCredentials: true, //Esto permite que las cookies se envíen con cada solicitud
   });
 

@@ -1,8 +1,8 @@
-import { ActionIcon, RingProgress, Text, Center } from '@mantine/core';
+import {  RingProgress, Text } from '@mantine/core';
 import { useState } from 'react';
 
 export default function ProgressRing () {
-  const [value, setValue] = useState(0);
+  const [value, _] = useState(0);
   return (
     <>
       <RingProgress

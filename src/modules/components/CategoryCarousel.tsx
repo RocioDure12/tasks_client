@@ -1,6 +1,5 @@
 import {Carousel} from "@mantine/carousel"
 import CardCategory from "./CategoryCard";
-import { useState } from "react";
 import Task from "../models/Task";
 import Category from "../models/Category";
 
@@ -16,7 +15,7 @@ export default function CategoryCarousel(props:CategoryCarouselProps)  {
     
     return (
       <Carousel slideSize="33%" slideGap="md" align="start" withControls>
-        {props.categories?.map((category, index) => (
+        {props.categories?.map((category, _) => (
           <Carousel.Slide key={category.id}>
             <CardCategory
             title={category.category_name}

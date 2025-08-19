@@ -1,6 +1,3 @@
-import React from "react";
-import MainLayout from "./MainLayout";
-
 export default function Loading() {
   return (
     <div className="flex justify-center items-center h-screen">

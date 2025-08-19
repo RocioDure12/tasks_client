@@ -47,7 +47,7 @@ const userSignUpFields:Field[]=[
 ]
 
 export const SignUpForm:React.FC=()=>{
-    const [user,setUser]=useState<Partial<User>>({disabled:false, is_verified:false})
+    const [user,_]=useState<Partial<User>>({disabled:false, is_verified:false})
     const userApi=useUserApi()
     const navigate = useNavigate();
       const [loading, setLoading] = useState(false); // <-- estado loading
