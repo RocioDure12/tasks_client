@@ -1,30 +1,66 @@
-# React + TypeScript + Vite
+# 🖥️ Frontend - tasks_client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Aplicación web construida con **React + Vite** y **TypeScript** para la gestión de usuarios, tareas y categorías.  
+Este frontend consume la [API de Gestión de Tareas](https://github.com/RocioDure12/Basic_Api).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tecnologías utilizadas
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/) (para llamadas a la API)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## ⚙️ Instalación y ejecución local
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/RocioDure12/tasks_client.git
+   cd tasks_client
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Instala dependencias:**
+  npm install
+
+3. **Configura la URL de la API en un archivo .env:**
+  VITE_API_URL=http://localhost:8000
+
+4. **Inicia el servidor de desarrollo:**
+  npm run dev
+
+La aplicación estará disponible en:
+
+Local: http://localhost:5173
+
+
+🔗 URLs de la aplicación
+
+-Frontend Producción: https://task-planner-wajw.onrender.com
+
+-Frontend Local: http://localhost:5173
+
+-API Producción: https://taskplanner-api.onrender.com
+
+-API Local: http://localhost:8000
+
+
+🔐 Autenticación y Seguridad
+
+  -Gestión de sesión con cookies HTTPOnly (enviadas por la API).
+
+  -Protección de rutas según rol:
+
+  👤 Usuario → tareas y categorías propias.
+
+  🛠️ Admin → gestión de usuarios y control global.
+
+
+✨ Notas finales
+
+  -Este frontend está 100% integrado con el backend Task Planner API
+  
+
+  -Más allá de un simple CRUD, incluye gestión de sesiones, seguridad y feedback visual al usuario.
